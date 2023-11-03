@@ -3,9 +3,13 @@ import ReactDOM from "react-dom";
 // n3
 import React from "react";
 // n6
-import n6 from "./n6";
+import n6_RC from "./m6";
 // n5
-import n5 from "./n5";
+import n5 from "./m5";
+import SoftKeyPanel_RC from "./m73";
+
+import "./m63";
+import n72_RC from "./m72";
 
 const require = () => {};
 
@@ -87,10 +91,6 @@ var u =
 			return n && e(t.prototype, n), i && e(t, i), t;
 		};
 	})(),
-	v = require(73),
-	g = toEsm(v),
-	w = require(72),
-	k = toEsm(w),
 	_ = require(210),
 	S = toEsm(_),
 	O = require(200),
@@ -111,10 +111,7 @@ var u =
 	R = toEsm(q),
 	B = require(108),
 	F = toEsm(B);
-require(63),
-	require(112),
-	require(111),
-	window.performance.mark("navigationLoaded"),
+window.performance.mark("navigationLoaded"),
 	window.addEventListener("load", function () {
 		window.performance.mark("fullyLoaded"),
 			document.body.classList.add("loaded"),
@@ -246,9 +243,9 @@ var K = (function (e) {
 							})
 						),
 						React.createElement(z.default, null),
-						React.createElement(k.default, null),
+						React.createElement(n72_RC, null),
 						React.createElement(D.default, null),
-						React.createElement(g.default, {
+						React.createElement(SoftKeyPanel_RC, {
 							ref: function (t) {
 								e.panels.softKey = t;
 							},
@@ -259,5 +256,5 @@ var K = (function (e) {
 		]),
 		t
 	);
-})(n6);
+})(n6_RC);
 ReactDOM.render(React.createElement(K, null), document.getElementById("root"));

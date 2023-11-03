@@ -1,0 +1,3 @@
+- filenames starting with `n` means it has not been properly deobfuscated/debundled
+- when a class has a name that ends with "\_RC" it means that class likely is a React.Component
+- when a class name can be taken from the context of the code, name it like this: `n210_MainView_RC`

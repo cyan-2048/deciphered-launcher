@@ -3,7 +3,7 @@ import React from "react";
 // n11
 import ReactDOM from "react-dom";
 // n5
-import n5 from "./n5";
+import n5 from "./m5";
 
 function s(e) {
 	if (!e || "string" != typeof e) throw new Error("Event name should be a valid non-empty string!");
@@ -12,7 +12,7 @@ function u(e) {
 	if ("function" != typeof e) throw new Error("Handler should be a function!");
 }
 
-class n6 extends React.Component {
+class n6_RC extends React.Component {
 	setHierarchy(e) {
 		e && ReactDOM.findDOMNode(this).focus();
 	}
@@ -92,4 +92,4 @@ class n6 extends React.Component {
 	}
 }
 
-export default n6;
+export default n6_RC;

@@ -1,4 +1,4 @@
-var r = {
+var n5 = {
 	_providers: new Map(),
 	_services: new Map(),
 	_requestsByService: new Map(),
@@ -90,4 +90,4 @@ var r = {
 	debug: function () {},
 };
 
-export default r;
+export default n5;

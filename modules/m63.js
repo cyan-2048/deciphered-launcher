@@ -7,8 +7,8 @@ import n41 from "./m41";
 import n110 from "./m110";
 
 class SpeedDialHelper extends m14 {
-	constructor(...args) {
-		super(...args); // useless?? m14 doesn't even take any arguments
+	constructor() {
+		super(...arguments); // useless?? m14 doesn't even take any arguments
 		this.name = "SpeedDialHelper";
 	}
 
@@ -167,6 +167,6 @@ class SpeedDialHelper extends m14 {
 	}
 }
 
-const n63 = new SpeedDialHelper();
+const n63_SpeedDialHelper = new SpeedDialHelper();
 
-export default n63;
+export default n63_SpeedDialHelper;

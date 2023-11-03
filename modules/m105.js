@@ -1,6 +1,6 @@
 // probably contacts helper
 
-import n14 from "./m14";
+import n14_StoreBase from "./m14";
 import * as n13 from "./m13";
 
 function u(e, t, n) {
@@ -28,7 +28,7 @@ var h = {
 	},
 	m = /\s+/;
 
-class v extends n14 {
+class v extends n14_StoreBase {
 	start() {
 		this.contactStore = new Map();
 		this.API = window.mozContacts || navigator.mozContacts;
@@ -142,6 +142,6 @@ class v extends n14 {
 	}
 }
 
-var n105 = new v();
-n105.start();
-export default n105;
+var n105_ContactsStore = new v();
+n105_ContactsStore.start();
+export default n105_ContactsStore;

@@ -10,6 +10,9 @@ import SoftKeyPanel_RC from "./m73";
 
 import "./m63";
 import n72_RC from "./m72";
+import n210_MainView_RC from "./m210";
+import n200_AppList_RC from "./m200";
+import n208_InstantSettings_RC from "./m208";
 
 const require = () => {};
 
@@ -91,12 +94,6 @@ var u =
 			return n && e(t.prototype, n), i && e(t, i), t;
 		};
 	})(),
-	_ = require(210),
-	S = toEsm(_),
-	O = require(200),
-	E = toEsm(O),
-	I = require(208),
-	P = toEsm(I),
 	T = require(203),
 	M = toEsm(T),
 	C = require(213),
@@ -202,13 +199,13 @@ var K = (function (e) {
 						React.createElement(
 							"div",
 							{ className: "app-content" },
-							React.createElement(S.default, {
+							React.createElement(n210_MainView_RC, {
 								ref: function (t) {
 									e.panels.mainView = t;
 								},
 							}),
 							React.createElement(
-								E.default,
+								n200_AppList_RC,
 								u(
 									{
 										ref: function (t) {
@@ -219,7 +216,7 @@ var K = (function (e) {
 								)
 							),
 							React.createElement(
-								P.default,
+								n208_InstantSettings_RC,
 								u({}, this.state.grid, {
 									ref: function (t) {
 										e.panels.instantSettings = t;

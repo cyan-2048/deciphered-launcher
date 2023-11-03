@@ -53,7 +53,7 @@ class n71_OptionMenu_RC extends n6_RC {
 			this.setState(e, function () {
 				n.updateSoftKeys();
 			}),
-			u(t.prototype.__proto__ || Object.getPrototypeOf(t.prototype), "show", this).call(this);
+			u(exports.prototype.__proto__ || Object.getPrototypeOf(exports.prototype), "show", this).call(this);
 	}
 	onKeyDown(e) {
 		var t = (e.target, e.key),

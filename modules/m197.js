@@ -1,6 +1,6 @@
-import n14 from "./m14";
+import n14_StoreBase from "./m14";
 
-class n197 extends n14 {
+class n197 extends n14_StoreBase {
 	constructor(conn, index, r) {
 		super();
 

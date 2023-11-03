@@ -2,20 +2,12 @@ import React from "react";
 import n6_RC from "./m6";
 import n16 from "./m16";
 import n5 from "./m5";
-import n63 from "./m63";
+import n63_SpeedDialHelper from "./m63";
 import n41 from "./m41";
-
-function toESM(e) {
-	return e && e.__esModule ? e : { default: e };
-}
-var h = require(201),
-	m = toESM(h),
-	v = require(214),
-	g = toESM(v),
-	_ = require(109),
-	S = toESM(_),
-	O = require(42),
-	E = toESM(O);
+import n201_Clock_RC from "./m201";
+import n214_SimcardInfo_RC from "./m214";
+import n109_FlashlightHelper from "./m109";
+import n42_LaunchStore from "./m42";
 
 class n210_MainView_RC extends n6_RC {
 	static defaultProps = { open: null, close: null };
@@ -33,9 +25,9 @@ class n210_MainView_RC extends n6_RC {
 				if (!_self._longPressTimer) {
 					switch (t) {
 						case "Call":
-							return void E.default.launch("manifestURL", "app://communications.gaiamobile.org/manifest.webapp");
+							return void n42_LaunchStore.launch("manifestURL", "app://communications.gaiamobile.org/manifest.webapp");
 						case "SoftLeft":
-							return void E.default.launch("iac", "notice");
+							return void n42_LaunchStore.launch("iac", "notice");
 						case "Enter":
 							_self.simmcc
 								? ("460" !== _self.simmcc && "250" !== _self.simmcc) || n5.request("openSheet", "appList")
@@ -47,7 +39,7 @@ class n210_MainView_RC extends n6_RC {
 					_self._longPressTimer = setTimeout(function () {
 						switch ((_self.clearLongPressTimer(), (_self._longPressActionTriggered = !0), t)) {
 							case "ArrowUp":
-								S.default.toggle();
+								n109_FlashlightHelper.toggle();
 								break;
 							case "Enter":
 								_self.simmcc
@@ -75,7 +67,7 @@ class n210_MainView_RC extends n6_RC {
 				if ((_self.clearLongPressTimer(), _self._longPressActionTriggered)) return void (_self._longPressActionTriggered = !1);
 				switch (t) {
 					case "Backspace":
-						E.default.isLaunching && (E.default.isLaunching = !1);
+						n42_LaunchStore.isLaunching && (n42_LaunchStore.isLaunching = !1);
 						break;
 					case "Enter":
 						n5.request("openSheet", "appList");
@@ -94,7 +86,7 @@ class n210_MainView_RC extends n6_RC {
 		n5.register("show", this);
 		n5.register("hide", this);
 		n16.register({ left: "notifications", center: "icon=all-apps", right: "shortcuts" }, this.element);
-		n63.register(this.element);
+		n63_SpeedDialHelper.register(this.element);
 	}
 	clearLongPressTimer() {
 		this._longPressTimer && (clearTimeout(this._longPressTimer), (this._longPressTimer = null));
@@ -121,8 +113,8 @@ class n210_MainView_RC extends n6_RC {
 					e.element = t;
 				},
 			},
-			React.createElement(g.default, null),
-			React.createElement(m.default, null)
+			React.createElement(n214_SimcardInfo_RC, null),
+			React.createElement(n201_Clock_RC, null)
 		);
 	}
 }

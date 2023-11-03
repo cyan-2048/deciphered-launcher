@@ -1,6 +1,6 @@
 import n6_RC from "./m6";
 import n19 from "./m19";
-import n105 from "./m105";
+import n105_ContactsStore from "./m105";
 
 class h_RC extends n6_RC {
 	constructor() {
@@ -66,7 +66,7 @@ class h_RC extends n6_RC {
 		var t = this,
 			n = e.map(function (e) {
 				return new Promise(function (n) {
-					n105.findById(e.contactId, function (i) {
+					n105_ContactsStore.findById(e.contactId, function (i) {
 						if (!(i instanceof window.mozContact)) return void n();
 						var a = void 0;
 						i.photo && i.photo.length && (a = window.URL.createObjectURL(i.photo[0]));

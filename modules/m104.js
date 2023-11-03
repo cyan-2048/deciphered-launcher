@@ -1,9 +1,9 @@
-import n14 from "./m14";
+import n14_StoreBase from "./m14";
 import n197 from "./m197";
 
 var d = navigator.mozIccManager;
 
-class f extends n14 {
+class f extends n14_StoreBase {
 	constructor() {
 		super(...arguments);
 		this.length = 0;

@@ -4,7 +4,7 @@ import n19 from "./n19";
 
 var h = false;
 
-class n14 extends EventEmitter {
+class n14_StoreBase extends EventEmitter {
 	constructor() {
 		super();
 
@@ -52,4 +52,4 @@ class n14 extends EventEmitter {
 	}
 }
 
-export default n14;
+export default n14_StoreBase;

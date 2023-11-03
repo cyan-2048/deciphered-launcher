@@ -1,4 +1,4 @@
-import n14 from "./m14";
+import n14_StoreBase from "./m14";
 import n19 from "./m19";
 import n5 from "./m5";
 import * as n13 from "./m13";
@@ -47,7 +47,7 @@ var u =
 		favicon: { 48: "./style/images/default_favicon_48.png" },
 	};
 
-class AppStore extends n14 {
+class AppStore extends n14_StoreBase {
 	constructor() {
 		super();
 

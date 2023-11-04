@@ -1,8 +1,8 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
 import Service from "./Service";
-import n16_SoftKeyStore from "./m16";
-import n19 from "./m19";
+import softkeyStore from "./softkeyStore";
+import SettingsCore from "./SettingsCore";
 import * as n13 from "./m13";
 import n110 from "./m110";
 import n65_SimCardHelper from "./m65";
@@ -55,7 +55,7 @@ class n204_DialerInput_RC extends ComponentBase {
 
 	componentDidMount() {
 		this.element.setAttribute("x-inputmode", "native");
-		n19.addObserver("phone.ring.keypad", this);
+		SettingsCore.addObserver("phone.ring.keypad", this);
 		this.updateSoftKeys();
 		this.getFontStyles();
 		this.getVTSupportability();
@@ -71,7 +71,7 @@ class n204_DialerInput_RC extends ComponentBase {
 				n = void 0 !== n65_SimCardHelper.cardIndex;
 			t && n && (e.center.icon = "sim-" + (n65_SimCardHelper.cardIndex + 1));
 		}
-		n16_SoftKeyStore.register(e, this.element);
+		softkeyStore.register(e, this.element);
 	}
 	onInput() {
 		var e = this.element.value;

@@ -1,7 +1,7 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
 import n26 from "./m26";
-import n16_SoftKeyStore from "./m16";
+import softkeyStore from "./softkeyStore";
 import KeypadNavigator from "./KeypadNavigator";
 import Service from "./Service";
 import n108 from "./m108";
@@ -28,7 +28,7 @@ class APNSelection extends ComponentBase {
 		(this.navigator = new KeypadNavigator(this.FOCUS_SELECTOR, this.element)), this.updateSoftkeys(), Service.register("setOperatorId", this);
 	}
 	updateSoftkeys() {
-		n16_SoftKeyStore.register({ center: "select" }, this.element);
+		softkeyStore.register({ center: "select" }, this.element);
 	}
 	onKeyDown(e) {
 		switch (e.key) {

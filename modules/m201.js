@@ -1,7 +1,7 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
 import Service from "./Service";
-import n19 from "./m19";
+import SettingsCore from "./SettingsCore";
 
 function a(e) {
 	if (Array.isArray(e)) {
@@ -77,7 +77,7 @@ class n201_Clock_RC extends ComponentBase {
 	focus() {}
 
 	componentWillMount() {
-		n19.addObserver("home.clock.visible", this), n19.addObserver("locale.hour12", this);
+		SettingsCore.addObserver("home.clock.visible", this), SettingsCore.addObserver("locale.hour12", this);
 	}
 	componentDidMount() {
 		Service.register("start", this), Service.register("stop", this), Service.register("forcedRefresh", this), window.addEventListener("moztimechange", this);

@@ -1,12 +1,12 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
-import n41 from "./m41";
-import n16_SoftKeyStore from "./m16";
+import appStore from "./appStore";
+import softkeyStore from "./softkeyStore";
 import Service from "./Service";
 import n63_SpeedDialHelper from "./m63";
 import * as n13 from "./m13";
 import n42_LaunchStore from "./m42";
-import n19 from "./m19";
+import SettingsCore from "./SettingsCore";
 import n26 from "./m26";
 import * as n216 from "./m216";
 import * as n206 from "./m206";
@@ -55,14 +55,14 @@ class AppList extends ComponentBase {
 			{
 				id: "rename",
 				callback: function () {
-					__self.element.focus(), __self.focusIfPossible(), n41.renameBookmark(__self.state.apps[__self.focusIndex]);
+					__self.element.focus(), __self.focusIfPossible(), appStore.renameBookmark(__self.state.apps[__self.focusIndex]);
 				},
 			},
 			{ id: "move", tags: ["grid", "list"], callback: __self.enterReorderMode.bind(__self) },
 			{
 				id: "unpin",
 				callback: function () {
-					__self.element.focus(), __self.focusIfPossible(), n41.unpinBookmark(__self.state.apps[__self.focusIndex]);
+					__self.element.focus(), __self.focusIfPossible(), appStore.unpinBookmark(__self.state.apps[__self.focusIndex]);
 				},
 			},
 			{ id: "grid-view", tags: ["list", "single"], callback: __self.switchViewMode.bind(__self, "grid") },
@@ -71,7 +71,7 @@ class AppList extends ComponentBase {
 			{
 				id: "uninstall",
 				callback: function () {
-					__self.element.focus(), __self.focusIfPossible(), n41.uninstallMozApp(__self.state.apps[__self.focusIndex].mozApp);
+					__self.element.focus(), __self.focusIfPossible(), appStore.uninstallMozApp(__self.state.apps[__self.focusIndex].mozApp);
 				},
 			},
 		];
@@ -83,7 +83,7 @@ class AppList extends ComponentBase {
 		__self.updateApps = __self.updateApps.bind(__self);
 		__self.currentPage = 0;
 		__self.getLauncherApps();
-		n19.addObserver("custom.launcher.apps", __self);
+		SettingsCore.addObserver("custom.launcher.apps", __self);
 		window.addEventListener("visibilitychange", function () {
 			var e = document.activeElement;
 			document.hidden && __self.appElements && [].concat(o(__self.appElements)).includes(e) && ((__self.isStickyApp = true), e && e.classList.add("is-focus-app"));
@@ -95,7 +95,7 @@ class AppList extends ComponentBase {
 
 	getLauncherApps() {
 		var e = this;
-		n19.get("custom.launcher.apps").then(function (t) {
+		SettingsCore.get("custom.launcher.apps").then(function (t) {
 			(e.custom_apps = t), e.updateApps();
 		});
 	}
@@ -103,12 +103,12 @@ class AppList extends ComponentBase {
 		(this.custom_apps = e), this.updateApps();
 	}
 	customAppHandler(e) {
-		for (var t = [], n = [], i = n41.getDataMcc(), a = n41.getSimmcc(), o = 0; o < e.length; o++)
+		for (var t = [], n = [], i = appStore.getDataMcc(), a = appStore.getSimmcc(), o = 0; o < e.length; o++)
 			if ("TIMGate" != e[o].manifest.name)
 				D.includes(e[o].manifest.name) ? (a ? "460" !== a && t.push(e[o]) : "460" !== i && t.push(e[o])) : N.includes(e[o].manifest.name) ? n.push(e[o]) : t.push(e[o]);
 			else {
-				var r = n41.getDataMccmnc(),
-					s = n41.getSimmccmnc();
+				var r = appStore.getDataMccmnc(),
+					s = appStore.getSimmccmnc();
 				("22201" != r && "22201" != s) || t.push(e[o]);
 			}
 		if (this.custom_apps)
@@ -125,7 +125,7 @@ class AppList extends ComponentBase {
 	}
 	componentDidMount() {
 		var e = this;
-		n41.on("change", this.updateApps),
+		appStore.on("change", this.updateApps),
 			Service.register("show", this),
 			Service.register("hide", this),
 			Service.registerState("ready", this),
@@ -214,7 +214,7 @@ class AppList extends ComponentBase {
 	updateApps() {
 		var e = this,
 			t = this.element.contains(document.activeElement),
-			n = this.appHandler(n41.apps);
+			n = this.appHandler(appStore.apps);
 		(n = this.customAppHandler(n)),
 			this.setState(
 				function (t) {
@@ -227,7 +227,7 @@ class AppList extends ComponentBase {
 	}
 	updateSoftKeys() {
 		var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : { center: "select", right: "options" };
-		this.state.reorderMode && (e = { center: "set", right: "", left: "cancel" }), n16_SoftKeyStore.register(e, this.element);
+		this.state.reorderMode && (e = { center: "set", right: "", left: "cancel" }), softkeyStore.register(e, this.element);
 	}
 	onFocus() {
 		return (
@@ -280,7 +280,7 @@ class AppList extends ComponentBase {
 		);
 	}
 	saveOrderAndExit() {
-		n41.setAppsOrder(
+		appStore.setAppsOrder(
 			[]
 				.concat(o(this.state.apps))
 				.sort(function (e, t) {

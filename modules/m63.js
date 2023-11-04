@@ -1,9 +1,9 @@
 import Service from "./Service";
-import m14 from "./m14";
+import m14 from "./StoreBase";
 import * as n13 from "./m13";
 import n215 from "./m215";
 import n64 from "./m64";
-import n41 from "./m41";
+import appStore from "./appStore";
 import n110 from "./m110";
 
 class SpeedDialHelper extends m14 {
@@ -14,7 +14,7 @@ class SpeedDialHelper extends m14 {
 
 	speedDial(e) {
 		var t = this;
-		dump("launcher,speeddial:" + e), 0 == e && n41.launchBrowser();
+		dump("launcher,speeddial:" + e), 0 == e && appStore.launchBrowser();
 		var n = e - 1;
 		if (!(n < 0))
 			return 0 === n

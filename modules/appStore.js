@@ -1,5 +1,5 @@
-import n14_StoreBase from "./m14";
-import n19 from "./m19";
+import StoreBase from "./StoreBase";
+import SettingsCore from "./SettingsCore";
 import Service from "./Service";
 import * as n13 from "./m13";
 import n211 from "./m211";
@@ -47,7 +47,7 @@ var u =
 		favicon: { 48: "./style/images/default_favicon_48.png" },
 	};
 
-class AppStore extends n14_StoreBase {
+class AppStore extends StoreBase {
 	constructor() {
 		super();
 
@@ -95,7 +95,7 @@ class AppStore extends n14_StoreBase {
 				var n = t.target.id;
 				(e.removeBookmarkItem(n).toBeTracked = true), e.emit("change"), e.removeItemFromAppsOrder(n);
 			}),
-			n19.addObserver("icc.applications", this));
+			SettingsCore.addObserver("icc.applications", this));
 	}
 	"_observe_icc.applications"(e) {
 		(e = JSON.parse(e)), (this.stkEnabled = e && "object" === ("undefined" == typeof e ? "undefined" : u(e)) && Object.keys(e).length > 0), this.emit("change");
@@ -390,7 +390,7 @@ class AppStore extends n14_StoreBase {
 	}
 }
 
-var n41 = new AppStore();
-n41.start();
+var appStore = new AppStore();
+appStore.start();
 
-export default n41;
+export default appStore;

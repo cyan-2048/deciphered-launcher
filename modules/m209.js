@@ -1,11 +1,11 @@
 import n104 from "./m104";
 import n109_FlashlightHelper from "./m109";
-import n14_StoreBase from "./m14";
-import n19 from "./m19";
+import StoreBase from "./StoreBase";
+import SettingsCore from "./SettingsCore";
 import n42_LaunchStore from "./m42";
 import * as n13 from "./m13";
 
-class InstantSettingsStore extends n14_StoreBase {
+class InstantSettingsStore extends StoreBase {
 	constructor() {
 		super();
 		const __self = this;
@@ -123,7 +123,7 @@ class InstantSettingsStore extends n14_StoreBase {
 				t.observerSetting && !t.removed && e.initSettingObserver(t);
 			}),
 			this.initSettingObserverForBrightness(),
-			n19.addObserver("airplaneMode.status", this),
+			SettingsCore.addObserver("airplaneMode.status", this),
 			navigator.hasFeature &&
 				navigator.hasFeature("device.capability.torch").then(function (t) {
 					if (t) {
@@ -154,7 +154,7 @@ class InstantSettingsStore extends n14_StoreBase {
 	}
 	initSettingObserver(e) {
 		var t = this;
-		n19.addObserver(e.observerSetting, this),
+		SettingsCore.addObserver(e.observerSetting, this),
 			(this["_observe_" + e.observerSetting] = function (n) {
 				var i = t.getSetting(e.name);
 				(i.isActive = n), true === n ? (i.subtitle = "on") : false === n ? (i.subtitle = "off") : (i.subtitle = n.toString()), t.emit("change");
@@ -162,7 +162,7 @@ class InstantSettingsStore extends n14_StoreBase {
 	}
 	initSettingObserverForBrightness() {
 		var e = this;
-		n19.addObserver("screen.brightness", this),
+		SettingsCore.addObserver("screen.brightness", this),
 			(this["_observe_screen.brightness"] = function (t) {
 				(e.getSetting("brightness").subtitleArgs = { number: 100 * t }), e.emit("change");
 			});
@@ -232,10 +232,10 @@ class InstantSettingsStore extends n14_StoreBase {
 		var n = function () {
 			(e.isDisabled = false), t.emit("change");
 		};
-		n19.get(e.observerSetting).then(function (t) {
+		SettingsCore.get(e.observerSetting).then(function (t) {
 			var i = {};
 			(i[e.observerSetting] = !t),
-				n19.set(i).then(function () {
+				SettingsCore.set(i).then(function () {
 					switch (e.name) {
 						case "airplane-mode":
 							break;
@@ -257,7 +257,7 @@ class InstantSettingsStore extends n14_StoreBase {
 	}
 	toggleBrightness() {
 		var e = this.getSetting("brightness").subtitleArgs.number;
-		n19.set({ "screen.brightness": this.brightnessMap[e] || 0.1 });
+		SettingsCore.set({ "screen.brightness": this.brightnessMap[e] || 0.1 });
 	}
 	enterVolumeManagerMode() {
 		var e = this;

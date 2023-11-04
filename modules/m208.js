@@ -1,7 +1,7 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
 import n26 from "./m26";
-import n16_SoftKeyStore from "./m16";
+import softkeyStore from "./softkeyStore";
 import Service from "./Service";
 import n209_InstantSettingsStore from "./m209";
 import * as n13 from "./m13";
@@ -52,7 +52,7 @@ class InstantSettings extends ComponentBase {
 	updateSoftKey() {
 		var e = this.state.focusIndex,
 			t = this.state.settings[e];
-		n16_SoftKeyStore.register({ left: "", center: t.isDisabled ? "" : "select", right: "" }, this.element);
+		softkeyStore.register({ left: "", center: t.isDisabled ? "" : "select", right: "" }, this.element);
 	}
 	updateSettings() {
 		this.setState(function (e) {

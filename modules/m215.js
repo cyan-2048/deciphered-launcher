@@ -1,5 +1,5 @@
 import ComponentBase from "./ComponentBase";
-import n19 from "./m19";
+import SettingsCore from "./SettingsCore";
 import n105_ContactsStore from "./m105";
 
 class h_RC extends ComponentBase {
@@ -14,7 +14,7 @@ class h_RC extends ComponentBase {
 	start() {
 		this.fetch(),
 			this.getCustomSpeedDials(),
-			n19.addObserver("ril.iccInfo.mbdn", this),
+			SettingsCore.addObserver("ril.iccInfo.mbdn", this),
 			navigator.mozContacts.addEventListener("speeddialchange", this.fetch.bind(this)),
 			navigator.mozContacts.addEventListener("contactchange", this.fetch.bind(this));
 	}
@@ -29,7 +29,7 @@ class h_RC extends ComponentBase {
 
 	getCustomSpeedDials() {
 		var e = this;
-		n19.get("custom.speeddials").then(function (t) {
+		SettingsCore.get("custom.speeddials").then(function (t) {
 			t && ((e.customSpeedDials = t), e.fillCustomSpeedDials(t), e.emit("changed"));
 		});
 	}

@@ -1,8 +1,8 @@
-import n14_StoreBase from "./m14";
-import n41 from "./m41";
+import StoreBase from "./StoreBase";
+import appStore from "./appStore";
 import Service from "./Service";
 
-class LaunchStore extends n14_StoreBase {
+class LaunchStore extends StoreBase {
 	constructor(e) {
 		super(e);
 		const __self = this;
@@ -27,7 +27,7 @@ class LaunchStore extends n14_StoreBase {
 	launchApp(e, t) {
 		if (!this.isLaunching) {
 			this.isLaunching = true;
-			var n = n41.queryApp(e, t);
+			var n = appStore.queryApp(e, t);
 			n && n.launch();
 		}
 	}

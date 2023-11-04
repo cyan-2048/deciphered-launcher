@@ -1,6 +1,6 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
-import n19 from "./m19";
+import SettingsCore from "./SettingsCore";
 
 class n214_SimcardInfo_RC extends ComponentBase {
 	constructor(props) {
@@ -12,7 +12,7 @@ class n214_SimcardInfo_RC extends ComponentBase {
 	}
 
 	componentDidMount() {
-		this._initCardInfos(), n19.addObserver("airplaneMode.enabled", this), n19.addObserver("custom.lockscreen.ui", this);
+		this._initCardInfos(), SettingsCore.addObserver("airplaneMode.enabled", this), SettingsCore.addObserver("custom.lockscreen.ui", this);
 	}
 	"_observe_airplaneMode.enabled"(e) {
 		this.setState({ isAirplaneMode: e });
@@ -27,7 +27,7 @@ class n214_SimcardInfo_RC extends ComponentBase {
 			Array.from(t).forEach(function (t, n) {
 				t.addEventListener("datachange", e), t.addEventListener("voicechange", e), t.addEventListener("signalstrengthchange", e);
 			}),
-				n19.get("custom.lockscreen.ui").then(function (t) {
+				SettingsCore.get("custom.lockscreen.ui").then(function (t) {
 					dump("launcher simcard_info.js get setting value = " + t), (e._cuzVal = t), e._updateCardInfos();
 				});
 			var n = this;

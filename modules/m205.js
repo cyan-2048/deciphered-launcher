@@ -1,7 +1,7 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
 import Service from "./Service";
-import n16_SoftKeyStore from "./m16";
+import softkeyStore from "./softkeyStore";
 import KeypadNavigator from "./KeypadNavigator";
 import n65_SimCardHelper from "./m65";
 
@@ -31,7 +31,7 @@ class n205_DialerSuggestions_RC extends ComponentBase {
 				n = void 0 !== n65_SimCardHelper.cardIndex;
 			t && n && (e.center.icon = "sim-" + (n65_SimCardHelper.cardIndex + 1));
 		}
-		n16_SoftKeyStore.register(e, this.element);
+		softkeyStore.register(e, this.element);
 	}
 	getVTSupportability() {
 		var e = this;

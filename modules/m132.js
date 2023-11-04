@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import ComponentBase from "./ComponentBase";
-import n16_SoftKeyStore from "./m16";
+import softkeyStore from "./softkeyStore";
 import Service from "./Service";
 
 var b = 0;
@@ -83,24 +83,24 @@ class n132_Dialog_RC extends ComponentBase {
 	updateSoftKeys() {
 		if ("custom" !== this.props.type)
 			"alert" === this.props.type
-				? n16_SoftKeyStore.register({ left: "", center: "ok", right: "" }, ReactDOM.findDOMNode(this))
+				? softkeyStore.register({ left: "", center: "ok", right: "" }, ReactDOM.findDOMNode(this))
 				: "progress" === this.props.type
-				? n16_SoftKeyStore.register({ left: this.props.hideCancel ? "" : this.props.cancel || "cancel", center: "", right: "" }, ReactDOM.findDOMNode(this))
-				: n16_SoftKeyStore.register({ left: this.props.cancel || "cancel", center: "", right: this.props.ok || "ok" }, ReactDOM.findDOMNode(this));
+				? softkeyStore.register({ left: this.props.hideCancel ? "" : this.props.cancel || "cancel", center: "", right: "" }, ReactDOM.findDOMNode(this))
+				: softkeyStore.register({ left: this.props.cancel || "cancel", center: "", right: this.props.ok || "ok" }, ReactDOM.findDOMNode(this));
 		else {
 			var e = this.props.buttons;
 			3 === e.length
 				? "alert" !== this.props.type
-					? n16_SoftKeyStore.register({ left: e[0].message, center: e[1].message, right: e[2].message }, ReactDOM.findDOMNode(this))
-					: n16_SoftKeyStore.register({ left: "", center: "ok", right: "" }, ReactDOM.findDOMNode(this))
+					? softkeyStore.register({ left: e[0].message, center: e[1].message, right: e[2].message }, ReactDOM.findDOMNode(this))
+					: softkeyStore.register({ left: "", center: "ok", right: "" }, ReactDOM.findDOMNode(this))
 				: 2 === e.length
-				? (n16_SoftKeyStore.register({ left: e[0].message, center: "", right: e[1].message }, ReactDOM.findDOMNode(this)),
+				? (softkeyStore.register({ left: e[0].message, center: "", right: e[1].message }, ReactDOM.findDOMNode(this)),
 				  ReactDOM.findDOMNode(this.refs.checkbox) &&
-						n16_SoftKeyStore.register(
+						softkeyStore.register(
 							{ center: "check-on" === ReactDOM.findDOMNode(this.refs.checkbox).dataset.icon ? "off" : "on" },
 							ReactDOM.findDOMNode(this.refs.checkboxContainer)
 						))
-				: 1 === e.length && n16_SoftKeyStore.register({ left: "", center: e[0].message, right: "" }, ReactDOM.findDOMNode(this));
+				: 1 === e.length && softkeyStore.register({ left: "", center: e[0].message, right: "" }, ReactDOM.findDOMNode(this));
 		}
 	}
 	focus() {

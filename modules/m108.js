@@ -1,6 +1,6 @@
-import n14_StoreBase from "./m14";
+import StoreBase from "./StoreBase";
 
-class c extends n14_StoreBase {
+class c extends StoreBase {
 	start() {
 		this.emit("user-has-selected");
 	}

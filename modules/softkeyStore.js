@@ -1,4 +1,4 @@
-import EventEmitter from "./m30";
+import EventEmitter from "./EventEmitter";
 
 // originally named c
 class SoftKeyStore extends EventEmitter {
@@ -8,8 +8,10 @@ class SoftKeyStore extends EventEmitter {
 	}
 
 	start() {
-		(this.currentKeys = {}), (this.registeredDOMMap = new Map());
+		this.currentKeys = {};
+		this.registeredDOMMap = new Map();
 	}
+
 	register(e, t) {
 		var n = this.registeredDOMMap.get(t),
 			r = this;
@@ -61,7 +63,8 @@ class SoftKeyStore extends EventEmitter {
 		t.length && navigator.softkeyManager && navigator.softkeyManager.registerKeys(t);
 	}
 	store(e) {
-		(this.currentKeys = e), this.registerSoftkeys(e), this.emit("change");
+		this.currentKeys = e;
+		this.registerSoftkeys(e), this.emit("change");
 	}
 	recount() {
 		for (var e = {}, t = document.activeElement; t !== document.body; ) {
@@ -80,7 +83,7 @@ class SoftKeyStore extends EventEmitter {
 	}
 }
 
-var n16_SoftKeyStore = new SoftKeyStore();
-n16_SoftKeyStore.start();
+var softkeyStore = new SoftKeyStore();
+softkeyStore.start();
 
-export default n16_SoftKeyStore;
+export default softkeyStore;

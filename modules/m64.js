@@ -1,7 +1,7 @@
-import EventEmitter from "./m30";
+import EventEmitter from "./EventEmitter";
 import Service from "./Service";
 import * as n13 from "./m13";
-import n19 from "./m19";
+import SettingsCore from "./SettingsCore";
 import n104 from "./m104";
 import n65_SimCardHelper from "./m65";
 
@@ -118,7 +118,7 @@ class k extends EventEmitter {
 			]);
 		}
 		navigator.mozSetMessageHandler("ussd-received", _self.onUssdReceived.bind(_self));
-		n19.get("debugger.remote-mode").then(function (e) {
+		SettingsCore.get("debugger.remote-mode").then(function (e) {
 			if (_self.versionType && "user" !== _self.versionType && "disabled" !== e) {
 				_self.debuggerRemoteMode = true;
 				_self.instantDialNumbers = _self.instantDialNumbers.concat(["*#0606#", "*#8378269#", "*#*#2637643#*#*"]);
@@ -183,10 +183,10 @@ class k extends EventEmitter {
 		);
 	}
 	setDebuggerMode(e) {
-		e ? n19.set({ "debugger.remote-mode": "adb-devtools" }) : n19.set({ "debugger.remote-mode": "disabled" });
+		e ? SettingsCore.set({ "debugger.remote-mode": "adb-devtools" }) : SettingsCore.set({ "debugger.remote-mode": "disabled" });
 	}
 	showSarValue() {
-		n19.get("deviceinfo.sar_value").then(function (e) {
+		SettingsCore.get("deviceinfo.sar_value").then(function (e) {
 			Service.request("showDialog", { type: "alert", header: "SAR Information", content: (e || "0") + " W/kg", translated: true, noClose: false });
 		});
 	}
@@ -515,7 +515,7 @@ class k extends EventEmitter {
 				break;
 			case "*#*#33284#*#*":
 				var r = false;
-				n19.get("debugger.remote-mode").then(function (e) {
+				SettingsCore.get("debugger.remote-mode").then(function (e) {
 					"disabled" !== e && (r = true), dump("checkSpecialNumber: debuggerMode is: " + r), t.setDebuggerMode(!r);
 				});
 				break;

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import ComponentBase from "./ComponentBase";
-import n16_SoftKeyStore from "./m16";
+import softkeyStore from "./softkeyStore";
 import KeypadNavigator from "./KeypadNavigator";
 
 class n71_OptionMenu_RC extends ComponentBase {
@@ -27,10 +27,10 @@ class n71_OptionMenu_RC extends ComponentBase {
 		e && this.navigator.setFocus(e);
 	}
 	unregisterSoftKeys() {
-		n16_SoftKeyStore.unregister(this.element);
+		softkeyStore.unregister(this.element);
 	}
 	updateSoftKeys() {
-		n16_SoftKeyStore.register({ left: this.state.hasCancel ? "cancel" : "", center: "select", right: "" }, this.element);
+		softkeyStore.register({ left: this.state.hasCancel ? "cancel" : "", center: "select", right: "" }, this.element);
 	}
 	clear() {
 		this.setState({ header: "", options: [], onCancel: function () {} });

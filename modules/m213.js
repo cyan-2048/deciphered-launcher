@@ -1,7 +1,7 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
 import n26 from "./m26";
-import n16_SoftKeyStore from "./m16";
+import softkeyStore from "./softkeyStore";
 import Service from "./Service";
 import n212 from "./m212";
 
@@ -71,7 +71,7 @@ class QRFace extends ComponentBase {
 	}
 	updateSoftKeys() {
 		var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : { left: "", center: "ok", right: "" };
-		n16_SoftKeyStore.register(e, this.element);
+		softkeyStore.register(e, this.element);
 	}
 	onKeyDown(e) {
 		switch (e.key) {

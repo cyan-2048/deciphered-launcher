@@ -1,10 +1,10 @@
 import n5 from "./Service";
-import EventEmitter from "./m30";
-import n19 from "./m19";
+import EventEmitter from "./EventEmitter";
+import SettingsCore from "./SettingsCore";
 
 var h = false;
 
-class n14_StoreBase extends EventEmitter {
+class StoreBase extends EventEmitter {
 	constructor() {
 		super();
 
@@ -25,7 +25,7 @@ class n14_StoreBase extends EventEmitter {
 		this.SETTINGS &&
 			((this._settings = {}),
 			this.SETTINGS.forEach(function (e) {
-				n19.addObserver(e, this);
+				SettingsCore.addObserver(e, this);
 			}, this));
 	}
 
@@ -52,4 +52,4 @@ class n14_StoreBase extends EventEmitter {
 	}
 }
 
-export default n14_StoreBase;
+export default StoreBase;

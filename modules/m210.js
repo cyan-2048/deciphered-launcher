@@ -1,9 +1,9 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
-import n16_SoftKeyStore from "./m16";
+import softkeyStore from "./softkeyStore";
 import Service from "./Service";
 import n63_SpeedDialHelper from "./m63";
-import n41 from "./m41";
+import appStore from "./appStore";
 import n201_Clock_RC from "./m201";
 import n214_SimcardInfo_RC from "./m214";
 import n109_FlashlightHelper from "./m109";
@@ -21,7 +21,7 @@ class n210_MainView_RC extends ComponentBase {
 
 		n.name = "MainView";
 		n.onKeyDown = function (e) {
-			if (((_self.mcc = n41.getDataMcc()), (_self.simmcc = n41.getSimmcc()), !Service.query("LaunchStore.isLaunching") && Service.query("AppList.ready"))) {
+			if (((_self.mcc = appStore.getDataMcc()), (_self.simmcc = appStore.getSimmcc()), !Service.query("LaunchStore.isLaunching") && Service.query("AppList.ready"))) {
 				var t = e.key;
 				if (!_self._longPressTimer) {
 					switch (t) {
@@ -46,12 +46,12 @@ class n210_MainView_RC extends ComponentBase {
 								_self.simmcc
 									? "460" !== _self.simmcc &&
 									  "250" !== _self.simmcc &&
-									  n41.apps.some(function (e) {
+									  appStore.apps.some(function (e) {
 											"Assistant" === e.manifest.name && e.launch();
 									  })
 									: "460" !== _self.mcc &&
 									  "250" !== _self.mcc &&
-									  n41.apps.some(function (e) {
+									  appStore.apps.some(function (e) {
 											"Assistant" === e.manifest.name && e.launch();
 									  });
 								break;
@@ -86,7 +86,7 @@ class n210_MainView_RC extends ComponentBase {
 	componentDidMount() {
 		Service.register("show", this);
 		Service.register("hide", this);
-		n16_SoftKeyStore.register({ left: "notifications", center: "icon=all-apps", right: "shortcuts" }, this.element);
+		softkeyStore.register({ left: "notifications", center: "icon=all-apps", right: "shortcuts" }, this.element);
 		n63_SpeedDialHelper.register(this.element);
 	}
 	clearLongPressTimer() {

@@ -1,7 +1,7 @@
 import n103 from "./m103";
-import n14_StoreBase from "./m14";
+import StoreBase from "./StoreBase";
 
-class SimCardHelper extends n14_StoreBase {
+class SimCardHelper extends StoreBase {
 	constructor(e) {
 		super(e);
 		this.name = "SimCardHelper";

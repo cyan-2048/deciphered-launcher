@@ -1,6 +1,6 @@
-import n14_StoreBase from "./m14";
+import StoreBase from "./StoreBase";
 
-class FlashlightHelper extends n14_StoreBase {
+class FlashlightHelper extends StoreBase {
 	constructor(e) {
 		dump("cck flashlight constructor");
 		super(e);

@@ -1,5 +1,5 @@
 import * as n13 from "./m13";
-import EventEmitter from "./m30";
+import EventEmitter from "./EventEmitter";
 
 class d extends EventEmitter {
 	constructor(e) {

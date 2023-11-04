@@ -52,7 +52,7 @@ class AppStore extends n14_StoreBase {
 		super();
 
 		this.apps = [];
-		this.stkEnabled = !1;
+		this.stkEnabled = false;
 		window.AppStore = this;
 	}
 
@@ -69,7 +69,7 @@ class AppStore extends n14_StoreBase {
 			}),
 			t.addEventListener("install", function (t) {
 				var n = t.application;
-				(n.toBeTracked = !0),
+				(n.toBeTracked = true),
 					"installed" === n.installState && (e.addMozAppItem(n), e.emit("change")),
 					(n.ondownloadapplied = function (t) {
 						var n = t.application;
@@ -79,21 +79,21 @@ class AppStore extends n14_StoreBase {
 			}),
 			t.addEventListener("uninstall", function (t) {
 				var n = t.application;
-				(e.removeMozAppItem(n).toBeTracked = !0), e.emit("change"), e.removeItemFromAppsOrder(n.manifest.name);
+				(e.removeMozAppItem(n).toBeTracked = true), e.emit("change"), e.removeItemFromAppsOrder(n.manifest.name);
 			}),
 			t.addEventListener("enabledstatechange", function () {
 				(e.apps = []), e.updateAllItems();
 			}),
 			BookmarksDatabase.addEventListener("added", function (t) {
 				var n = t.target;
-				(e.addBookmarkItem(n).toBeTracked = !0), e.emit("change");
+				(e.addBookmarkItem(n).toBeTracked = true), e.emit("change");
 			}),
 			BookmarksDatabase.addEventListener("updated", function () {
 				e.updateAllItems();
 			}),
 			BookmarksDatabase.addEventListener("removed", function (t) {
 				var n = t.target.id;
-				(e.removeBookmarkItem(n).toBeTracked = !0), e.emit("change"), e.removeItemFromAppsOrder(n);
+				(e.removeBookmarkItem(n).toBeTracked = true), e.emit("change"), e.removeItemFromAppsOrder(n);
 			}),
 			n19.addObserver("icc.applications", this));
 	}
@@ -104,7 +104,7 @@ class AppStore extends n14_StoreBase {
 		var n = void 0;
 		return (
 			this.apps.some(function (i) {
-				return n13.getDeepProp(i, e) === t && ((n = i), !0);
+				return n13.getDeepProp(i, e) === t && ((n = i), true);
 			}),
 			n
 		);
@@ -315,7 +315,7 @@ class AppStore extends n14_StoreBase {
 			ok: "uninstall",
 			header: n13.toL10n("confirmation"),
 			content: n13.toL10n("confirm-to-uninstall-app", { appName: e.manifest.name }),
-			translated: !0,
+			translated: true,
 			onOk: function () {
 				navigator.mozApps.mgmt.uninstall(e);
 			},
@@ -352,8 +352,8 @@ class AppStore extends n14_StoreBase {
 		return {
 			type: "bookmark",
 			displayName: e.name,
-			enabled: !0,
-			removable: !0,
+			enabled: true,
+			removable: true,
 			manifestURL: e.url,
 			url: e.url,
 			favicon: e.icon,
@@ -366,7 +366,7 @@ class AppStore extends n14_StoreBase {
 			ok: "unpin",
 			header: n13.toL10n("confirmation"),
 			content: n13.toL10n("confirm-to-unpin-bookmark"),
-			translated: !0,
+			translated: true,
 			onOk: function () {
 				BookmarksDatabase.remove(e.url);
 			},

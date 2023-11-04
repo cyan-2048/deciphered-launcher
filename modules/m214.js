@@ -7,8 +7,8 @@ class n214_SimcardInfo_RC extends n6_RC {
 		super(props);
 
 		this.name = "SimcardInfo";
-		this.DEBUG = !1;
-		this.state = { isAirplaneMode: !1, cardInfos: [] };
+		this.DEBUG = false;
+		this.state = { isAirplaneMode: false, cardInfos: [] };
 	}
 
 	componentDidMount() {
@@ -101,8 +101,8 @@ class n214_SimcardInfo_RC extends n6_RC {
 			Array.from(n).forEach(function (n, a) {
 				var o = !n.iccId,
 					r = 0,
-					s = !1;
-				o || (r = n.signalStrength ? n.signalStrength.level + 1 || 0 : Math.ceil(n.voice.relSignalStrength / 20) || 0), 0 == r && (s = !0);
+					s = false;
+				o || (r = n.signalStrength ? n.signalStrength.level + 1 || 0 : Math.ceil(n.voice.relSignalStrength / 20) || 0), 0 == r && (s = true);
 				var u = void 0,
 					l = void 0;
 				dump("launcher simcard_info.js _cuzVal = " + t._cuzVal + ", index = " + a);

@@ -37,7 +37,7 @@ class h_RC extends n6_RC {
 		var e = this;
 		(arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : []).forEach(function (t) {
 			var n = parseInt(t.key, 10);
-			e.contacts[n - 1] = { dial: n, editable: !1, tel: t.tel, name: t.name, id: "customsd" };
+			e.contacts[n - 1] = { dial: n, editable: false, tel: t.tel, name: t.name, id: "customsd" };
 		});
 	}
 	fetch() {
@@ -58,9 +58,9 @@ class h_RC extends n6_RC {
 		(this.contacts = Array(this.SIZE)
 			.fill(null)
 			.map(function (e, t) {
-				return { dial: t + 1, editable: !0 };
+				return { dial: t + 1, editable: true };
 			})),
-			Object.assign(this.contacts[0], { tel: this.voicemailNumber, editable: !1, voicemail: !0, name: "voicemail", id: "voicemail" });
+			Object.assign(this.contacts[0], { tel: this.voicemailNumber, editable: false, voicemail: true, name: "voicemail", id: "voicemail" });
 	}
 	parse(e) {
 		var t = this,

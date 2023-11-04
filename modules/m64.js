@@ -16,13 +16,13 @@ function o(e) {
 var u = (function () {
 		function e(e, t) {
 			var n = [],
-				r = !0,
-				o = !1,
+				r = true,
+				o = false,
 				i = void 0;
 			try {
-				for (var a, s = e[Symbol.iterator](); !(r = (a = s.next()).done) && (n.push(a.value), !t || n.length !== t); r = !0);
+				for (var a, s = e[Symbol.iterator](); !(r = (a = s.next()).done) && (n.push(a.value), !t || n.length !== t); r = true);
 			} catch (u) {
-				(o = !0), (i = u);
+				(o = true), (i = u);
 			} finally {
 				try {
 					!r && s.return && s.return();
@@ -63,7 +63,7 @@ class k extends EventEmitter {
 				_self._session = e.session;
 				var t = function () {
 					n5_Service.request("hideDialog");
-					_self.mmiloading = !1;
+					_self.mmiloading = false;
 					_self._session.cancel();
 					_self._session = null;
 				};
@@ -71,28 +71,28 @@ class k extends EventEmitter {
 					type: "prompt",
 					header: n13.toL10n("confirmation"),
 					content: e.message.replace(/\\r\\n|\\r|\\n/g, "\n"),
-					translated: !0,
-					noClose: !1,
+					translated: true,
+					noClose: false,
 					onOk: function (e) {
-						e ? ((_self.mmiloading = !0), _self.emit("mmiloading"), _self._session.send(e)) : t();
+						e ? ((_self.mmiloading = true), _self.emit("mmiloading"), _self._session.send(e)) : t();
 					},
 					onCancel: t,
 					onBack: t,
 				});
 			} else {
 				_self.emit("ussd-received", e);
-				_self.mmiloading = !1;
+				_self.mmiloading = false;
 			}
 		};
 		_self.errorCases = {
 			BadNumber: { header: "invalidNumberToDialTitle", content: "invalidNumberToDialMessage" },
 			NoNetwork: { header: "emergencyDialogTitle", content: "emergencyDialogBodyBadNumber" },
-			EmergencyCallOnly: { header: "emergency-call-only", content: "emergency-call-error", containNumber: !0 },
+			EmergencyCallOnly: { header: "emergency-call-only", content: "emergency-call-error", containNumber: true },
 			RadioNotAvailable: { header: "callAirplaneModeTitle", content: "callAirplaneModeMessage" },
 			DeviceNotAcceptedError: { header: "emergencyDialogTitle", content: "emergencyDialogBodyDeviceNotAccepted" },
 			BusyError: { header: "numberIsBusyTitle", content: "numberIsBusyMessage" },
-			FDNBlockedError: { header: "fdnIsActiveTitle", content: "fdnIsActiveMessage", containNumber: !0 },
-			FdnCheckFailure: { header: "fdnIsActiveTitle", content: "fdnIsActiveMessage", containNumber: !0 },
+			FDNBlockedError: { header: "fdnIsActiveTitle", content: "fdnIsActiveMessage", containNumber: true },
+			FdnCheckFailure: { header: "fdnIsActiveTitle", content: "fdnIsActiveMessage", containNumber: true },
 			OtherConnectionInUse: { header: "otherConnectionInUseTitle", content: "otherConnectionInUseMessage" },
 		};
 		_self.validExp = /^(?!,)([0-9#+*,]){1,50}$/;
@@ -120,7 +120,7 @@ class k extends EventEmitter {
 		navigator.mozSetMessageHandler("ussd-received", _self.onUssdReceived.bind(_self));
 		n19.get("debugger.remote-mode").then(function (e) {
 			if (_self.versionType && "user" !== _self.versionType && "disabled" !== e) {
-				_self.debuggerRemoteMode = !0;
+				_self.debuggerRemoteMode = true;
 				_self.instantDialNumbers = _self.instantDialNumbers.concat(["*#0606#", "*#8378269#", "*#*#2637643#*#*"]);
 			}
 		});
@@ -141,10 +141,10 @@ class k extends EventEmitter {
 		});
 		Promise.all(r).then(
 			function (e) {
-				n5_Service.request("showDialog", { type: "alert", header: t, content: "IMEI:" + e.join("\n") + "SVN:" + n, translated: !0, noClose: !1 });
+				n5_Service.request("showDialog", { type: "alert", header: t, content: "IMEI:" + e.join("\n") + "SVN:" + n, translated: true, noClose: false });
 			},
 			function (e) {
-				n5_Service.request("showDialog", { type: "alert", header: t, content: "IMEI: \nSVN:" + n, translated: !0, noClose: !1 });
+				n5_Service.request("showDialog", { type: "alert", header: t, content: "IMEI: \nSVN:" + n, translated: true, noClose: false });
 			}
 		);
 	}
@@ -158,10 +158,10 @@ class k extends EventEmitter {
 		});
 		Promise.all(t).then(
 			function (t) {
-				n5_Service.request("showDialog", { type: "alert", header: e.toUpperCase(), content: t.join("\n"), translated: !0, noClose: !1 });
+				n5_Service.request("showDialog", { type: "alert", header: e.toUpperCase(), content: t.join("\n"), translated: true, noClose: false });
 			},
 			function (t) {
-				n5_Service.request("showDialog", { type: "alert", header: e.toUpperCase(), content: t.message, translated: !0, noClose: !1 });
+				n5_Service.request("showDialog", { type: "alert", header: e.toUpperCase(), content: t.message, translated: true, noClose: false });
 			}
 		);
 	}
@@ -178,7 +178,7 @@ class k extends EventEmitter {
 				n5_Service.request("openSheet", "qrface");
 			},
 			function (t) {
-				n5_Service.request("showDialog", { type: "alert", header: e.toUpperCase(), content: t.message, translated: !0, noClose: !1 });
+				n5_Service.request("showDialog", { type: "alert", header: e.toUpperCase(), content: t.message, translated: true, noClose: false });
 			}
 		);
 	}
@@ -187,7 +187,7 @@ class k extends EventEmitter {
 	}
 	showSarValue() {
 		n19.get("deviceinfo.sar_value").then(function (e) {
-			n5_Service.request("showDialog", { type: "alert", header: "SAR Information", content: (e || "0") + " W/kg", translated: !0, noClose: !1 });
+			n5_Service.request("showDialog", { type: "alert", header: "SAR Information", content: (e || "0") + " W/kg", translated: true, noClose: false });
 		});
 	}
 	showInternalVersion() {
@@ -198,7 +198,7 @@ class k extends EventEmitter {
 		e && ((t = e.getPropertyValue("ro.tver.boot")), (n = e.getPropertyValue("ro.tver.sys")), dump("showInternalVersion: ro.tver.boot is: " + t + "ro.tver.sys is: " + n));
 		var o = "boot: " + t + "\nsystem: " + n;
 		Promise.resolve().then(function () {
-			n5_Service.request("showDialog", { type: "alert", header: r, content: o, translated: !0, noClose: !1 });
+			n5_Service.request("showDialog", { type: "alert", header: r, content: o, translated: true, noClose: false });
 		});
 	}
 	showFIHVersion() {
@@ -218,7 +218,7 @@ class k extends EventEmitter {
 			(o = "Variant:" + this.getVariantInfo()),
 			(i = ["Nokia 8110 4G", t, n, r, "(c)Nokia", o].join("\n")),
 			Promise.resolve().then(function () {
-				n5_Service.request("showDialog", { type: "alert", content: i, translated: !0, noClose: !1 });
+				n5_Service.request("showDialog", { type: "alert", content: i, translated: true, noClose: false });
 			});
 	}
 	getVariantInfo() {
@@ -243,11 +243,11 @@ class k extends EventEmitter {
 		"diag,serial_smd,rmnet_qti_bam,adb" === t
 			? (navigator.engmodeExtension.setPropertyValue("persist.sys.usb.config", "mtp,adb"),
 			  Promise.resolve().then(function () {
-					n5_Service.request("showDialog", { type: "alert", header: "close diag", content: " ", translated: !0, noClose: !1 });
+					n5_Service.request("showDialog", { type: "alert", header: "close diag", content: " ", translated: true, noClose: false });
 			  }))
 			: "mtp,adb" === t &&
 			  (navigator.engmodeExtension.setPropertyValue("persist.sys.usb.config", "diag,serial_smd,rmnet_qti_bam,adb"),
-			  (e = navigator.mozSettings.createLock().set({ "ums.enabled": !1 })),
+			  (e = navigator.mozSettings.createLock().set({ "ums.enabled": false })),
 			  (e.onsuccess = function () {
 					dump("close ums success");
 			  }),
@@ -255,30 +255,30 @@ class k extends EventEmitter {
 					dump("close ums error");
 			  }),
 			  Promise.resolve().then(function () {
-					n5_Service.request("showDialog", { type: "alert", header: "open diag", content: " ", translated: !0, noClose: !1 });
+					n5_Service.request("showDialog", { type: "alert", header: "open diag", content: " ", translated: true, noClose: false });
 			  }));
 	}
 	changeAutoSmsMode() {
 		var e = navigator.mozSettings.createLock().get("auto.send.crash.sms");
 		e.onsuccess = function () {
 			e.result["auto.send.crash.sms"]
-				? (dump("sb_sms launcher get auto.send.crash.sms true"), (this._autoSmsEnable = !0))
-				: (dump("sb_sms launcher get auto.send.crash.sms false"), (this._autoSmsEnable = !1)),
+				? (dump("sb_sms launcher get auto.send.crash.sms true"), (this._autoSmsEnable = true))
+				: (dump("sb_sms launcher get auto.send.crash.sms false"), (this._autoSmsEnable = false)),
 				this._autoSmsEnable
-					? (navigator.mozSettings.createLock().set({ "auto.send.crash.sms": !1 }),
+					? (navigator.mozSettings.createLock().set({ "auto.send.crash.sms": false }),
 					  Promise.resolve().then(function () {
-							n5_Service.request("showDialog", { type: "alert", header: "autosms off", content: " ", translated: !0, noClose: !1 });
+							n5_Service.request("showDialog", { type: "alert", header: "autosms off", content: " ", translated: true, noClose: false });
 					  }))
-					: (navigator.mozSettings.createLock().set({ "auto.send.crash.sms": !0 }),
+					: (navigator.mozSettings.createLock().set({ "auto.send.crash.sms": true }),
 					  Promise.resolve().then(function () {
-							n5_Service.request("showDialog", { type: "alert", header: "autosms on", content: " ", translated: !0, noClose: !1 });
+							n5_Service.request("showDialog", { type: "alert", header: "autosms on", content: " ", translated: true, noClose: false });
 					  }));
 		}.bind(this);
 	}
 	instantDialIfNecessary(e) {
 		return this.noSIMCardOnDevice()
 			? (dump("instantDialIfNecessary:No SIM card on device"),
-			  this.isValidSimLockPassword(e) ? (dump("instantDialIfNecessary:ValidSimLockPassword"), !0) : this.instantDialNumbers.includes(e))
+			  this.isValidSimLockPassword(e) ? (dump("instantDialIfNecessary:ValidSimLockPassword"), true) : this.instantDialNumbers.includes(e))
 			: this.instantDialNumbers.includes(e);
 	}
 	noSIMCardOnDevice() {
@@ -316,7 +316,7 @@ class k extends EventEmitter {
 	}
 	mmiHandler(e, t) {
 		var n = this;
-		(this.mmiloading = !0),
+		(this.mmiloading = true),
 			this.emit("mmiloading"),
 			e.then(function (e) {
 				if (!e) return void n.emit("mmiloaded", "!", "GenericFailure");
@@ -340,7 +340,7 @@ class k extends EventEmitter {
 							i && "smServiceEnabledFor" === o && Array.isArray(i) && (a = i.map(n13.toL10n)), a.unshift(n13.toL10n(s[o]) || o), (o = a.join("\n"));
 						}
 				}
-				(n.mmiloading = !1), n.emit("mmiloaded", r, o);
+				(n.mmiloading = false), n.emit("mmiloaded", r, o);
 			});
 	}
 	processCf(e) {
@@ -407,7 +407,7 @@ class k extends EventEmitter {
 							if (((e = r.getNumberAsDtmfToneGroups(l)[0]), (r._conn = a), !a || !a.voice)) return i(), void r.errorHandler({ errorName: "NoNetwork" });
 							var c = navigator.mozTelephony;
 							if (!c) return void i();
-							n5_Service.request("Dialer:toggleStayEffect", !0);
+							n5_Service.request("Dialer:toggleStayEffect", true);
 							var p = a.imsHandler && a.imsHandler.capability,
 								d = !p && a.voice.emergencyCallsOnly;
 							d ? (u = c.dialEmergency(e, n)) : t ? dump("dialVT, should not hanppen") : (u = c.dial(e, n)),
@@ -448,15 +448,15 @@ class k extends EventEmitter {
 										return i(e);
 									}),
 							navigator.mozTelephony.getEccList().then(function (t) {
-								var n = !1;
+								var n = false;
 								return (
 									n104.isMultiSIM()
 										? n104.getSlots().forEach(function (e, t) {
 												if (e) {
-													(!e.isAbsent() && !e.isLocked()) || (n = !0);
+													(!e.isAbsent() && !e.isLocked()) || (n = true);
 												}
 										  })
-										: (n = !0),
+										: (n = true),
 									!n && t.includes(e)
 										? void a(0)
 										: void n5_Service
@@ -473,13 +473,13 @@ class k extends EventEmitter {
 	}
 	checkSpecialNumber(e) {
 		var t = this,
-			n = !0;
+			n = true;
 		switch (e) {
 			case "*#1219#":
 				this.versionType && "user" !== this.versionType
 					? (navigator.mozSettings.createLock().set({ "customization.value.last": "clearedbysecretcode" }),
 					  Toaster.showToast({ message: "flag of customization is cleared by secret code", latency: 3e3 }))
-					: (n = !1);
+					: (n = false);
 				break;
 			case "*#06#":
 				this.listIMEI("imei");
@@ -488,19 +488,19 @@ class k extends EventEmitter {
 				dump("set isTa4request true"),
 					this.versionType && "user" !== this.versionType
 						? (navigator.engmodeExtension.setPropertyValue("TA-4-request", "true"), Toaster.showToast({ message: "auto answer on", latency: 3e3 }))
-						: (n = !1);
+						: (n = false);
 				break;
 			case "*#092#":
 				dump("set isTa4request false"),
 					this.versionType && "user" !== this.versionType
 						? (navigator.engmodeExtension.setPropertyValue("TA-4-request", "false"), Toaster.showToast({ message: "auto answer off", latency: 3e3 }))
-						: (n = !1);
+						: (n = false);
 				break;
 			case "*#07#":
 				navigator.customization.getValue("ro.sar.enabled").then(function (e) {
 					dump("checkSpecialNumber: ro.sar.enabled in customization state is: " + e);
-					var t = !1;
-					if ((e && (t = !0), dump("checkSpecialNumber: isSarEnabled = " + t), t)) {
+					var t = false;
+					if ((e && (t = true), dump("checkSpecialNumber: isSarEnabled = " + t), t)) {
 						var n = new MozActivity({ name: "configure", data: { target: "device", section: "about-health-safety" } });
 						n.onerror = function () {};
 					}
@@ -512,12 +512,12 @@ class k extends EventEmitter {
 			case "*#2886#":
 				if (this.versionType && "user" !== this.versionType) {
 					new MozActivity({ name: "mmitest" }).onerror = function () {};
-				} else n = !1;
+				} else n = false;
 				break;
 			case "*#*#33284#*#*":
-				var r = !1;
+				var r = false;
 				n19.get("debugger.remote-mode").then(function (e) {
-					"disabled" !== e && (r = !0), dump("checkSpecialNumber: debuggerMode is: " + r), t.setDebuggerMode(!r);
+					"disabled" !== e && (r = true), dump("checkSpecialNumber: debuggerMode is: " + r), t.setDebuggerMode(!r);
 				});
 				break;
 			case "*#7223#":
@@ -533,7 +533,7 @@ class k extends EventEmitter {
 								new MozActivity({ name: "jrdlog" }).onerror = function () {};
 							}
 					  })
-					: (n = !1);
+					: (n = false);
 				break;
 			case "*#8378266#":
 				new MozActivity({ name: "testbox" }).onerror = function () {};
@@ -542,12 +542,12 @@ class k extends EventEmitter {
 				this.changeDiagMode();
 				break;
 			case "*#1314#":
-				this.versionType && "user" !== this.versionType ? this.changeAutoSmsMode() : (n = !1);
+				this.versionType && "user" !== this.versionType ? this.changeAutoSmsMode() : (n = false);
 				break;
 			case "*#*#0574#*#*":
 				if (this.versionType && "user" !== this.versionType) {
 					new MozActivity({ name: "logmanager" }).onerror = function () {};
-				} else n = !1;
+				} else n = false;
 				break;
 			case "*#*#212018#*#*":
 				this.switchUsertoRoot();
@@ -574,9 +574,9 @@ class k extends EventEmitter {
 							this.listDeviceInfos("meid");
 							break;
 						default:
-							n = !1;
+							n = false;
 					}
-				else n = !1;
+				else n = false;
 		}
 		return n;
 	}
@@ -611,8 +611,8 @@ class k extends EventEmitter {
 		"BadNumberError" === t && (t = r ? "NoNetwork" : "RegularCall");
 		var o = this.errorCases[t];
 		o || (o = { content: "CallFailed" });
-		var i = Object.assign({ type: "alert", translated: !1, noClose: !1 }, o);
-		i.containNumber && ((i.header = n13.toL10n(i.header, { number: n })), (i.content = n13.toL10n(i.content, { number: n })), (i.translated = !0)),
+		var i = Object.assign({ type: "alert", translated: false, noClose: false }, o);
+		i.containNumber && ((i.header = n13.toL10n(i.header, { number: n })), (i.content = n13.toL10n(i.content, { number: n })), (i.translated = true)),
 			n5_Service.request("showDialog", i);
 	}
 	isValid(e) {

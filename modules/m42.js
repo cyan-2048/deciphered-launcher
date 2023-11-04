@@ -9,7 +9,7 @@ class LaunchStore extends n14_StoreBase {
 
 		__self.name = "LaunchStore";
 		__self.resetLaunchingMarker = function () {
-			__self.isLaunching = !1;
+			__self.isLaunching = false;
 		};
 		__self.ports = {};
 		window.addEventListener("visibilitychange", __self.resetLaunchingMarker);
@@ -26,7 +26,7 @@ class LaunchStore extends n14_StoreBase {
 	}
 	launchApp(e, t) {
 		if (!this.isLaunching) {
-			this.isLaunching = !0;
+			this.isLaunching = true;
 			var n = n41.queryApp(e, t);
 			n && n.launch();
 		}
@@ -44,7 +44,7 @@ class LaunchStore extends n14_StoreBase {
 						function (e) {}
 					);
 				});
-			(this.isLaunching = !0),
+			(this.isLaunching = true),
 				this.ports[e].forEach(function (e) {
 					e.postMessage(n);
 				});

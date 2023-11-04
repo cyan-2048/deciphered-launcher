@@ -15,7 +15,7 @@ class InstantSettingsStore extends n14_StoreBase {
 			{
 				name: "volume",
 				icon: "sound-max",
-				isShortcut: !0,
+				isShortcut: true,
 				title: "volume",
 				order: { portrait: 1, landscape: 1 },
 				click: function (t) {
@@ -27,7 +27,7 @@ class InstantSettingsStore extends n14_StoreBase {
 			{
 				name: "brightness",
 				icon: "brightness",
-				isShortcut: !0,
+				isShortcut: true,
 				title: "brightness",
 				subtitle: "percentage-number",
 				order: { portrait: 2, landscape: 2 },
@@ -39,7 +39,7 @@ class InstantSettingsStore extends n14_StoreBase {
 				icon: "flashlight-on",
 				iconInactived: "flashlight-off",
 				title: "flashlight",
-				removed: !0,
+				removed: true,
 				order: { portrait: 4, landscape: 3 },
 				cskType: "toggle",
 				click: n109_FlashlightHelper.toggle.bind(n109_FlashlightHelper),
@@ -47,7 +47,7 @@ class InstantSettingsStore extends n14_StoreBase {
 			{
 				name: "camera",
 				icon: "camera",
-				isShortcut: !0,
+				isShortcut: true,
 				title: "camera",
 				order: { portrait: 7, landscape: 6 },
 				cskType: "launch",
@@ -58,7 +58,7 @@ class InstantSettingsStore extends n14_StoreBase {
 			{
 				name: "calculator",
 				icon: "calculator",
-				isShortcut: !0,
+				isShortcut: true,
 				title: "calculator",
 				order: { portrait: 5, landscape: -1 },
 				cskType: "launch",
@@ -81,7 +81,7 @@ class InstantSettingsStore extends n14_StoreBase {
 				iconInactived: "wifi-off-32px",
 				title: "wifi",
 				observerSetting: "wifi.enabled",
-				removed: !0,
+				removed: true,
 				order: { portrait: 0, landscape: 0 },
 				cskType: "toggle",
 			},
@@ -99,7 +99,7 @@ class InstantSettingsStore extends n14_StoreBase {
 				icon: "bluetooth-32px",
 				iconInactived: "bluetooth-off-32px",
 				title: "bluetooth",
-				removed: !0,
+				removed: true,
 				observerSetting: "bluetooth.enabled",
 				order: { portrait: 6, landscape: 5 },
 				cskType: "toggle",
@@ -127,7 +127,7 @@ class InstantSettingsStore extends n14_StoreBase {
 			navigator.hasFeature &&
 				navigator.hasFeature("device.capability.torch").then(function (t) {
 					if (t) {
-						(e.getSetting("flashlight").removed = !1),
+						(e.getSetting("flashlight").removed = false),
 							n109_FlashlightHelper.on("ready", e.updateFlashlightState.bind(e)),
 							n109_FlashlightHelper.on("change", e.updateFlashlightState.bind(e));
 					}
@@ -140,14 +140,14 @@ class InstantSettingsStore extends n14_StoreBase {
 								e.attrs.includes("defaultAdapter") && (navigator.mozBluetooth.onattributechanged = null);
 							});
 						var n = e.getSetting("bluetooth");
-						(n.removed = !1), e.initSettingObserver(n);
+						(n.removed = false), e.initSettingObserver(n);
 					}
 				}),
 			navigator.hasFeature &&
 				navigator.hasFeature("device.capability.wifi").then(function (t) {
 					if (t) {
 						var n = e.getSetting("wifi");
-						(n.removed = !1), e.initSettingObserver(n);
+						(n.removed = false), e.initSettingObserver(n);
 					}
 				}),
 			this.emit("change");
@@ -157,7 +157,7 @@ class InstantSettingsStore extends n14_StoreBase {
 		n19.addObserver(e.observerSetting, this),
 			(this["_observe_" + e.observerSetting] = function (n) {
 				var i = t.getSetting(e.name);
-				(i.isActive = n), !0 === n ? (i.subtitle = "on") : !1 === n ? (i.subtitle = "off") : (i.subtitle = n.toString()), t.emit("change");
+				(i.isActive = n), true === n ? (i.subtitle = "on") : false === n ? (i.subtitle = "off") : (i.subtitle = n.toString()), t.emit("change");
 			});
 	}
 	initSettingObserverForBrightness() {
@@ -194,7 +194,7 @@ class InstantSettingsStore extends n14_StoreBase {
 	addSimCardObserver() {
 		var e = this;
 		if (!this.isSimCardObserverAdded) {
-			(this.isSimCardObserverAdded = !0), this.checkSimCardState();
+			(this.isSimCardObserverAdded = true), this.checkSimCardState();
 			var t = window.navigator.mozMobileConnections;
 			t &&
 				Array.from(t).forEach(function (t) {
@@ -204,7 +204,7 @@ class InstantSettingsStore extends n14_StoreBase {
 	}
 	removeSimCardObserver() {
 		var e = this;
-		this.isSimCardObserverAdded = !1;
+		this.isSimCardObserverAdded = false;
 		var t = window.navigator.mozMobileConnections;
 		t &&
 			Array.from(t).forEach(function (t) {
@@ -228,9 +228,9 @@ class InstantSettingsStore extends n14_StoreBase {
 	}
 	toggleSetting(e) {
 		var t = this;
-		(e.isDisabled = !0), this.emit("change");
+		(e.isDisabled = true), this.emit("change");
 		var n = function () {
-			(e.isDisabled = !1), t.emit("change");
+			(e.isDisabled = false), t.emit("change");
 		};
 		n19.get(e.observerSetting).then(function (t) {
 			var i = {};

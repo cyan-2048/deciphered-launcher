@@ -64,7 +64,7 @@ class n71_OptionMenu_RC extends n6_RC {
 			case "Backspace":
 				e.stopPropagation(), e.preventDefault(), this.state.onCancel && this.state.onCancel(), this.hide();
 		}
-		n && (n.scrollIntoView(!1), n.focus());
+		n && (n.scrollIntoView(false), n.focus());
 	}
 	render() {
 		var e = this,

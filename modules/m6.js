@@ -18,7 +18,7 @@ class n6_RC extends React.Component {
 	}
 	handleEvent(e) {
 		if ("function" == typeof this._pre_handleEvent) {
-			if (this._pre_handleEvent(e) === !1) return;
+			if (this._pre_handleEvent(e) === false) return;
 		} else this.debug("no handle event pre found. skip");
 		"function" == typeof this["_handle_" + e.type] && (this.debug("handling " + e.type), this["_handle_" + e.type](e)),
 			"function" == typeof this._post_handleEvent && this._post_handleEvent(e);
@@ -48,12 +48,12 @@ class n6_RC extends React.Component {
 	}
 	publish(e, t, n) {
 		this.broadcast(e, t);
-		var r = new CustomEvent(n ? e : this.EVENT_PREFIX + e, { bubbles: !0, detail: t || this });
+		var r = new CustomEvent(n ? e : this.EVENT_PREFIX + e, { bubbles: true, detail: t || this });
 		this.debug("publishing external event: " + e + (t ? JSON.stringify(t) : "")), ReactDOM.findDOMNode(this).dispatchEvent(r);
 	}
 	broadcast(e, t) {
 		if (ReactDOM.findDOMNode(this)) {
-			var n = new CustomEvent("_" + e, { bubbles: !1, detail: t || this });
+			var n = new CustomEvent("_" + e, { bubbles: false, detail: t || this });
 			ReactDOM.findDOMNode(this).dispatchEvent(n);
 		}
 	}

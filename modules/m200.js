@@ -50,7 +50,7 @@ class AppList extends n6_RC {
 
 		__self.name = "AppList";
 		__self.navItemThrottleTime = 60;
-		__self.ready = !1;
+		__self.ready = false;
 		__self.menuOptions = [
 			{
 				id: "rename",
@@ -86,7 +86,7 @@ class AppList extends n6_RC {
 		n19.addObserver("custom.launcher.apps", __self);
 		window.addEventListener("visibilitychange", function () {
 			var e = document.activeElement;
-			document.hidden && __self.appElements && [].concat(o(__self.appElements)).includes(e) && ((__self.isStickyApp = !0), e && e.classList.add("is-focus-app"));
+			document.hidden && __self.appElements && [].concat(o(__self.appElements)).includes(e) && ((__self.isStickyApp = true), e && e.classList.add("is-focus-app"));
 		});
 		n13.asyncLocalStorage.getItem("app-view-mode").then(function (e) {
 			e && __self.switchViewMode(e);
@@ -131,10 +131,10 @@ class AppList extends n6_RC {
 			n5_Service.registerState("ready", this),
 			n63_SpeedDialHelper.register(this.element),
 			this.element.addEventListener("animationstart", function () {
-				e.isAnimationEnd = !1;
+				e.isAnimationEnd = false;
 			}),
 			this.element.addEventListener("animationend", function () {
-				e.isAnimationEnd = !0;
+				e.isAnimationEnd = true;
 			});
 	}
 	componentDidUpdate(e, t) {
@@ -197,7 +197,7 @@ class AppList extends n6_RC {
 		}
 		var n = document.activeElement,
 			i = n.getBoundingClientRect();
-		i.top < this.wrapperBondary.top ? n.scrollIntoView(!0) : i.bottom > window.innerHeight - this.wrapperBondary.bottom && n.scrollIntoView(!1);
+		i.top < this.wrapperBondary.top ? n.scrollIntoView(true) : i.bottom > window.innerHeight - this.wrapperBondary.bottom && n.scrollIntoView(false);
 	}
 	getPage(e) {
 		return Math.floor(e / this.props.row);
@@ -231,7 +231,7 @@ class AppList extends n6_RC {
 	}
 	onFocus() {
 		return (
-			this.isStickyApp && ((this.isStickyApp = !1), document.querySelector(".is-focus-app").classList.remove("is-focus-app")),
+			this.isStickyApp && ((this.isStickyApp = false), document.querySelector(".is-focus-app").classList.remove("is-focus-app")),
 			this.element === document.activeElement
 				? (this.focusIfPossible(), this.scrollIntoViewIfPossible(), void this.updateSoftKeys())
 				: (this.element.contains(document.activeElement) || this.element.focus(), void this.updateSoftKeys())
@@ -254,7 +254,7 @@ class AppList extends n6_RC {
 		);
 	}
 	enterReorderMode() {
-		this.setState({ reorderMode: !0 }),
+		this.setState({ reorderMode: true }),
 			(this.reorder = {
 				target: this.element.querySelectorAll(".app-tile")[this.focusIndex],
 				focus: this.state.focus,
@@ -267,7 +267,7 @@ class AppList extends n6_RC {
 		var t = this;
 		this.setState(
 			function (n) {
-				if (((n.reorderMode = !1), e)) n.focus = [].concat(o(t.reorder.focus));
+				if (((n.reorderMode = false), e)) n.focus = [].concat(o(t.reorder.focus));
 				else {
 					var i = t.focusIndex;
 					n.apps[i].renderProps.orderStyle.order = t.calcOrder(i);
@@ -297,7 +297,7 @@ class AppList extends n6_RC {
 				app_id: this.reorder.app.manifestURL,
 				app_version: this.reorder.app.manifest.version,
 			}),
-			this.exitReorderMode(!0);
+			this.exitReorderMode(true);
 	}
 	handleMoveGrid(e) {
 		var t = this,

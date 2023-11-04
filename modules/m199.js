@@ -47,14 +47,14 @@ class a {
 		this._getApnSettings().then(function (i) {
 			if ((dump("ApnSelector in launcher _updateApnSettings apnSettings:" + JSON.stringify(i)), i && i[e])) {
 				var a = i[e],
-					o = !1;
+					o = false;
 				t.forEach(function (e) {
 					var t = a.findIndex(function (t) {
 						return t.types.some(function (t) {
 							return e.types[0] === t;
 						});
 					});
-					t === -1 ? (a.push(e), (o = !0)) : JSON.stringify(a[t]) != JSON.stringify(e) && ((a[t] = e), (o = !0));
+					t === -1 ? (a.push(e), (o = true)) : JSON.stringify(a[t]) != JSON.stringify(e) && ((a[t] = e), (o = true));
 				}),
 					o && (dump("_updateApnSettings to set new apns:" + JSON.stringify(i)), n._setApnSettings(i));
 			}

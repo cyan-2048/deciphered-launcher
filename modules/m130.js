@@ -4,7 +4,7 @@ import n6_RC from "./m6";
 import n131_RC from "./m131";
 
 class n130_RC extends n6_RC {
-	static defaultProps = { openAnimation: "immediate", closeAnimation: "immediate", noFocus: !1 };
+	static defaultProps = { openAnimation: "immediate", closeAnimation: "immediate", noFocus: false };
 	static propTypes = { openAnimation: React.PropTypes.string, closeAnimation: React.PropTypes.string, noFocus: React.PropTypes.bool };
 
 	constructor(props) {
@@ -33,7 +33,7 @@ class n130_RC extends n6_RC {
 			}
 	}
 	componentDidMount() {
-		ReactDOM.findDOMNode(this).addEventListener("animationend", this.onAnimationEnd.bind(this), !1);
+		ReactDOM.findDOMNode(this).addEventListener("animationend", this.onAnimationEnd.bind(this), false);
 	}
 	getActivatedState() {
 		switch (this.state.transition) {

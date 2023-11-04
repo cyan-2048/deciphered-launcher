@@ -17,10 +17,10 @@ class SoftKeyStore extends EventEmitter {
 			? n.updateKeys(e)
 			: ((n = {
 					start: function () {
-						t.addEventListener("focus", this, !0), this.updateKeys(e);
+						t.addEventListener("focus", this, true), this.updateKeys(e);
 					},
 					stop: function () {
-						t.removeEventListener("focus", this, !0);
+						t.removeEventListener("focus", this, true);
 					},
 					handleEvent: function () {
 						this.check();

@@ -12,7 +12,7 @@ function getCanvasContext(e) {
 	if (t) return t;
 	var n = document.createElement("canvas");
 	n.setAttribute("moz-opaque", "true"), n.setAttribute("width", "1px"), n.setAttribute("height", "1px"), debug("created canvas", n);
-	var i = n.getContext("2d", { willReadFrequently: !0 });
+	var i = n.getContext("2d", { willReadFrequently: true });
 	return (i.font = e), (cache[e] = i);
 }
 function trim(e) {

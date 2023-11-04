@@ -102,14 +102,14 @@ class QRFace extends n6_RC {
 	show() {
 		return n5_Service.query("QRFace.isShown", this)
 			? void this.focus()
-			: void (this.isHidden() && (n5_Service.request("openSheet", "qrface"), (this.isShown = !0), this.element.focus()));
+			: void (this.isHidden() && (n5_Service.request("openSheet", "qrface"), (this.isShown = true), this.element.focus()));
 	}
 	isHidden() {
 		for (var e = this.element; e !== document.body && !e.classList.contains("hidden") && "closed" !== e.dataset.transitionState; ) e = e.parentElement;
 		return e.classList.contains("hidden") || "closed" === e.dataset.transitionState;
 	}
 	hide() {
-		n5_Service.request("closeSheet", "qrface"), (this.isShown = !1);
+		n5_Service.request("closeSheet", "qrface"), (this.isShown = false);
 	}
 	focus() {
 		this.element.focus();

@@ -14,13 +14,13 @@ function a(e) {
 var u = (function () {
 	function e(e, t) {
 		var n = [],
-			i = !0,
-			a = !1,
+			i = true,
+			a = false,
 			o = void 0;
 		try {
-			for (var r, s = e[Symbol.iterator](); !(i = (r = s.next()).done) && (n.push(r.value), !t || n.length !== t); i = !0);
+			for (var r, s = e[Symbol.iterator](); !(i = (r = s.next()).done) && (n.push(r.value), !t || n.length !== t); i = true);
 		} catch (u) {
-			(a = !0), (o = u);
+			(a = true), (o = u);
 		} finally {
 			try {
 				!i && s.return && s.return();
@@ -130,7 +130,7 @@ class n201_Clock_RC extends n6_RC {
 			});
 	}
 	forcedRefresh() {
-		this.refresh(!0);
+		this.refresh(true);
 	}
 	"_observe_locale.hour12"(e) {
 		localStorage.setItem("locale.hour12", e);

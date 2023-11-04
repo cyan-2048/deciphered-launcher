@@ -9,13 +9,13 @@ class n107_OptionMenuRenderer_RC extends n6_RC {
 
 		const __self = this;
 		__self.name = "OptionMenuRenderer";
-		__self.state = { menu: !1, options: null };
+		__self.state = { menu: false, options: null };
 		n5_Service.register("showOptionMenu", __self);
 	}
 
 	showOptionMenu(e) {
 		this.lastActive = this.lastActive || document.activeElement;
-		this.setState({ menu: !0, options: e });
+		this.setState({ menu: true, options: e });
 	}
 	focusLast() {
 		this.lastActive && this.lastActive.offsetParent && this.lastActive.focus(), (this.lastActive = null);

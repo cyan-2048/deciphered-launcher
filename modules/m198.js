@@ -43,7 +43,7 @@ class APNSelection extends n6_RC {
 					? ((i["apn_default_show_" + this.id] = "pp.vodafone.co.uk"), n199.apnSelect(this.id, "pp.vodafone.co.uk"))
 					: (i["apn_default_show_" + this.id] = ""),
 					n.set(i),
-					n.set({ apn_auto_disable: !0 }),
+					n.set({ apn_auto_disable: true }),
 					this.hide(),
 					0 == this.id && n108.start();
 				break;

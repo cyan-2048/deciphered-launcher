@@ -87,7 +87,7 @@ function getContactDetails(e, t, n) {
 			u = void 0,
 			l = void 0;
 		for (r = t.name[0], l = t.org && t.org[0], s = t.tel ? t.tel.length : 0, u = e.length > 7 ? e.substr(-8) : e, a = 0; a < s && t.tel[a].value.indexOf(u) === -1; a++);
-		if (((o.isContact = !0), n.photoURL)) {
+		if (((o.isContact = true), n.photoURL)) {
 			var c = n202.getThumbnail(t);
 			c && (o.photoURL = window.URL.createObjectURL(c));
 		}

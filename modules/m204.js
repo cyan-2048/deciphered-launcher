@@ -22,7 +22,7 @@ class n204_DialerInput_RC extends n6_RC {
 		__self.SPECIAL_CHARS = ["*", "+", ","];
 		__self.telNum = "";
 		__self.fontStyles = "";
-		__self.isVTSupported = !1;
+		__self.isVTSupported = false;
 		LazyLoader.load(["shared/js/dialer/tone_player.js"], function () {
 			TonePlayer.init("normal");
 			TonePlayer.gTonesFrequencies = {
@@ -181,7 +181,7 @@ class n204_DialerInput_RC extends n6_RC {
 		(this.element.value = ""), this.onInput();
 	}
 	playKeyTone(e) {
-		this._keypadSoundIsEnabled && TonePlayer.start(TonePlayer.gTonesFrequencies[e], !0);
+		this._keypadSoundIsEnabled && TonePlayer.start(TonePlayer.gTonesFrequencies[e], true);
 	}
 	handleTelNumber() {
 		var e = this,

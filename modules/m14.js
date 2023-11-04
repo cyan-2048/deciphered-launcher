@@ -31,12 +31,12 @@ class n14_StoreBase extends EventEmitter {
 
 	publish(e, t, n) {
 		var r = n ? "" : this.EVENT_PREFIX,
-			o = new CustomEvent(r + e, { bubbles: !0, detail: t || this });
+			o = new CustomEvent(r + e, { bubbles: true, detail: t || this });
 		this.debug("publishing: " + r + e), window.dispatchEvent(o);
 	}
 	handleEvent(e) {
 		if ("function" == typeof this._pre_handleEvent) {
-			if (this._pre_handleEvent(e) === !1) return;
+			if (this._pre_handleEvent(e) === false) return;
 		} else this.debug("no handle event pre found. skip");
 		"function" == typeof this["_handle_" + e.type] && (this.debug("handling " + e.type), this["_handle_" + e.type](e)),
 			"function" == typeof this._post_handleEvent && this._post_handleEvent(e);

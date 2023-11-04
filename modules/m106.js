@@ -12,24 +12,24 @@ class n106_DialogRenderer_RC extends n6_RC {
 		const __self = this;
 		__self.name = "DialogRenderer";
 		__self.closeDialog = function () {
-			__self.isHidden = !0;
+			__self.isHidden = true;
 			__self.focusLast();
 			__self.dialog.off("closed", __self.closeDialog);
 		};
-		__self.state = { dialog: !1, options: {} };
+		__self.state = { dialog: false, options: {} };
 		n5_Service.register("showDialog", __self);
 		n5_Service.register("hideDialog", __self);
 		n5_Service.registerState("isHidden", __self);
-		__self.isHidden = !0;
+		__self.isHidden = true;
 	}
 
 	showDialog(e) {
 		var t = this;
 		(this.lastActive = this.lastActive || document.activeElement),
-			this.setState({ dialog: !0, options: e }, function () {
+			this.setState({ dialog: true, options: e }, function () {
 				"prompt" === e.type ? (t.dialog.element.classList.add("prompt"), t.dialog.element.querySelector("input").select()) : t.dialog.element.classList.remove("prompt");
 			}),
-			(this.isHidden = !1);
+			(this.isHidden = false);
 	}
 	hideDialog() {
 		this.dialog.hide();

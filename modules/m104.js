@@ -10,7 +10,7 @@ class f extends n14_StoreBase {
 		this._instances = [];
 		this.TIMEOUT_FOR_SIM2 = 2e3;
 		this._timerForSIM2 = null;
-		this.ready = !1;
+		this.ready = false;
 	}
 
 	start() {
@@ -60,7 +60,7 @@ class f extends n14_StoreBase {
 		var t = null;
 		return (
 			this._instances.some(function (n) {
-				return !(!n.conn.iccId || n.conn.iccId !== e) && ((t = n), !0);
+				return !(!n.conn.iccId || n.conn.iccId !== e) && ((t = n), true);
 			}, this),
 			t
 		);
@@ -72,7 +72,7 @@ class f extends n14_StoreBase {
 		}, this.TIMEOUT_FOR_SIM2);
 	}
 	publishSIMSlotIsReady() {
-		this.ready || ((this.ready = !0), window.dispatchEvent(new CustomEvent("simslotready")));
+		this.ready || ((this.ready = true), window.dispatchEvent(new CustomEvent("simslotready")));
 	}
 	_handle_iccdetected(e) {
 		var t = this.getSlotByIccId(e.iccId);

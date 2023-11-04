@@ -15,7 +15,7 @@ class Dialer extends n6_RC {
 		const __self = this;
 
 		__self.name = "Dialer";
-		__self.ready = !1;
+		__self.ready = false;
 		__self.toggleStayEffect = function () {
 			var e = arguments.length > 0 && void 0 !== arguments[0] && arguments[0];
 			__self.parentBox.classList.toggle("with-dialer-stay-effect", e);
@@ -49,27 +49,27 @@ class Dialer extends n6_RC {
 			this.parentBox.addEventListener("animationend", function () {
 				e.toggleStayEffect();
 			}),
-			(this.ready = !0);
+			(this.ready = true);
 	}
 	onUssdReceived(e) {
 		if ((n64.mmiloading && n5_Service.request("hideDialog"), !e.message))
-			return void n5_Service.request("showDialog", { type: "alert", header: "Error USSD case!", content: JSON.stringify(e), translated: !0, noClose: !1 });
+			return void n5_Service.request("showDialog", { type: "alert", header: "Error USSD case!", content: JSON.stringify(e), translated: true, noClose: false });
 		var t = navigator.mozMobileConnections[e.serviceId || 0].voice.network,
 			n = t ? t.shortName || t.longName : "";
-		n5_Service.request("showDialog", { type: "alert", header: n, content: e.message.replace(/\\r\\n|\\r|\\n/g, "\n"), translated: !0, noClose: !1 });
+		n5_Service.request("showDialog", { type: "alert", header: n, content: e.message.replace(/\\r\\n|\\r|\\n/g, "\n"), translated: true, noClose: false });
 	}
 	show(e) {
 		this.isShown ||
 			(this.isHidden() &&
 				(this.updateTelTypes(),
 				n5_Service.request("openSheet", "dialer"),
-				(this.isShown = !0),
+				(this.isShown = true),
 				this.element.focus(),
 				e && (this.focusInput(), this.children.dialerInput.sendFirstChar(e))));
 	}
 	hide() {
 		this.isHidden() || n5_Service.request("closeSheet", "dialer"),
-			(this.isShown = !1),
+			(this.isShown = false),
 			(this.children.dialerInput.element.style.fontSize = ""),
 			this.setState(this.initState),
 			this.children.dialerInput.setState({ telNum: "" });
@@ -139,15 +139,15 @@ class Dialer extends n6_RC {
 						n5_Service.request("Dialer:resetCallingMarker");
 					},
 			  })
-			: ((this.isCalling = !0),
+			: ((this.isCalling = true),
 			  this.stopRenderSteply(),
 			  void n64
 					.dial(i, o)
 					.then(function () {
-						(e.isCalling = !1), n5_Service.request("Dialer:hide"), n5_Service.request("hideDialog");
+						(e.isCalling = false), n5_Service.request("Dialer:hide"), n5_Service.request("hideDialog");
 					})
 					.catch(function () {
-						e.isCalling = !1;
+						e.isCalling = false;
 					}));
 	}
 	getSuggestions(e) {
@@ -202,12 +202,12 @@ class Dialer extends n6_RC {
 					header: e,
 					content: n13.toL10n(t),
 					buttons: [{ message: "" }, { message: "ok" }, { message: "" }],
-					translated: !0,
-					noClose: !1,
+					translated: true,
+					noClose: false,
 				});
 	}
 	resetCallingMarker() {
-		this.isCalling = !1;
+		this.isCalling = false;
 	}
 	showLoading() {
 		n5_Service.request("Dialer:hide").then(function () {
@@ -216,7 +216,7 @@ class Dialer extends n6_RC {
 				content: "sending",
 				buttons: [{ message: "" }, { message: "ok" }, { message: "" }],
 				otherClass: "is-loading",
-				noClose: !1,
+				noClose: false,
 			});
 		});
 	}

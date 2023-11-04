@@ -44,7 +44,7 @@ class v extends n14_StoreBase {
 	}
 	initObserver() {
 		var e = this,
-			t = { attributes: !0, characterData: !1, childList: !0, subtree: !0, attributeFilter: ["data-contact-number"] };
+			t = { attributes: true, characterData: false, childList: true, subtree: true, attributeFilter: ["data-contact-number"] };
 		new MutationObserver(function (n, i) {
 			i.disconnect(), e.updateContacts(n), i.observe(document, t);
 		}).observe(document, t);
@@ -64,7 +64,7 @@ class v extends n14_StoreBase {
 			i = "name" === e.dataset.contactColumn ? e : e.querySelector("[data-contact-column=name]"),
 			a = "photo" === e.dataset.contactColumn ? e : e.querySelector("[data-contact-column=photo]");
 		this.findByAddress(n, function (o) {
-			var r = n13.getContactDetails(n, o, { photoURL: !0 });
+			var r = n13.getContactDetails(n, o, { photoURL: true });
 			i
 				? r.name
 					? i.textContent !== r.name && (t.debug("updating name", r, e), (i.textContent = r.name))
@@ -119,7 +119,7 @@ class v extends n14_StoreBase {
 		return this.findBy({ filterBy: ["givenName", "familyName"], filterOp: "contains", filterValue: e }, function (n) {
 			var i = n && n.length ? n[0] : null,
 				a = { fields: ["name"], terms: [e] },
-				o = !1;
+				o = false;
 			i && (o = u(i, a, h.equality)), t(o ? [i] : []);
 		});
 	}

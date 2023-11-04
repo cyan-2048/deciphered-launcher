@@ -10,7 +10,7 @@ function i(e, t) {
 }
 function a(e, t) {
 	if ("function" != typeof t && null !== t) throw new TypeError("Super expression must either be null or a function, not " + typeof t);
-	(e.prototype = Object.create(t && t.prototype, { constructor: { value: e, enumerable: !1, writable: !0, configurable: !0 } })),
+	(e.prototype = Object.create(t && t.prototype, { constructor: { value: e, enumerable: false, writable: true, configurable: true } })),
 		t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : (e.__proto__ = t));
 }
 function s(e) {
@@ -22,7 +22,7 @@ var u = (function () {
 		function e(e, t) {
 			for (var n = 0; n < t.length; n++) {
 				var r = t[n];
-				(r.enumerable = r.enumerable || !1), (r.configurable = !0), "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r);
+				(r.enumerable = r.enumerable || false), (r.configurable = true), "value" in r && (r.writable = true), Object.defineProperty(e, r.key, r);
 			}
 		}
 		return function (t, n, r) {

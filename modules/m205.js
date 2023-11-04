@@ -48,7 +48,7 @@ class n205_DialerSuggestions_RC extends n6_RC {
 					{
 						id: "video-call",
 						callback: function () {
-							t.focus(), e.props.dial({ number: e.getFocusedSuggestion().number, isVideo: !0 });
+							t.focus(), e.props.dial({ number: e.getFocusedSuggestion().number, isVideo: true });
 						},
 					},
 				];

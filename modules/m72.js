@@ -12,7 +12,7 @@ class n72_RC extends n6_RC {
 	constructor(props) {
 		super(props);
 
-		this.state = { shown: !1 };
+		this.state = { shown: false };
 		n5_Service.register("chooseSim", this);
 	}
 
@@ -39,7 +39,7 @@ class n72_RC extends n6_RC {
 						if (e.hasOnlyOneSIMCardDetected()) {
 							var n = e.isSIMCardAbsent(0) ? 1 : 0;
 							e.resolve(n);
-						} else e.noSIMCardOnDevice() ? e.resolve(0) : t === n103.ALWAYS_ASK_OPTION_VALUE ? e.setState({ shown: !0 }) : e.resolve(t);
+						} else e.noSIMCardOnDevice() ? e.resolve(0) : t === n103.ALWAYS_ASK_OPTION_VALUE ? e.setState({ shown: true }) : e.resolve(t);
 					});
 			})
 		);
@@ -79,7 +79,7 @@ class n72_RC extends n6_RC {
 	isSIMCardAbsent(e) {
 		var t = navigator.mozIccManager,
 			n = navigator.mozMobileConnections[e];
-		if (!t || !n) return !0;
+		if (!t || !n) return true;
 		var r = t.getIccById(n.iccId);
 		return !r || (r && r.iccInfo && null === r.iccInfo.iccid);
 	}

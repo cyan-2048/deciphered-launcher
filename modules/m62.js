@@ -1,13 +1,13 @@
 class n62 {
 	constructor(selector, element, scrollSelector, initialFocusIndex) {
-		this.loopable = !0;
+		this.loopable = true;
 		this.selector = selector;
 		this.element = element;
 		this.scrollSelector = scrollSelector;
 		this.initialFocusIndex = initialFocusIndex || 0;
 		this.element.addEventListener("keydown", this);
 		this._mutationObserver = new MutationObserver(this.refresh.bind(this));
-		this._mutationObserver.observe(this.element, { childList: !0, subtree: !0, attributes: !0 });
+		this._mutationObserver.observe(this.element, { childList: true, subtree: true, attributes: true });
 		this.element.addEventListener("focus", this);
 		this.refresh([]);
 	}
@@ -28,9 +28,9 @@ class n62 {
 		this._candidates = Array.from(this.element.querySelectorAll(this.selector));
 	}
 	isAriaHiddenByAncestor() {
-		for (var e = !1, t = this.element; t !== document.body; ) {
+		for (var e = false, t = this.element; t !== document.body; ) {
 			if ("true" === t.getAttribute("aria-hidden")) {
-				e = !0;
+				e = true;
 				break;
 			}
 			t = t.parentNode;
@@ -39,11 +39,11 @@ class n62 {
 	}
 	refresh(e) {
 		var t = this,
-			n = !1;
+			n = false;
 		if (
 			(e.forEach(function (e) {
 				[].slice.call(e.removedNodes).forEach(function (e) {
-					e.contains(t._currentFocus) && (n = !0);
+					e.contains(t._currentFocus) && (n = true);
 				});
 			}),
 			this.updateCandidates(),
@@ -66,27 +66,27 @@ class n62 {
 	}
 	onKeyDown(e) {
 		var t = null,
-			n = !1;
+			n = false;
 		switch (e.key) {
 			case "ArrowDown":
-				(n = !0), (t = this.findNext());
+				(n = true), (t = this.findNext());
 				break;
 			case "ArrowUp":
-				(n = !0), (t = this.findPrev());
+				(n = true), (t = this.findPrev());
 		}
 		t && (this.scrollIntoView(t), t.focus(), (this._currentFocus = t), (this.element.activeElement = t)), n && (e.stopPropagation(), e.preventDefault());
 	}
 	scrollIntoView(e) {
 		if (this.scrollSelector) {
-			for (var t = e, n = !1; t !== document.body; ) {
+			for (var t = e, n = false; t !== document.body; ) {
 				if (t.matches(this.scrollSelector)) {
-					(n = !0), t.scrollIntoView(!1);
+					(n = true), t.scrollIntoView(false);
 					break;
 				}
 				t = t.parentNode;
 			}
-			n || e.scrollIntoView(!1);
-		} else e.scrollIntoView(!1);
+			n || e.scrollIntoView(false);
+		} else e.scrollIntoView(false);
 	}
 	getInitialFocus() {
 		var e = this._candidates;
@@ -99,7 +99,7 @@ class n62 {
 		var n = 0;
 		return (
 			t.some(function (r, o) {
-				return r === e && ((n = (o + 1) % t.length), !0);
+				return r === e && ((n = (o + 1) % t.length), true);
 			}),
 			t[n] || this.loopable ? t[n] || t[this.initialFocusIndex] : null
 		);
@@ -112,7 +112,7 @@ class n62 {
 		var r = null;
 		return (
 			n.some(function (o, i) {
-				return o === e && ((r = (n.length + i - 1) % n.length), t.loopable || 0 !== i || (r = null), !0);
+				return o === e && ((r = (n.length + i - 1) % n.length), t.loopable || 0 !== i || (r = null), true);
 			}),
 			n[r] || this.loopable ? n[r] || n[this.initialFocusIndex] : null
 		);

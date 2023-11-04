@@ -18,19 +18,19 @@ class n132_Dialog_RC extends n6_RC {
 		onOk: null,
 		onBack: null,
 		onCancel: null,
-		translated: !1,
+		translated: false,
 		buttons: [],
-		showCheckbox: !1,
-		checkboxCheckedByDefault: !1,
+		showCheckbox: false,
+		checkboxCheckedByDefault: false,
 		checkboxMessage: "",
 		placeholder: "",
 		initialValue: "",
 		maxLength: 100,
 		progressValue: "",
 		progressMax: "",
-		noClose: !1,
-		noFocus: !1,
-		hideCancel: !1,
+		noClose: false,
+		noFocus: false,
+		hideCancel: false,
 	};
 	static propTypes = {
 		header: React.PropTypes.string,
@@ -74,10 +74,10 @@ class n132_Dialog_RC extends n6_RC {
 	scrollContent(e) {
 		if (this.content) {
 			var t = this.content.scrollHeight - this.content.clientHeight;
-			if ((0 == this.content.scrollTop && e < 0) || (this.content.scrollTop == t && e > 0)) return !1;
+			if ((0 == this.content.scrollTop && e < 0) || (this.content.scrollTop == t && e > 0)) return false;
 			var n,
 				r = this.content.clientHeight - 41;
-			return e > 0 ? (n = this.content.scrollTop + r) : e < 0 && (n = this.content.scrollTop - r), n < 0 ? (n = 0) : n > t && (n = t), this.content.scrollTo(0, n), !0;
+			return e > 0 ? (n = this.content.scrollTop + r) : e < 0 && (n = this.content.scrollTop - r), n < 0 ? (n = 0) : n > t && (n = t), this.content.scrollTo(0, n), true;
 		}
 	}
 	updateSoftKeys() {

@@ -8,7 +8,7 @@ function n(e) {
 			? (n = navigator.mozL10n.qps[navigator.language].translate(n))
 			: t.locales &&
 			  [o, o.substr(0, o.indexOf("-")), r, r.substr(0, o.indexOf("-"))].some(function (t) {
-					return !(!this[t] || !this[t][e]) && ((n = this[t][e]), !0);
+					return !(!this[t] || !this[t][e]) && ((n = this[t][e]), true);
 			  }, t.locales),
 		"object" !== ("undefined" == typeof n ? "undefined" : a(n)) || n instanceof Array || (n = new n211(n)),
 		n
@@ -16,7 +16,7 @@ function n(e) {
 }
 
 function n211(e) {
-	for (var t in e) Object.defineProperty(this, t, { get: n.bind(e, t), enumerable: !0 });
+	for (var t in e) Object.defineProperty(this, t, { get: n.bind(e, t), enumerable: true });
 }
 
 var a =

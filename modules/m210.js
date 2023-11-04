@@ -38,7 +38,7 @@ class n210_MainView_RC extends n6_RC {
 							return void n5_Service.request("openSheet", "instantSettings");
 					}
 					_self._longPressTimer = setTimeout(function () {
-						switch ((_self.clearLongPressTimer(), (_self._longPressActionTriggered = !0), t)) {
+						switch ((_self.clearLongPressTimer(), (_self._longPressActionTriggered = true), t)) {
 							case "ArrowUp":
 								n109_FlashlightHelper.toggle();
 								break;
@@ -56,7 +56,7 @@ class n210_MainView_RC extends n6_RC {
 									  });
 								break;
 							default:
-								_self._longPressActionTriggered = !1;
+								_self._longPressActionTriggered = false;
 						}
 					}, _self.longPressDuration);
 				}
@@ -65,10 +65,10 @@ class n210_MainView_RC extends n6_RC {
 		n.onKeyUp = function (e) {
 			var t = e.key;
 			if (_self._longPressTimer && !n5_Service.query("LaunchStore.isLaunching") && n5_Service.query("AppList.ready")) {
-				if ((_self.clearLongPressTimer(), _self._longPressActionTriggered)) return void (_self._longPressActionTriggered = !1);
+				if ((_self.clearLongPressTimer(), _self._longPressActionTriggered)) return void (_self._longPressActionTriggered = false);
 				switch (t) {
 					case "Backspace":
-						n42_LaunchStore.isLaunching && (n42_LaunchStore.isLaunching = !1);
+						n42_LaunchStore.isLaunching && (n42_LaunchStore.isLaunching = false);
 						break;
 					case "Enter":
 						n5_Service.request("openSheet", "appList");
@@ -79,7 +79,7 @@ class n210_MainView_RC extends n6_RC {
 		n.onKeyDown = _self.onKeyDown.bind(_self);
 		n.onKeyUp = _self.onKeyUp.bind(_self);
 		window.addEventListener("visibilitychange", function () {
-			document.hidden && (_self._longPressActionTriggered = !1);
+			document.hidden && (_self._longPressActionTriggered = false);
 		});
 	}
 

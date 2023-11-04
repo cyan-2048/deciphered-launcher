@@ -222,7 +222,7 @@ window.__vendor = function (e) {
 								type: "confirm",
 								header: null,
 								content: e,
-								translated: !0,
+								translated: true,
 								onOk: function () {
 									n5_Service
 										.request("chooseSim", "call")

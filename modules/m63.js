@@ -21,8 +21,8 @@ class SpeedDialHelper extends m14 {
 				? void this.dialVoicemail()
 				: void navigator.customization.getValue("speed.dial.enable").then(function (i) {
 						dump("speed dial enable result ====== " + i);
-						var a = !0;
-						i || (a = !1),
+						var a = true;
+						i || (a = false),
 							dump("speed dial enable speedDialEnable ====== " + a),
 							a &&
 								(0 == n
@@ -44,7 +44,7 @@ class SpeedDialHelper extends m14 {
 			var t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 0,
 				n = n215["ril.iccInfo.mbdn"],
 				i = (Array.isArray(n) ? n[t] : n) || (navigator.mozVoicemail && navigator.mozVoicemail.getNumber(t));
-			i ? n64.dial(i, !1, t) : e.assignSpeedDial(1);
+			i ? n64.dial(i, false, t) : e.assignSpeedDial(1);
 		});
 	}
 	assignSpeedDial(e) {
@@ -57,7 +57,7 @@ class SpeedDialHelper extends m14 {
 							type: "confirm",
 							header: n13.toL10n("confirmation"),
 							content: n13.toL10n("assign-speed-dial", { n: e }),
-							translated: !0,
+							translated: true,
 							onOk: function () {
 								n13.pickContact(function (t) {
 									var n = t.target.result,
@@ -79,7 +79,7 @@ class SpeedDialHelper extends m14 {
 			type: "confirm",
 			header: n13.toL10n("confirmation"),
 			content: n13.toL10n("remove-speed-dial", { name: n }),
-			translated: !0,
+			translated: true,
 			onOk: function () {
 				n215.remove(t);
 			},
@@ -105,7 +105,7 @@ class SpeedDialHelper extends m14 {
 							type: "confirm",
 							header: n13.toL10n("confirmation"),
 							content: n13.toL10n("replace-speed-dial", { name: n, subName: u }),
-							translated: !0,
+							translated: true,
 							onOk: function () {
 								n215.set(t, s, r);
 							},

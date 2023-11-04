@@ -1,4 +1,4 @@
-class n62 {
+class KeypadNavigator {
 	constructor(selector, element, scrollSelector, initialFocusIndex) {
 		this.loopable = true;
 		this.selector = selector;
@@ -12,9 +12,15 @@ class n62 {
 		this.refresh([]);
 	}
 
-	setFocus(e, t) {
-		(this._currentFocus = e), (this.element.activeElement = e), t || (this.scrollIntoView(e), this.element.contains(document.activeElement) && e.focus());
+	setFocus(element, t) {
+		this._currentFocus = element;
+		this.element.activeElement = element;
+		if (!t) {
+			this.scrollIntoView(element);
+			this.element.contains(document.activeElement) && element.focus();
+		}
 	}
+
 	destroy() {
 		this.element.removeEventListener("keydown", this),
 			this.element.removeEventListener("focus", this),
@@ -119,4 +125,4 @@ class n62 {
 	}
 }
 
-export default n62;
+export default KeypadNavigator;

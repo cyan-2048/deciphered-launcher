@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import n6_RC from "./m6";
 import n16_SoftKeyStore from "./m16";
-import n62 from "./m62";
+import KeypadNavigator from "./KeypadNavigator";
 
 class n71_OptionMenu_RC extends n6_RC {
 	constructor(e) {
@@ -14,7 +14,7 @@ class n71_OptionMenu_RC extends n6_RC {
 	}
 
 	componentDidMount() {
-		(this.element = ReactDOM.findDOMNode(this)), (this.navigator = new n62(this.FOCUS_SELECTOR, this.element)), this.updateSoftKeys();
+		(this.element = ReactDOM.findDOMNode(this)), (this.navigator = new KeypadNavigator(this.FOCUS_SELECTOR, this.element)), this.updateSoftKeys();
 	}
 	componentWillUnmount() {
 		this.navigator.destroy(), this.unregisterSoftKeys(), (this.element = null);

@@ -2,7 +2,7 @@ import React from "react";
 import n6_RC from "./m6";
 import n5_Service from "./m5";
 import n16_SoftKeyStore from "./m16";
-import n62 from "./m62";
+import KeypadNavigator from "./KeypadNavigator";
 import n65_SimCardHelper from "./m65";
 
 class n205_DialerSuggestions_RC extends n6_RC {
@@ -18,7 +18,7 @@ class n205_DialerSuggestions_RC extends n6_RC {
 	}
 
 	componentDidMount() {
-		(this.suggestionNavigator = new n62(".dialer-focusable", this.element)), this.updateSoftKeys(), this.getVTSupportability();
+		(this.suggestionNavigator = new KeypadNavigator(".dialer-focusable", this.element)), this.updateSoftKeys(), this.getVTSupportability();
 	}
 	componentDidUpdate() {
 		this.updateSoftKeys();

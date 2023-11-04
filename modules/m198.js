@@ -2,7 +2,7 @@ import React from "react";
 import n6_RC from "./m6";
 import n26 from "./m26";
 import n16_SoftKeyStore from "./m16";
-import n62 from "./m62";
+import KeypadNavigator from "./KeypadNavigator";
 import n5_Service from "./m5";
 import n108 from "./m108";
 import n199 from "./m199";
@@ -25,7 +25,7 @@ class APNSelection extends n6_RC {
 	}
 
 	componentDidMount() {
-		(this.navigator = new n62(this.FOCUS_SELECTOR, this.element)), this.updateSoftkeys(), n5_Service.register("setOperatorId", this);
+		(this.navigator = new KeypadNavigator(this.FOCUS_SELECTOR, this.element)), this.updateSoftkeys(), n5_Service.register("setOperatorId", this);
 	}
 	updateSoftkeys() {
 		n16_SoftKeyStore.register({ center: "select" }, this.element);

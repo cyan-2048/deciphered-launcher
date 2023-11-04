@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import n6_RC from "./m6";
+import ComponentBase from "./ComponentBase";
 import n131_RC from "./m131";
 
-class n130_RC extends n6_RC {
+class n130_RC extends ComponentBase {
 	static defaultProps = { openAnimation: "immediate", closeAnimation: "immediate", noFocus: false };
 	static propTypes = { openAnimation: React.PropTypes.string, closeAnimation: React.PropTypes.string, noFocus: React.PropTypes.bool };
 

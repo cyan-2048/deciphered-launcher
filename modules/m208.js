@@ -1,8 +1,8 @@
 import React from "react";
-import n6_RC from "./m6";
+import ComponentBase from "./ComponentBase";
 import n26 from "./m26";
 import n16_SoftKeyStore from "./m16";
-import n5_Service from "./m5";
+import Service from "./Service";
 import n209_InstantSettingsStore from "./m209";
 import * as n13 from "./m13";
 
@@ -26,7 +26,7 @@ function u(e) {
 
 var O = "instantSettings__icon";
 
-class InstantSettings extends n6_RC {
+class InstantSettings extends ComponentBase {
 	static defaultProps = { col: 3, row: 3 };
 	static propTypes = { col: React.PropTypes.number, row: React.PropTypes.number };
 
@@ -135,7 +135,7 @@ class InstantSettings extends n6_RC {
 		return "ArrowDown" === i && h >= r ? -1 : n13.clamp(h, 0, r - 1);
 	}
 	exit() {
-		n209_InstantSettingsStore.removeSimCardObserver(), n5_Service.request("closeSheet", "instantSettings"), window.removeEventListener("visibilitychange", this);
+		n209_InstantSettingsStore.removeSimCardObserver(), Service.request("closeSheet", "instantSettings"), window.removeEventListener("visibilitychange", this);
 	}
 	isHidden() {
 		return !this.element.offsetParent;

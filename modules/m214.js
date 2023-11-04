@@ -1,8 +1,8 @@
 import React from "react";
-import n6_RC from "./m6";
+import ComponentBase from "./ComponentBase";
 import n19 from "./m19";
 
-class n214_SimcardInfo_RC extends n6_RC {
+class n214_SimcardInfo_RC extends ComponentBase {
 	constructor(props) {
 		super(props);
 

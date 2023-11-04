@@ -1,5 +1,5 @@
 import React from "react";
-import n6_RC from "./m6";
+import ComponentBase from "./ComponentBase";
 import n16_SoftKeyStore from "./m16";
 
 function SoftKeyButton(props) {
@@ -7,7 +7,7 @@ function SoftKeyButton(props) {
 	return React.createElement("button", Object.assign({ id: "software-keys-" + props.pos, className: "sk-button", "data-position": props.pos }, t), props.content.text);
 }
 
-class n73_SoftKeyPanel_RC extends n6_RC {
+class SoftKeyPanel extends ComponentBase {
 	constructor(props) {
 		super(props);
 
@@ -52,4 +52,4 @@ class n73_SoftKeyPanel_RC extends n6_RC {
 	}
 }
 
-export default n73_SoftKeyPanel_RC;
+export default SoftKeyPanel;

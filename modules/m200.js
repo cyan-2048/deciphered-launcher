@@ -1,8 +1,8 @@
 import React from "react";
-import n6_RC from "./m6";
+import ComponentBase from "./ComponentBase";
 import n41 from "./m41";
 import n16_SoftKeyStore from "./m16";
-import n5_Service from "./m5";
+import Service from "./Service";
 import n63_SpeedDialHelper from "./m63";
 import * as n13 from "./m13";
 import n42_LaunchStore from "./m42";
@@ -39,7 +39,7 @@ function l(e) {
 var N = ["Siberian Strike", "Danger Dash", "Castle Of Magic", "Nitro Street Run 2"],
 	D = ["Assistant", "Maps", "Google Search", "YouTube", "Twitter"];
 
-class AppList extends n6_RC {
+class AppList extends ComponentBase {
 	static defaultProps = { viewMode: "grid", col: 3, row: 3 };
 	static propTypes = { viewMode: React.PropTypes.string, col: React.PropTypes.number, row: React.PropTypes.number };
 
@@ -126,9 +126,9 @@ class AppList extends n6_RC {
 	componentDidMount() {
 		var e = this;
 		n41.on("change", this.updateApps),
-			n5_Service.register("show", this),
-			n5_Service.register("hide", this),
-			n5_Service.registerState("ready", this),
+			Service.register("show", this),
+			Service.register("hide", this),
+			Service.registerState("ready", this),
 			n63_SpeedDialHelper.register(this.element),
 			this.element.addEventListener("animationstart", function () {
 				e.isAnimationEnd = false;
@@ -355,7 +355,7 @@ class AppList extends n6_RC {
 									return !!e.tags && e.tags.includes(t.state.viewMode);
 							}
 						});
-					n5_Service.request("showOptionMenu", { options: s });
+					Service.request("showOptionMenu", { options: s });
 				}
 				break;
 			case "SoftLeft":
@@ -367,7 +367,7 @@ class AppList extends n6_RC {
 			case "EndCall":
 			case "BrowserBack":
 			case "Backspace":
-				n ? this.exitReorderMode() : (this.setState({ focus: this.initFocus }), n5_Service.request("closeSheet", "appList"));
+				n ? this.exitReorderMode() : (this.setState({ focus: this.initFocus }), Service.request("closeSheet", "appList"));
 		}
 		i && (e.stopPropagation(), e.preventDefault());
 	}

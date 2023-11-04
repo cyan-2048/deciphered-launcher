@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import n73_SoftKeyPanel_RC from "../m73";
-import n5_Service from "../m5";
+import SoftKeyPanel from "../SoftKeyPanel";
+import Service from "../Service";
 import n72_RC from "../m72";
 import n106_DialogRenderer_RC from "../m106";
 import n107_OptionMenuRenderer_RC from "../m107";
@@ -22,7 +22,7 @@ class DialActivity extends React.Component {
 		navigator.mozL10n.ready(function () {
 			var e = t.data && t.data.number;
 			return e
-				? void n5_Service.request("showDialog", {
+				? void Service.request("showDialog", {
 						ok: "call",
 						cancel: "cancel",
 						type: "confirm",
@@ -30,8 +30,7 @@ class DialActivity extends React.Component {
 						content: e,
 						translated: true,
 						onOk: function () {
-							n5_Service
-								.request("chooseSim", "call")
+							Service.request("chooseSim", "call")
 								.then(function (t) {
 									n64.dialForcely(e, t), window.close();
 								})
@@ -56,7 +55,7 @@ class DialActivity extends React.Component {
 			React.createElement(n107_OptionMenuRenderer_RC, null),
 			React.createElement(n72_RC, null),
 			React.createElement(n106_DialogRenderer_RC, null),
-			React.createElement(n73_SoftKeyPanel_RC, null)
+			React.createElement(SoftKeyPanel, null)
 		);
 	}
 }

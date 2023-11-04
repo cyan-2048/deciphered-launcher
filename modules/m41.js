@@ -1,6 +1,6 @@
 import n14_StoreBase from "./m14";
 import n19 from "./m19";
-import n5_Service from "./m5";
+import Service from "./Service";
 import * as n13 from "./m13";
 import n211 from "./m211";
 
@@ -310,7 +310,7 @@ class AppStore extends n14_StoreBase {
 		});
 	}
 	uninstallMozApp(e) {
-		n5_Service.request("showDialog", {
+		Service.request("showDialog", {
 			type: "confirm",
 			ok: "uninstall",
 			header: n13.toL10n("confirmation"),
@@ -361,7 +361,7 @@ class AppStore extends n14_StoreBase {
 		};
 	}
 	unpinBookmark(e) {
-		n5_Service.request("showDialog", {
+		Service.request("showDialog", {
 			type: "confirm",
 			ok: "unpin",
 			header: n13.toL10n("confirmation"),
@@ -374,7 +374,7 @@ class AppStore extends n14_StoreBase {
 	}
 	renameBookmark(e) {
 		var t = e.displayName.slice(0, 255);
-		n5_Service.request("showDialog", {
+		Service.request("showDialog", {
 			type: "prompt",
 			content: "rename",
 			ok: "ok",

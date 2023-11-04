@@ -1,4 +1,4 @@
-import n5 from "./m5";
+import n5 from "./Service";
 import EventEmitter from "./m30";
 import n19 from "./m19";
 

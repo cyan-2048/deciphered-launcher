@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import n6_RC from "./m6";
+import ComponentBase from "./ComponentBase";
 import n16_SoftKeyStore from "./m16";
-import n5_Service from "./m5";
+import Service from "./Service";
 
 var b = 0;
 
-class n132_Dialog_RC extends n6_RC {
+class n132_Dialog_RC extends ComponentBase {
 	static defaultProps = {
 		header: "",
 		content: "",
@@ -67,8 +67,8 @@ class n132_Dialog_RC extends n6_RC {
 		(this.element = ReactDOM.findDOMNode(this)),
 			(this.content = this.element.querySelector(".content")),
 			"prompt" === this.props.type && ReactDOM.findDOMNode(this.refs.input).setAttribute("x-inputmode", this.props.inputMode),
-			n5_Service.register("show", this),
-			n5_Service.register("hide", this),
+			Service.register("show", this),
+			Service.register("hide", this),
 			this.updateSoftKeys();
 	}
 	scrollContent(e) {

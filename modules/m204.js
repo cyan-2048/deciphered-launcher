@@ -1,6 +1,6 @@
 import React from "react";
-import n6_RC from "./m6";
-import n5_Service from "./m5";
+import ComponentBase from "./ComponentBase";
+import Service from "./Service";
 import n16_SoftKeyStore from "./m16";
 import n19 from "./m19";
 import * as n13 from "./m13";
@@ -9,7 +9,7 @@ import n65_SimCardHelper from "./m65";
 import n42_LaunchStore from "./m42";
 import n128_fontFit from "./m128";
 
-class n204_DialerInput_RC extends n6_RC {
+class n204_DialerInput_RC extends ComponentBase {
 	static defaultProps = { dial: null, exitDialer: null, updateTelNum: null };
 	static propTypes = { dial: React.PropTypes.func, exitDialer: React.PropTypes.func, updateTelNum: React.PropTypes.func };
 
@@ -87,7 +87,7 @@ class n204_DialerInput_RC extends n6_RC {
 	onKeyDown(e) {
 		var t = this,
 			n = n110.translate(e.key);
-		if (!this.longpressDeleteTimer && (!n5_Service.query("Dialer.isCalling") || ("Call" === n && "Enter" === n)))
+		if (!this.longpressDeleteTimer && (!Service.query("Dialer.isCalling") || ("Call" === n && "Enter" === n)))
 			switch (n) {
 				case "1":
 				case "2":
@@ -199,7 +199,7 @@ class n204_DialerInput_RC extends n6_RC {
 					},
 				},
 			];
-		n5_Service.request("showOptionMenu", {
+		Service.request("showOptionMenu", {
 			options: t,
 			onCancel: function () {
 				return e.element.focus();

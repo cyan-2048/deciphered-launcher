@@ -3,10 +3,10 @@ import ReactDOM from "react-dom";
 // n3
 import React from "react";
 // n6
-import n6_RC from "../m6";
+import ComponentBase from "../ComponentBase";
 // n5
-import n5_Service from "../m5";
-import n73_SoftKeyPanel_RC from "../m73";
+import Service from "../Service";
+import SoftKeyPanel from "../SoftKeyPanel";
 
 import "../m63";
 import n72_RC from "../m72";
@@ -53,10 +53,10 @@ function s() {
 								n[e] &&
 									"23415" === n[e].mccmnc &&
 									setTimeout(function () {
-										n5_Service.request("APNSelection:setOperatorId", e), n5_Service.request("openSheet", "apnselection");
+										Service.request("APNSelection:setOperatorId", e), Service.request("openSheet", "apnselection");
 									}, 500);
 					  }))
-					: (n5_Service.request("APNSelection:setOperatorId", e), n5_Service.request("openSheet", "apnselection")));
+					: (Service.request("APNSelection:setOperatorId", e), Service.request("openSheet", "apnselection")));
 		}
 	};
 	for (var r in n) o(r);
@@ -75,7 +75,7 @@ window.addEventListener("load", function () {
 		s();
 });
 
-class App extends n6_RC {
+class App extends ComponentBase {
 	constructor(props) {
 		super(props);
 
@@ -84,7 +84,7 @@ class App extends n6_RC {
 		__self.panels = {};
 		__self.state = { grid: n207_GridHelper.grid };
 		window.app = __self;
-		window.Service = n5_Service;
+		window.Service = Service;
 		window.performance.mark("navigationInteractive");
 	}
 
@@ -97,10 +97,10 @@ class App extends n6_RC {
 			this.focusWhenReady(),
 			this._handle_largetextenabledchanged(),
 			window.addEventListener("largetextenabledchanged", this),
-			n5_Service.register("openSheet", this),
-			n5_Service.register("closeSheet", this),
-			n5_Service.registerState("lastSheet", this),
-			n5_Service.registerState("panelAnimationRunning", this),
+			Service.register("openSheet", this),
+			Service.register("closeSheet", this),
+			Service.registerState("lastSheet", this),
+			Service.registerState("panelAnimationRunning", this),
 			this.element.style.setProperty("--grid-row", this.state.grid.row),
 			this.element.style.setProperty("--grid-col", this.state.grid.col);
 	}
@@ -181,7 +181,7 @@ class App extends n6_RC {
 			React.createElement(n107_OptionMenuRenderer_RC, null),
 			React.createElement(n72_RC, null),
 			React.createElement(n106_DialogRenderer_RC, null),
-			React.createElement(n73_SoftKeyPanel_RC, {
+			React.createElement(SoftKeyPanel, {
 				ref: function (t) {
 					e.panels.softKey = t;
 				},

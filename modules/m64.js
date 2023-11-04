@@ -1,5 +1,5 @@
 import EventEmitter from "./m30";
-import n5_Service from "./m5";
+import Service from "./Service";
 import * as n13 from "./m13";
 import n19 from "./m19";
 import n104 from "./m104";
@@ -62,12 +62,12 @@ class k extends EventEmitter {
 			if (e.session) {
 				_self._session = e.session;
 				var t = function () {
-					n5_Service.request("hideDialog");
+					Service.request("hideDialog");
 					_self.mmiloading = false;
 					_self._session.cancel();
 					_self._session = null;
 				};
-				n5_Service.request("showDialog", {
+				Service.request("showDialog", {
 					type: "prompt",
 					header: n13.toL10n("confirmation"),
 					content: e.message.replace(/\\r\\n|\\r|\\n/g, "\n"),
@@ -141,10 +141,10 @@ class k extends EventEmitter {
 		});
 		Promise.all(r).then(
 			function (e) {
-				n5_Service.request("showDialog", { type: "alert", header: t, content: "IMEI:" + e.join("\n") + "SVN:" + n, translated: true, noClose: false });
+				Service.request("showDialog", { type: "alert", header: t, content: "IMEI:" + e.join("\n") + "SVN:" + n, translated: true, noClose: false });
 			},
 			function (e) {
-				n5_Service.request("showDialog", { type: "alert", header: t, content: "IMEI: \nSVN:" + n, translated: true, noClose: false });
+				Service.request("showDialog", { type: "alert", header: t, content: "IMEI: \nSVN:" + n, translated: true, noClose: false });
 			}
 		);
 	}
@@ -158,10 +158,10 @@ class k extends EventEmitter {
 		});
 		Promise.all(t).then(
 			function (t) {
-				n5_Service.request("showDialog", { type: "alert", header: e.toUpperCase(), content: t.join("\n"), translated: true, noClose: false });
+				Service.request("showDialog", { type: "alert", header: e.toUpperCase(), content: t.join("\n"), translated: true, noClose: false });
 			},
 			function (t) {
-				n5_Service.request("showDialog", { type: "alert", header: e.toUpperCase(), content: t.message, translated: true, noClose: false });
+				Service.request("showDialog", { type: "alert", header: e.toUpperCase(), content: t.message, translated: true, noClose: false });
 			}
 		);
 	}
@@ -175,10 +175,10 @@ class k extends EventEmitter {
 		});
 		Promise.all(t).then(
 			function (e) {
-				n5_Service.request("openSheet", "qrface");
+				Service.request("openSheet", "qrface");
 			},
 			function (t) {
-				n5_Service.request("showDialog", { type: "alert", header: e.toUpperCase(), content: t.message, translated: true, noClose: false });
+				Service.request("showDialog", { type: "alert", header: e.toUpperCase(), content: t.message, translated: true, noClose: false });
 			}
 		);
 	}
@@ -187,7 +187,7 @@ class k extends EventEmitter {
 	}
 	showSarValue() {
 		n19.get("deviceinfo.sar_value").then(function (e) {
-			n5_Service.request("showDialog", { type: "alert", header: "SAR Information", content: (e || "0") + " W/kg", translated: true, noClose: false });
+			Service.request("showDialog", { type: "alert", header: "SAR Information", content: (e || "0") + " W/kg", translated: true, noClose: false });
 		});
 	}
 	showInternalVersion() {
@@ -198,7 +198,7 @@ class k extends EventEmitter {
 		e && ((t = e.getPropertyValue("ro.tver.boot")), (n = e.getPropertyValue("ro.tver.sys")), dump("showInternalVersion: ro.tver.boot is: " + t + "ro.tver.sys is: " + n));
 		var o = "boot: " + t + "\nsystem: " + n;
 		Promise.resolve().then(function () {
-			n5_Service.request("showDialog", { type: "alert", header: r, content: o, translated: true, noClose: false });
+			Service.request("showDialog", { type: "alert", header: r, content: o, translated: true, noClose: false });
 		});
 	}
 	showFIHVersion() {
@@ -218,7 +218,7 @@ class k extends EventEmitter {
 			(o = "Variant:" + this.getVariantInfo()),
 			(i = ["Nokia 8110 4G", t, n, r, "(c)Nokia", o].join("\n")),
 			Promise.resolve().then(function () {
-				n5_Service.request("showDialog", { type: "alert", content: i, translated: true, noClose: false });
+				Service.request("showDialog", { type: "alert", content: i, translated: true, noClose: false });
 			});
 	}
 	getVariantInfo() {
@@ -243,7 +243,7 @@ class k extends EventEmitter {
 		"diag,serial_smd,rmnet_qti_bam,adb" === t
 			? (navigator.engmodeExtension.setPropertyValue("persist.sys.usb.config", "mtp,adb"),
 			  Promise.resolve().then(function () {
-					n5_Service.request("showDialog", { type: "alert", header: "close diag", content: " ", translated: true, noClose: false });
+					Service.request("showDialog", { type: "alert", header: "close diag", content: " ", translated: true, noClose: false });
 			  }))
 			: "mtp,adb" === t &&
 			  (navigator.engmodeExtension.setPropertyValue("persist.sys.usb.config", "diag,serial_smd,rmnet_qti_bam,adb"),
@@ -255,7 +255,7 @@ class k extends EventEmitter {
 					dump("close ums error");
 			  }),
 			  Promise.resolve().then(function () {
-					n5_Service.request("showDialog", { type: "alert", header: "open diag", content: " ", translated: true, noClose: false });
+					Service.request("showDialog", { type: "alert", header: "open diag", content: " ", translated: true, noClose: false });
 			  }));
 	}
 	changeAutoSmsMode() {
@@ -267,11 +267,11 @@ class k extends EventEmitter {
 				this._autoSmsEnable
 					? (navigator.mozSettings.createLock().set({ "auto.send.crash.sms": false }),
 					  Promise.resolve().then(function () {
-							n5_Service.request("showDialog", { type: "alert", header: "autosms off", content: " ", translated: true, noClose: false });
+							Service.request("showDialog", { type: "alert", header: "autosms off", content: " ", translated: true, noClose: false });
 					  }))
 					: (navigator.mozSettings.createLock().set({ "auto.send.crash.sms": true }),
 					  Promise.resolve().then(function () {
-							n5_Service.request("showDialog", { type: "alert", header: "autosms on", content: " ", translated: true, noClose: false });
+							Service.request("showDialog", { type: "alert", header: "autosms on", content: " ", translated: true, noClose: false });
 					  }));
 		}.bind(this);
 	}
@@ -407,7 +407,7 @@ class k extends EventEmitter {
 							if (((e = r.getNumberAsDtmfToneGroups(l)[0]), (r._conn = a), !a || !a.voice)) return i(), void r.errorHandler({ errorName: "NoNetwork" });
 							var c = navigator.mozTelephony;
 							if (!c) return void i();
-							n5_Service.request("Dialer:toggleStayEffect", true);
+							Service.request("Dialer:toggleStayEffect", true);
 							var p = a.imsHandler && a.imsHandler.capability,
 								d = !p && a.voice.emergencyCallsOnly;
 							d ? (u = c.dialEmergency(e, n)) : t ? dump("dialVT, should not hanppen") : (u = c.dial(e, n)),
@@ -415,17 +415,17 @@ class k extends EventEmitter {
 									.then(function (t) {
 										if ((o(), t instanceof TelephonyCall)) {
 											c.addEventListener("callschanged", function e() {
-												c.removeEventListener("callschanged", e), n5_Service.request("Dialer:toggleStayEffect");
+												c.removeEventListener("callschanged", e), Service.request("Dialer:toggleStayEffect");
 											});
 											var i = r.getNumberAsDtmfToneGroups(l);
 											i.length > 1 &&
 												t.addEventListener("connected", function e() {
 													t.removeEventListener("connected", e), s.playDtmfToneGroups(i, n);
 												});
-										} else n5_Service.request("Dialer:toggleStayEffect"), r.mmiHandler(t.result, e);
+										} else Service.request("Dialer:toggleStayEffect"), r.mmiHandler(t.result, e);
 									})
 									.catch(function (t) {
-										n5_Service.request("Dialer:toggleStayEffect"), i(), s.errorHandler({ errorName: t, number: e, isEmergencyOnly: d });
+										Service.request("Dialer:toggleStayEffect"), i(), s.errorHandler({ errorName: t, number: e, isEmergencyOnly: d });
 									});
 						};
 						parseInt(n, 10) >= 0
@@ -439,7 +439,7 @@ class k extends EventEmitter {
 										var t = function () {
 											return !n104.isSIMCardAbsent(0) && !n104.isSIMCardAbsent(1);
 										};
-										return e && t() && n65_SimCardHelper.isAlwaysAsk() ? 0 : n5_Service.request("chooseSim", "call");
+										return e && t() && n65_SimCardHelper.isAlwaysAsk() ? 0 : Service.request("chooseSim", "call");
 									})
 									.then(function (e) {
 										return a(e);
@@ -459,8 +459,7 @@ class k extends EventEmitter {
 										: (n = true),
 									!n && t.includes(e)
 										? void a(0)
-										: void n5_Service
-												.request("chooseSim", "call")
+										: void Service.request("chooseSim", "call")
 												.then(a)
 												.catch(function () {
 													i();
@@ -613,7 +612,7 @@ class k extends EventEmitter {
 		o || (o = { content: "CallFailed" });
 		var i = Object.assign({ type: "alert", translated: false, noClose: false }, o);
 		i.containNumber && ((i.header = n13.toL10n(i.header, { number: n })), (i.content = n13.toL10n(i.content, { number: n })), (i.translated = true)),
-			n5_Service.request("showDialog", i);
+			Service.request("showDialog", i);
 	}
 	isValid(e) {
 		return this.validExp.test(e);

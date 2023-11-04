@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import n6_RC from "./m6";
+import ComponentBase from "./ComponentBase";
 import n16_SoftKeyStore from "./m16";
 import KeypadNavigator from "./KeypadNavigator";
 
-class n71_OptionMenu_RC extends n6_RC {
+class n71_OptionMenu_RC extends ComponentBase {
 	constructor(e) {
 		super(e);
 

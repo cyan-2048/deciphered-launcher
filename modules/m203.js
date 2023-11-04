@@ -1,6 +1,6 @@
 import React from "react";
-import n5_Service from "./m5";
-import n6_RC from "./m6";
+import Service from "./Service";
+import ComponentBase from "./ComponentBase";
 import n26 from "./m26";
 import * as n13 from "./m13";
 import n64 from "./m64";
@@ -8,7 +8,7 @@ import n105_ContactsStore from "./m105";
 import n204_DialerInput_RC from "./m204";
 import n205_DialerSuggestions_RC from "./m205";
 
-class Dialer extends n6_RC {
+class Dialer extends ComponentBase {
 	constructor(e) {
 		super(e);
 
@@ -30,13 +30,13 @@ class Dialer extends n6_RC {
 			__self[e] = __self[e].bind(__self);
 		});
 		__self.timer = null;
-		n5_Service.register("show", __self);
-		n5_Service.register("hide", __self);
-		n5_Service.register("toggleStayEffect", __self);
-		n5_Service.register("resetCallingMarker", __self);
-		n5_Service.registerState("ready", __self);
-		n5_Service.registerState("isShown", __self);
-		n5_Service.registerState("isCalling", __self);
+		Service.register("show", __self);
+		Service.register("hide", __self);
+		Service.register("toggleStayEffect", __self);
+		Service.register("resetCallingMarker", __self);
+		Service.registerState("ready", __self);
+		Service.registerState("isShown", __self);
+		Service.registerState("isCalling", __self);
 	}
 
 	componentDidMount() {
@@ -52,23 +52,23 @@ class Dialer extends n6_RC {
 			(this.ready = true);
 	}
 	onUssdReceived(e) {
-		if ((n64.mmiloading && n5_Service.request("hideDialog"), !e.message))
-			return void n5_Service.request("showDialog", { type: "alert", header: "Error USSD case!", content: JSON.stringify(e), translated: true, noClose: false });
+		if ((n64.mmiloading && Service.request("hideDialog"), !e.message))
+			return void Service.request("showDialog", { type: "alert", header: "Error USSD case!", content: JSON.stringify(e), translated: true, noClose: false });
 		var t = navigator.mozMobileConnections[e.serviceId || 0].voice.network,
 			n = t ? t.shortName || t.longName : "";
-		n5_Service.request("showDialog", { type: "alert", header: n, content: e.message.replace(/\\r\\n|\\r|\\n/g, "\n"), translated: true, noClose: false });
+		Service.request("showDialog", { type: "alert", header: n, content: e.message.replace(/\\r\\n|\\r|\\n/g, "\n"), translated: true, noClose: false });
 	}
 	show(e) {
 		this.isShown ||
 			(this.isHidden() &&
 				(this.updateTelTypes(),
-				n5_Service.request("openSheet", "dialer"),
+				Service.request("openSheet", "dialer"),
 				(this.isShown = true),
 				this.element.focus(),
 				e && (this.focusInput(), this.children.dialerInput.sendFirstChar(e))));
 	}
 	hide() {
-		this.isHidden() || n5_Service.request("closeSheet", "dialer"),
+		this.isHidden() || Service.request("closeSheet", "dialer"),
 			(this.isShown = false),
 			(this.children.dialerInput.element.style.fontSize = ""),
 			this.setState(this.initState),
@@ -130,13 +130,13 @@ class Dialer extends n6_RC {
 			a = t.isVideo,
 			o = void 0 !== a && a;
 		return this.isCalling
-			? void n5_Service.request("showDialog", {
+			? void Service.request("showDialog", {
 					ok: "skip",
 					cancel: "cancel",
 					type: "confirm",
 					content: "otherConnectionInUseMessage",
 					onOk: function () {
-						n5_Service.request("Dialer:resetCallingMarker");
+						Service.request("Dialer:resetCallingMarker");
 					},
 			  })
 			: ((this.isCalling = true),
@@ -144,7 +144,7 @@ class Dialer extends n6_RC {
 			  void n64
 					.dial(i, o)
 					.then(function () {
-						(e.isCalling = false), n5_Service.request("Dialer:hide"), n5_Service.request("hideDialog");
+						(e.isCalling = false), Service.request("Dialer:hide"), Service.request("hideDialog");
 					})
 					.catch(function () {
 						e.isCalling = false;
@@ -195,9 +195,9 @@ class Dialer extends n6_RC {
 	}
 	showAlert(e, t) {
 		this.resetCallingMarker(),
-			n5_Service.request("Dialer:hide"),
+			Service.request("Dialer:hide"),
 			(e || t) &&
-				n5_Service.request("showDialog", {
+				Service.request("showDialog", {
 					type: "custom",
 					header: e,
 					content: n13.toL10n(t),
@@ -210,8 +210,8 @@ class Dialer extends n6_RC {
 		this.isCalling = false;
 	}
 	showLoading() {
-		n5_Service.request("Dialer:hide").then(function () {
-			n5_Service.request("showDialog", {
+		Service.request("Dialer:hide").then(function () {
+			Service.request("showDialog", {
 				type: "custom",
 				content: "sending",
 				buttons: [{ message: "" }, { message: "ok" }, { message: "" }],

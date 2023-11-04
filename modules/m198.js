@@ -1,9 +1,9 @@
 import React from "react";
-import n6_RC from "./m6";
+import ComponentBase from "./ComponentBase";
 import n26 from "./m26";
 import n16_SoftKeyStore from "./m16";
 import KeypadNavigator from "./KeypadNavigator";
-import n5_Service from "./m5";
+import Service from "./Service";
 import n108 from "./m108";
 import n199 from "./m199";
 
@@ -13,7 +13,7 @@ var O = ["Contract WAP", "PAYG WAP"],
 		{ l10nId: "apnConfigPrepay", value: O[1] },
 	];
 
-class APNSelection extends n6_RC {
+class APNSelection extends ComponentBase {
 	constructor(props) {
 		super(props);
 
@@ -25,7 +25,7 @@ class APNSelection extends n6_RC {
 	}
 
 	componentDidMount() {
-		(this.navigator = new KeypadNavigator(this.FOCUS_SELECTOR, this.element)), this.updateSoftkeys(), n5_Service.register("setOperatorId", this);
+		(this.navigator = new KeypadNavigator(this.FOCUS_SELECTOR, this.element)), this.updateSoftkeys(), Service.register("setOperatorId", this);
 	}
 	updateSoftkeys() {
 		n16_SoftKeyStore.register({ center: "select" }, this.element);
@@ -48,11 +48,11 @@ class APNSelection extends n6_RC {
 					0 == this.id && n108.start();
 				break;
 			case "Backspace":
-				e.preventDefault(), n5_Service.request("back");
+				e.preventDefault(), Service.request("back");
 		}
 	}
 	hide() {
-		n5_Service.request("closeSheet", "apnselection"), this._lock && this._lock.unlock && (dump("apn_selection unlock the _lock"), this._lock.unlock(), (this._lock = null));
+		Service.request("closeSheet", "apnselection"), this._lock && this._lock.unlock && (dump("apn_selection unlock the _lock"), this._lock.unlock(), (this._lock = null));
 	}
 	setOperatorId(e) {
 		dump("apn_selection.js setOperatorId id = " + e), (this._lock = navigator.requestWakeLock("screen")), (this.id = e), this.setState({ whichCard: e });

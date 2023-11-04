@@ -1,16 +1,16 @@
 import React from "react";
-import n6_RC from "./m6";
+import ComponentBase from "./ComponentBase";
 import n71_OptionMenu_RC from "./m71";
-import n5_Service from "./m5";
+import Service from "./Service";
 
-class n107_OptionMenuRenderer_RC extends n6_RC {
+class n107_OptionMenuRenderer_RC extends ComponentBase {
 	constructor(prop) {
 		super(prop);
 
 		const __self = this;
 		__self.name = "OptionMenuRenderer";
 		__self.state = { menu: false, options: null };
-		n5_Service.register("showOptionMenu", __self);
+		Service.register("showOptionMenu", __self);
 	}
 
 	showOptionMenu(e) {
@@ -28,7 +28,7 @@ class n107_OptionMenuRenderer_RC extends n6_RC {
 					e.focusLast();
 					e.menu.off("closed", t);
 				});
-		} else n5_Service.request("focus");
+		} else Service.request("focus");
 	}
 	render() {
 		var e = this;

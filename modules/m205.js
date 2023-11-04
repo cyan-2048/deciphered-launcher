@@ -1,11 +1,11 @@
 import React from "react";
-import n6_RC from "./m6";
-import n5_Service from "./m5";
+import ComponentBase from "./ComponentBase";
+import Service from "./Service";
 import n16_SoftKeyStore from "./m16";
 import KeypadNavigator from "./KeypadNavigator";
 import n65_SimCardHelper from "./m65";
 
-class n205_DialerSuggestions_RC extends n6_RC {
+class n205_DialerSuggestions_RC extends ComponentBase {
 	static defaultProps = { dial: null, exitSuggestions: null, suggestions: null };
 	static propTypes = { dial: React.PropTypes.func, exitSuggestions: React.PropTypes.func, suggestions: React.PropTypes.arrayOf(React.PropTypes.object) };
 
@@ -52,7 +52,7 @@ class n205_DialerSuggestions_RC extends n6_RC {
 						},
 					},
 				];
-			n5_Service.request("showOptionMenu", {
+			Service.request("showOptionMenu", {
 				options: n,
 				onCancel: function () {
 					return e.element.focus();
@@ -61,7 +61,7 @@ class n205_DialerSuggestions_RC extends n6_RC {
 		}
 	}
 	onKeyDown(e) {
-		if (!n5_Service.query("Dialer.isCalling"))
+		if (!Service.query("Dialer.isCalling"))
 			switch (e.key) {
 				case "SoftRight":
 					e.stopPropagation();

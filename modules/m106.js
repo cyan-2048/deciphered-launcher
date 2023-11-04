@@ -1,11 +1,11 @@
 import React from "react";
-import n6_RC from "./m6";
-import n5_Service from "./m5";
+import ComponentBase from "./ComponentBase";
+import Service from "./Service";
 import n132_Dialog_RC from "./m132";
 
 var s = Object.assign;
 
-class n106_DialogRenderer_RC extends n6_RC {
+class n106_DialogRenderer_RC extends ComponentBase {
 	constructor(props) {
 		super(props);
 
@@ -17,9 +17,9 @@ class n106_DialogRenderer_RC extends n6_RC {
 			__self.dialog.off("closed", __self.closeDialog);
 		};
 		__self.state = { dialog: false, options: {} };
-		n5_Service.register("showDialog", __self);
-		n5_Service.register("hideDialog", __self);
-		n5_Service.registerState("isHidden", __self);
+		Service.register("showDialog", __self);
+		Service.register("hideDialog", __self);
+		Service.registerState("isHidden", __self);
 		__self.isHidden = true;
 	}
 
@@ -35,7 +35,7 @@ class n106_DialogRenderer_RC extends n6_RC {
 		this.dialog.hide();
 	}
 	focusLast() {
-		this.lastActive && this.lastActive.offsetParent && document.hasFocus() ? this.lastActive.focus() : n5_Service.request(n5_Service.query("App.lastSheet") + ":show"),
+		this.lastActive && this.lastActive.offsetParent && document.hasFocus() ? this.lastActive.focus() : Service.request(Service.query("App.lastSheet") + ":show"),
 			(this.lastActive = null);
 	}
 	componentDidUpdate() {

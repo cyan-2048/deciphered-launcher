@@ -1,8 +1,8 @@
-import n6_RC from "./m6";
+import ComponentBase from "./ComponentBase";
 import n19 from "./m19";
 import n105_ContactsStore from "./m105";
 
-class h_RC extends n6_RC {
+class h_RC extends ComponentBase {
 	constructor() {
 		super(...arguments); // ahhh it's a React Element
 

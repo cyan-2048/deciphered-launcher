@@ -1,8 +1,8 @@
 import React from "react";
-import n6_RC from "./m6";
+import ComponentBase from "./ComponentBase";
 import n26 from "./m26";
 import n16_SoftKeyStore from "./m16";
-import n5_Service from "./m5";
+import Service from "./Service";
 import n212 from "./m212";
 
 function a(e) {
@@ -13,7 +13,7 @@ function a(e) {
 	return Array.from(e);
 }
 
-class QRFace extends n6_RC {
+class QRFace extends ComponentBase {
 	constructor(props) {
 		super(props);
 
@@ -22,9 +22,9 @@ class QRFace extends n6_RC {
 		__self.name = "QRFace";
 		__self.initFocus = [0, 0];
 		__self.state = { focus: __self.initFocus };
-		n5_Service.register("show", __self);
-		n5_Service.register("hide", __self);
-		n5_Service.register("isShown", __self);
+		Service.register("show", __self);
+		Service.register("hide", __self);
+		Service.register("isShown", __self);
 		__self.onFocus = __self.onFocus.bind(__self);
 		__self.onKeyDown = __self.onKeyDown.bind(__self);
 		var i = [].concat(a(navigator.mozMobileConnections)).map(function (e, t) {
@@ -56,9 +56,9 @@ class QRFace extends n6_RC {
 	}
 
 	componentDidMount() {
-		n5_Service.register("show", this),
-			n5_Service.register("hide", this),
-			n5_Service.register("isShown", this),
+		Service.register("show", this),
+			Service.register("hide", this),
+			Service.register("isShown", this),
 			this.updateSoftKeys(),
 			(this.onFocus = this.onFocus.bind(this)),
 			(this.onKeyDown = this.onKeyDown.bind(this));
@@ -100,16 +100,16 @@ class QRFace extends n6_RC {
 		this.setState({ focus: [0, 2] });
 	}
 	show() {
-		return n5_Service.query("QRFace.isShown", this)
+		return Service.query("QRFace.isShown", this)
 			? void this.focus()
-			: void (this.isHidden() && (n5_Service.request("openSheet", "qrface"), (this.isShown = true), this.element.focus()));
+			: void (this.isHidden() && (Service.request("openSheet", "qrface"), (this.isShown = true), this.element.focus()));
 	}
 	isHidden() {
 		for (var e = this.element; e !== document.body && !e.classList.contains("hidden") && "closed" !== e.dataset.transitionState; ) e = e.parentElement;
 		return e.classList.contains("hidden") || "closed" === e.dataset.transitionState;
 	}
 	hide() {
-		n5_Service.request("closeSheet", "qrface"), (this.isShown = false);
+		Service.request("closeSheet", "qrface"), (this.isShown = false);
 	}
 	focus() {
 		this.element.focus();

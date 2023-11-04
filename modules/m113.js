@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import n6_RC from "./m6";
+import ComponentBase from "./ComponentBase";
 
-class n113_RC extends n6_RC {
+class n113_RC extends ComponentBase {
 	constructor(props) {
 		super(props);
 		this.state = { popup: null };

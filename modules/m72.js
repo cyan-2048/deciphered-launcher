@@ -1,6 +1,6 @@
 import React from "react";
-import n6_RC from "./m6";
-import n5_Service from "./m5";
+import ComponentBase from "./ComponentBase";
+import Service from "./Service";
 import n103 from "./m103";
 import n71_OptionMenu_RC from "./m71";
 import n129 from "./m129";
@@ -8,21 +8,21 @@ import n129 from "./m129";
 // useless side effects, all return a string
 // require(234), require(235), require(236);
 
-class n72_RC extends n6_RC {
+class n72_RC extends ComponentBase {
 	constructor(props) {
 		super(props);
 
 		this.state = { shown: false };
-		n5_Service.register("chooseSim", this);
+		Service.register("chooseSim", this);
 	}
 
 	componentDidUpdate() {
 		this.refs.menu
 			? (this.refs.menu.show(this.getSimOptions()),
 			  this.refs.menu.on("closed", function () {
-					n5_Service.request("focus");
+					Service.request("focus");
 			  }))
-			: n5_Service.request("focus");
+			: Service.request("focus");
 	}
 	capitalize(e) {
 		return e.charAt(0).toUpperCase() + e.slice(1);

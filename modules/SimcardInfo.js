@@ -2,7 +2,7 @@ import React from "react";
 import ComponentBase from "./ComponentBase";
 import SettingsCore from "./SettingsCore";
 
-class n214_SimcardInfo_RC extends ComponentBase {
+class SimcardInfo extends ComponentBase {
 	constructor(props) {
 		super(props);
 
@@ -226,4 +226,4 @@ class n214_SimcardInfo_RC extends ComponentBase {
 	}
 }
 
-export default n214_SimcardInfo_RC;
+export default SimcardInfo;

@@ -52,6 +52,6 @@ class LaunchStore extends StoreBase {
 	}
 }
 
-const n42_LaunchStore = new LaunchStore();
+const launchStore = new LaunchStore();
 
-export default n42_LaunchStore;
+export default launchStore;

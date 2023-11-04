@@ -1,7 +1,7 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
 import Service from "./Service";
-import n103 from "./m103";
+import SimSettingsHelper from "./SimSettingsHelper";
 import n71_OptionMenu_RC from "./m71";
 import n129 from "./m129";
 
@@ -35,11 +35,11 @@ class n72_RC extends ComponentBase {
 			new Promise(function (n, r) {
 				(e.resolve = n),
 					(e.reject = r),
-					n103.getCardIndexFrom("outgoing" + e.capitalize(t), function (t) {
+					SimSettingsHelper.getCardIndexFrom("outgoing" + e.capitalize(t), function (t) {
 						if (e.hasOnlyOneSIMCardDetected()) {
 							var n = e.isSIMCardAbsent(0) ? 1 : 0;
 							e.resolve(n);
-						} else e.noSIMCardOnDevice() ? e.resolve(0) : t === n103.ALWAYS_ASK_OPTION_VALUE ? e.setState({ shown: true }) : e.resolve(t);
+						} else e.noSIMCardOnDevice() ? e.resolve(0) : t === SimSettingsHelper.ALWAYS_ASK_OPTION_VALUE ? e.setState({ shown: true }) : e.resolve(t);
 					});
 			})
 		);

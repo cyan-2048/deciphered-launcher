@@ -1,6 +1,6 @@
 import ComponentBase from "./ComponentBase";
 import SettingsCore from "./SettingsCore";
-import n105_ContactsStore from "./m105";
+import contactStore from "./contactStore";
 
 class h_RC extends ComponentBase {
 	constructor() {
@@ -66,7 +66,7 @@ class h_RC extends ComponentBase {
 		var t = this,
 			n = e.map(function (e) {
 				return new Promise(function (n) {
-					n105_ContactsStore.findById(e.contactId, function (i) {
+					contactStore.findById(e.contactId, function (i) {
 						if (!(i instanceof window.mozContact)) return void n();
 						var a = void 0;
 						i.photo && i.photo.length && (a = window.URL.createObjectURL(i.photo[0]));

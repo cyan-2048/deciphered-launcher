@@ -1,12 +1,12 @@
 import Service from "./Service";
-import m14 from "./StoreBase";
+import StoreBase from "./StoreBase";
 import * as n13 from "./m13";
 import n215 from "./m215";
 import n64 from "./m64";
 import appStore from "./appStore";
 import n110 from "./m110";
 
-class SpeedDialHelper extends m14 {
+class SpeedDialHelper extends StoreBase {
 	constructor() {
 		super(...arguments); // useless?? m14 doesn't even take any arguments
 		this.name = "SpeedDialHelper";
@@ -167,6 +167,6 @@ class SpeedDialHelper extends m14 {
 	}
 }
 
-const n63_SpeedDialHelper = new SpeedDialHelper();
+const speedDialHelper = new SpeedDialHelper();
 
-export default n63_SpeedDialHelper;
+export default speedDialHelper;

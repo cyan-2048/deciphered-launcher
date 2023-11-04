@@ -1,7 +1,7 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
 import Service from "./Service";
-import n132_Dialog_RC from "./m132";
+import Dialog from "./Dialog";
 
 var s = Object.assign;
 
@@ -48,7 +48,7 @@ class n106_DialogRenderer_RC extends ComponentBase {
 			{ id: "dialog-root", className: "dialog-root " + (this.state.options.otherClass || "") },
 			this.state.dialog &&
 				React.createElement(
-					n132_Dialog_RC,
+					Dialog,
 					s(
 						{
 							ref: function (t) {

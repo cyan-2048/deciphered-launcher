@@ -6,7 +6,7 @@ import SettingsCore from "./SettingsCore";
 import * as n13 from "./m13";
 import n110 from "./m110";
 import n65_SimCardHelper from "./m65";
-import n42_LaunchStore from "./m42";
+import launchStore from "./launchStore";
 import n128_fontFit from "./m128";
 
 class n204_DialerInput_RC extends ComponentBase {
@@ -132,7 +132,7 @@ class n204_DialerInput_RC extends ComponentBase {
 					e.stopPropagation(), this.deleteAllText();
 					break;
 				case "SoftLeft":
-					e.stopPropagation(), n42_LaunchStore.launch("manifestURL", "app://contact.gaiamobile.org/manifest.webapp");
+					e.stopPropagation(), launchStore.launch("manifestURL", "app://contact.gaiamobile.org/manifest.webapp");
 					break;
 				case "SoftRight":
 					e.stopPropagation(), this.handleTelNumber();

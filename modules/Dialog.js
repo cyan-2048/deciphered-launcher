@@ -6,7 +6,7 @@ import Service from "./Service";
 
 var b = 0;
 
-class n132_Dialog_RC extends ComponentBase {
+class Dialog extends ComponentBase {
 	static defaultProps = {
 		header: "",
 		content: "",
@@ -240,4 +240,4 @@ class n132_Dialog_RC extends ComponentBase {
 	}
 }
 
-export default n132_Dialog_RC;
+export default Dialog;

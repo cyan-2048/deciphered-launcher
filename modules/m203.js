@@ -4,7 +4,7 @@ import ComponentBase from "./ComponentBase";
 import n26 from "./m26";
 import * as n13 from "./m13";
 import n64 from "./m64";
-import n105_ContactsStore from "./m105";
+import contactStore from "./contactStore";
 import n204_DialerInput_RC from "./m204";
 import n205_DialerSuggestions_RC from "./m205";
 
@@ -41,7 +41,7 @@ class Dialer extends ComponentBase {
 
 	componentDidMount() {
 		var e = this;
-		n105_ContactsStore.on("contact-changed", function () {
+		contactStore.on("contact-changed", function () {
 			e.isShown && e.getSuggestions(e.state.telNum);
 		}),
 			this.updateTelTypes(),

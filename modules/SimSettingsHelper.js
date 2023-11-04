@@ -1,21 +1,40 @@
-var n103 = {
+/**
+ * Seems to be taken from
+ * @link  https://github.com/mozilla-b2g/gaia/blob/975a35c0f5010df341e96d6c5ec60217f5347412/shared/js/sim_settings_helper.js
+ */
+var SimSettingsHelper = {
 	EMPTY_OPTION_TEXT: "--",
 	EMPTY_OPTION_VALUE: -2,
 	ALWAYS_ASK_OPTION_VALUE: -1,
-	_callbacks: { outgoingCall: [], outgoingMessages: [], outgoingData: [] },
-	observe: function (e, t) {
-		var n = this._callbacks[e];
-		n && n.push(t);
+	_callbacks: {
+		outgoingCall: [],
+		outgoingMessages: [],
+		outgoingData: [],
 	},
-	unobserve: function (e, t) {
-		var n = this._callbacks[e];
-		if (n) {
-			var r = n.indexOf(t);
-			r > -1 && n.splice(r, 1);
+
+	observe: function (serviceName, callback) {
+		var serviceCallbacks = this._callbacks[serviceName];
+		if (serviceCallbacks) {
+			serviceCallbacks.push(callback);
 		}
 	},
-	getCardIndexFrom: function (e, t) {
-		this._get(e)._onWhichCard(t);
+
+	unobserve: function (serviceName, callback) {
+		var serviceCallbacks = this._callbacks[serviceName];
+		if (serviceCallbacks) {
+			var index = serviceCallbacks.indexOf(callback);
+			if (index > -1) {
+				serviceCallbacks.splice(index, 1);
+			}
+		}
+	},
+
+	getCardIndexFrom: function (serviceName, callback) {
+		// _get(), _onWhichCard() and _getFromSettingsDB() are internal methods
+		// and should be used together, so I wrap them inside this method
+		// and expose them outside the world to make sure developers
+		// will not call them separately.
+		this._get(serviceName)._onWhichCard(callback);
 	},
 	_get: function (e) {
 		switch (((this.settingKeys = []), e)) {
@@ -106,6 +125,6 @@ var n103 = {
 		});
 	},
 };
-n103._addSettingsObservers();
+SimSettingsHelper._addSettingsObservers();
 
-export default n103;
+export default SimSettingsHelper;

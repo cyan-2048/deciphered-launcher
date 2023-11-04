@@ -2,7 +2,7 @@ import n104 from "./m104";
 import n109_FlashlightHelper from "./m109";
 import StoreBase from "./StoreBase";
 import SettingsCore from "./SettingsCore";
-import n42_LaunchStore from "./m42";
+import launchStore from "./launchStore";
 import * as n13 from "./m13";
 
 class InstantSettingsStore extends StoreBase {
@@ -52,7 +52,7 @@ class InstantSettingsStore extends StoreBase {
 				order: { portrait: 7, landscape: 6 },
 				cskType: "launch",
 				click: function () {
-					n42_LaunchStore.launch("manifestURL", "app://camera.gaiamobile.org/manifest.webapp");
+					launchStore.launch("manifestURL", "app://camera.gaiamobile.org/manifest.webapp");
 				},
 			},
 			{
@@ -63,7 +63,7 @@ class InstantSettingsStore extends StoreBase {
 				order: { portrait: 5, landscape: -1 },
 				cskType: "launch",
 				click: function () {
-					n42_LaunchStore.launch("manifestURL", "app://calculator.gaiamobile.org/manifest.webapp");
+					launchStore.launch("manifestURL", "app://calculator.gaiamobile.org/manifest.webapp");
 				},
 			},
 			{

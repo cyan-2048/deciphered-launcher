@@ -12,7 +12,7 @@ import ComponentBase from "./ComponentBase";
 import Service from "./Service";
 import SoftKeyPanel from "./SoftKeyPanel";
 
-import "./m63";
+import "./speedDialHelper";
 import n72_RC from "./m72";
 import n210_MainView_RC from "./m210";
 import n200_AppList_RC from "./m200";

@@ -2,12 +2,12 @@ import React from "react";
 import ComponentBase from "./ComponentBase";
 import softkeyStore from "./softkeyStore";
 import Service from "./Service";
-import n63_SpeedDialHelper from "./m63";
+import speedDialHelper from "./speedDialHelper";
 import appStore from "./appStore";
 import n201_Clock_RC from "./m201";
-import n214_SimcardInfo_RC from "./m214";
+import SimcardInfo from "./SimcardInfo";
 import n109_FlashlightHelper from "./m109";
-import n42_LaunchStore from "./m42";
+import launchStore from "./launchStore";
 
 class n210_MainView_RC extends ComponentBase {
 	static defaultProps = { open: null, close: null };
@@ -26,9 +26,9 @@ class n210_MainView_RC extends ComponentBase {
 				if (!_self._longPressTimer) {
 					switch (t) {
 						case "Call":
-							return void n42_LaunchStore.launch("manifestURL", "app://communications.gaiamobile.org/manifest.webapp");
+							return void launchStore.launch("manifestURL", "app://communications.gaiamobile.org/manifest.webapp");
 						case "SoftLeft":
-							return void n42_LaunchStore.launch("iac", "notice");
+							return void launchStore.launch("iac", "notice");
 						case "Enter":
 							_self.simmcc
 								? ("460" !== _self.simmcc && "250" !== _self.simmcc) || Service.request("openSheet", "appList")
@@ -68,7 +68,7 @@ class n210_MainView_RC extends ComponentBase {
 				if ((_self.clearLongPressTimer(), _self._longPressActionTriggered)) return void (_self._longPressActionTriggered = false);
 				switch (t) {
 					case "Backspace":
-						n42_LaunchStore.isLaunching && (n42_LaunchStore.isLaunching = false);
+						launchStore.isLaunching && (launchStore.isLaunching = false);
 						break;
 					case "Enter":
 						Service.request("openSheet", "appList");
@@ -87,7 +87,7 @@ class n210_MainView_RC extends ComponentBase {
 		Service.register("show", this);
 		Service.register("hide", this);
 		softkeyStore.register({ left: "notifications", center: "icon=all-apps", right: "shortcuts" }, this.element);
-		n63_SpeedDialHelper.register(this.element);
+		speedDialHelper.register(this.element);
 	}
 	clearLongPressTimer() {
 		this._longPressTimer && (clearTimeout(this._longPressTimer), (this._longPressTimer = null));
@@ -114,7 +114,7 @@ class n210_MainView_RC extends ComponentBase {
 					e.element = t;
 				},
 			},
-			React.createElement(n214_SimcardInfo_RC, null),
+			React.createElement(SimcardInfo, null),
 			React.createElement(n201_Clock_RC, null)
 		);
 	}

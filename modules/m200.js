@@ -3,9 +3,9 @@ import ComponentBase from "./ComponentBase";
 import appStore from "./appStore";
 import softkeyStore from "./softkeyStore";
 import Service from "./Service";
-import n63_SpeedDialHelper from "./m63";
+import speedDialHelper from "./speedDialHelper";
 import * as n13 from "./m13";
-import n42_LaunchStore from "./m42";
+import launchStore from "./launchStore";
 import SettingsCore from "./SettingsCore";
 import n26 from "./m26";
 import * as n216 from "./m216";
@@ -129,7 +129,7 @@ class AppList extends ComponentBase {
 			Service.register("show", this),
 			Service.register("hide", this),
 			Service.registerState("ready", this),
-			n63_SpeedDialHelper.register(this.element),
+			speedDialHelper.register(this.element),
 			this.element.addEventListener("animationstart", function () {
 				e.isAnimationEnd = false;
 			}),
@@ -339,7 +339,7 @@ class AppList extends ComponentBase {
 				(i = n13.navGrid({ currentRowCol: o, dir: a, col: this.state.col, total: this.state.apps.length })), this.navItem(i);
 				break;
 			case "Call":
-				n42_LaunchStore.launch("manifestURL", "app://communications.gaiamobile.org/manifest.webapp");
+				launchStore.launch("manifestURL", "app://communications.gaiamobile.org/manifest.webapp");
 				break;
 			case "SoftRight":
 				if (!n) {

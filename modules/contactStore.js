@@ -28,7 +28,7 @@ var h = {
 	},
 	m = /\s+/;
 
-class v extends StoreBase {
+class ContactStore extends StoreBase {
 	start() {
 		this.contactStore = new Map();
 		this.API = window.mozContacts || navigator.mozContacts;
@@ -142,6 +142,6 @@ class v extends StoreBase {
 	}
 }
 
-var n105_ContactsStore = new v();
-n105_ContactsStore.start();
-export default n105_ContactsStore;
+var contactStore = new ContactStore();
+contactStore.start();
+export default contactStore;

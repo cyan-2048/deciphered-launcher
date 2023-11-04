@@ -1,20 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import n6_RC from "./m6";
-import n16 from "./m16";
+import n16_SoftKeyStore from "./m16";
 import n62 from "./m62";
-
-var u = function e(t, n, r) {
-	null === t && (t = Function.prototype);
-	var o = Object.getOwnPropertyDescriptor(t, n);
-	if (void 0 === o) {
-		var i = Object.getPrototypeOf(t);
-		return null === i ? void 0 : e(i, n, r);
-	}
-	if ("value" in o) return o.value;
-	var a = o.get;
-	if (void 0 !== a) return a.call(r);
-};
 
 class n71_OptionMenu_RC extends n6_RC {
 	constructor(e) {
@@ -39,10 +27,10 @@ class n71_OptionMenu_RC extends n6_RC {
 		e && this.navigator.setFocus(e);
 	}
 	unregisterSoftKeys() {
-		n16.unregister(this.element);
+		n16_SoftKeyStore.unregister(this.element);
 	}
 	updateSoftKeys() {
-		n16.register({ left: this.state.hasCancel ? "cancel" : "", center: "select", right: "" }, this.element);
+		n16_SoftKeyStore.register({ left: this.state.hasCancel ? "cancel" : "", center: "select", right: "" }, this.element);
 	}
 	clear() {
 		this.setState({ header: "", options: [], onCancel: function () {} });
@@ -52,8 +40,8 @@ class n71_OptionMenu_RC extends n6_RC {
 		this.clear(),
 			this.setState(e, function () {
 				n.updateSoftKeys();
-			}),
-			u(exports.prototype.__proto__ || Object.getPrototypeOf(exports.prototype), "show", this).call(this);
+			});
+		super.show();
 	}
 	onKeyDown(e) {
 		var t = (e.target, e.key),

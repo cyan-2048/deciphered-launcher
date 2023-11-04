@@ -1,4 +1,4 @@
-import n5 from "./m5";
+import n5_Service from "./m5";
 import m14 from "./m14";
 import * as n13 from "./m13";
 import n215 from "./m215";
@@ -40,7 +40,7 @@ class SpeedDialHelper extends m14 {
 	}
 	dialVoicemail() {
 		var e = this;
-		n5.request("chooseSim", "call").then(function () {
+		n5_Service.request("chooseSim", "call").then(function () {
 			var t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 0,
 				n = n215["ril.iccInfo.mbdn"],
 				i = (Array.isArray(n) ? n[t] : n) || (navigator.mozVoicemail && navigator.mozVoicemail.getNumber(t));
@@ -51,8 +51,8 @@ class SpeedDialHelper extends m14 {
 		(e = Number(e)),
 			e &&
 				(1 === e
-					? n5.request("showDialog", { type: "alert", header: "confirmation", content: "assign-voicemail" })
-					: n5.request("showDialog", {
+					? n5_Service.request("showDialog", { type: "alert", header: "confirmation", content: "assign-voicemail" })
+					: n5_Service.request("showDialog", {
 							ok: "assign",
 							type: "confirm",
 							header: n13.toL10n("confirmation"),
@@ -74,7 +74,7 @@ class SpeedDialHelper extends m14 {
 			a = function () {
 				"function" == typeof i && i();
 			};
-		n5.request("showDialog", {
+		n5_Service.request("showDialog", {
 			ok: "remove",
 			type: "confirm",
 			header: n13.toL10n("confirmation"),
@@ -100,7 +100,7 @@ class SpeedDialHelper extends m14 {
 					u = o.name[0] || s;
 				i + "-" + n + "-" + a == r + "-" + u + "-" + s
 					? n215.set(t, s, r)
-					: n5.request("showDialog", {
+					: n5_Service.request("showDialog", {
 							ok: "replace",
 							type: "confirm",
 							header: n13.toL10n("confirmation"),
@@ -117,7 +117,7 @@ class SpeedDialHelper extends m14 {
 		e.addEventListener("keydown", this), e.addEventListener("keyup", this);
 	}
 	_handle_keyup(e) {
-		if (this.pressingTimer && !n5.query("LaunchStore.isLaunching") && n5.query("Dialer.ready")) {
+		if (this.pressingTimer && !n5_Service.query("LaunchStore.isLaunching") && n5_Service.query("Dialer.ready")) {
 			var t = n110.translate(e.key);
 			switch (t) {
 				case "0":
@@ -133,13 +133,13 @@ class SpeedDialHelper extends m14 {
 				case "*":
 				case "#":
 				case "+":
-					window.clearTimeout(this.pressingTimer), (this.pressingTimer = null), n5.query("App.panelAnimationRunning") || n5.request("Dialer:show", t);
+					window.clearTimeout(this.pressingTimer), (this.pressingTimer = null), n5_Service.query("App.panelAnimationRunning") || n5_Service.request("Dialer:show", t);
 			}
 		}
 	}
 	_handle_keydown(e) {
 		var t = this;
-		if (!n5.query("LaunchStore.isLaunching") && n5.query("Dialer.ready")) {
+		if (!n5_Service.query("LaunchStore.isLaunching") && n5_Service.query("Dialer.ready")) {
 			var n = n110.translate(e.key);
 			switch ((this.pressingTimer && (window.clearTimeout(this.pressingTimer), (this.pressingTimer = null)), n)) {
 				case "0":

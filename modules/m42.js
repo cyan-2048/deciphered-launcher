@@ -1,6 +1,6 @@
 import n14_StoreBase from "./m14";
 import n41 from "./m41";
-import n5 from "./m5";
+import n5_Service from "./m5";
 
 class LaunchStore extends n14_StoreBase {
 	constructor(e) {
@@ -14,7 +14,7 @@ class LaunchStore extends n14_StoreBase {
 		__self.ports = {};
 		window.addEventListener("visibilitychange", __self.resetLaunchingMarker);
 		window.addEventListener("blur", __self.resetLaunchingMarker);
-		n5.registerState("isLaunching", __self);
+		n5_Service.registerState("isLaunching", __self);
 	}
 
 	launch(e, t, n) {

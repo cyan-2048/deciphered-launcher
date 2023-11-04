@@ -1,7 +1,7 @@
 import React from "react";
 import n6_RC from "./m6";
-import n16 from "./m16";
-import n5 from "./m5";
+import n16_SoftKeyStore from "./m16";
+import n5_Service from "./m5";
 import n63_SpeedDialHelper from "./m63";
 import n41 from "./m41";
 import n201_Clock_RC from "./m201";
@@ -17,10 +17,11 @@ class n210_MainView_RC extends n6_RC {
 		super(props);
 
 		const _self = this;
+		const n = _self;
 
 		n.name = "MainView";
 		n.onKeyDown = function (e) {
-			if (((_self.mcc = n41.getDataMcc()), (_self.simmcc = n41.getSimmcc()), !n5.query("LaunchStore.isLaunching") && n5.query("AppList.ready"))) {
+			if (((_self.mcc = n41.getDataMcc()), (_self.simmcc = n41.getSimmcc()), !n5_Service.query("LaunchStore.isLaunching") && n5_Service.query("AppList.ready"))) {
 				var t = e.key;
 				if (!_self._longPressTimer) {
 					switch (t) {
@@ -30,11 +31,11 @@ class n210_MainView_RC extends n6_RC {
 							return void n42_LaunchStore.launch("iac", "notice");
 						case "Enter":
 							_self.simmcc
-								? ("460" !== _self.simmcc && "250" !== _self.simmcc) || n5.request("openSheet", "appList")
-								: ("460" !== _self.mcc && "250" !== _self.mcc) || n5.request("openSheet", "appList");
+								? ("460" !== _self.simmcc && "250" !== _self.simmcc) || n5_Service.request("openSheet", "appList")
+								: ("460" !== _self.mcc && "250" !== _self.mcc) || n5_Service.request("openSheet", "appList");
 							break;
 						case "SoftRight":
-							return void n5.request("openSheet", "instantSettings");
+							return void n5_Service.request("openSheet", "instantSettings");
 					}
 					_self._longPressTimer = setTimeout(function () {
 						switch ((_self.clearLongPressTimer(), (_self._longPressActionTriggered = !0), t)) {
@@ -63,14 +64,14 @@ class n210_MainView_RC extends n6_RC {
 		};
 		n.onKeyUp = function (e) {
 			var t = e.key;
-			if (_self._longPressTimer && !n5.query("LaunchStore.isLaunching") && n5.query("AppList.ready")) {
+			if (_self._longPressTimer && !n5_Service.query("LaunchStore.isLaunching") && n5_Service.query("AppList.ready")) {
 				if ((_self.clearLongPressTimer(), _self._longPressActionTriggered)) return void (_self._longPressActionTriggered = !1);
 				switch (t) {
 					case "Backspace":
 						n42_LaunchStore.isLaunching && (n42_LaunchStore.isLaunching = !1);
 						break;
 					case "Enter":
-						n5.request("openSheet", "appList");
+						n5_Service.request("openSheet", "appList");
 				}
 			}
 		};
@@ -83,9 +84,9 @@ class n210_MainView_RC extends n6_RC {
 	}
 
 	componentDidMount() {
-		n5.register("show", this);
-		n5.register("hide", this);
-		n16.register({ left: "notifications", center: "icon=all-apps", right: "shortcuts" }, this.element);
+		n5_Service.register("show", this);
+		n5_Service.register("hide", this);
+		n16_SoftKeyStore.register({ left: "notifications", center: "icon=all-apps", right: "shortcuts" }, this.element);
 		n63_SpeedDialHelper.register(this.element);
 	}
 	clearLongPressTimer() {

@@ -22,6 +22,6 @@ class SimCardHelper extends n14_StoreBase {
 	}
 }
 
-const n65 = new SimCardHelper();
+const n65_SimCardHelper = new SimCardHelper();
 
-export default n65;
+export default n65_SimCardHelper;

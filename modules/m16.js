@@ -80,7 +80,7 @@ class SoftKeyStore extends EventEmitter {
 	}
 }
 
-var n16 = new SoftKeyStore();
-n16.start();
+var n16_SoftKeyStore = new SoftKeyStore();
+n16_SoftKeyStore.start();
 
-export default n16;
+export default n16_SoftKeyStore;

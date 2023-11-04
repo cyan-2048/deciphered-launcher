@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import n6_RC from "./m6";
-import n5 from "./m5";
+import n5_Service from "./m5";
 import n130_RC from "./m130";
 import n113_RC from "./m113";
 
@@ -16,8 +16,8 @@ var n26 = function (el, openAnimation, closeAnimation) {
 			var e = this;
 			(this.refs.composed.open = this.refs.composing.open.bind(this.refs.composing)),
 				(this.refs.composed.close = this.refs.composing.close.bind(this.refs.composing)),
-				n5.register("open", this.refs.composed),
-				n5.register("close", this.refs.composed),
+				n5_Service.register("open", this.refs.composed),
+				n5_Service.register("close", this.refs.composed),
 				(this.refs.composed.isActive = this.refs.composing.isActive.bind(this.refs.composing)),
 				this.refs.composing.on("closed", function () {
 					e.refs.composed.emit("closed"), e.emit("closed");

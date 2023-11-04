@@ -1,6 +1,6 @@
-import n5 from "./n5";
-import EventEmitter from "./n30";
-import n19 from "./n19";
+import n5 from "./m5";
+import EventEmitter from "./m30";
+import n19 from "./m19";
 
 var h = false;
 

@@ -1,8 +1,8 @@
 import React from "react";
 import n6_RC from "./m6";
 import n41 from "./m41";
-import n16 from "./m16";
-import n5 from "./m5";
+import n16_SoftKeyStore from "./m16";
+import n5_Service from "./m5";
 import n63_SpeedDialHelper from "./m63";
 import * as n13 from "./m13";
 import n42_LaunchStore from "./m42";
@@ -126,9 +126,9 @@ class AppList extends n6_RC {
 	componentDidMount() {
 		var e = this;
 		n41.on("change", this.updateApps),
-			n5.register("show", this),
-			n5.register("hide", this),
-			n5.registerState("ready", this),
+			n5_Service.register("show", this),
+			n5_Service.register("hide", this),
+			n5_Service.registerState("ready", this),
 			n63_SpeedDialHelper.register(this.element),
 			this.element.addEventListener("animationstart", function () {
 				e.isAnimationEnd = !1;
@@ -227,7 +227,7 @@ class AppList extends n6_RC {
 	}
 	updateSoftKeys() {
 		var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : { center: "select", right: "options" };
-		this.state.reorderMode && (e = { center: "set", right: "", left: "cancel" }), n16.register(e, this.element);
+		this.state.reorderMode && (e = { center: "set", right: "", left: "cancel" }), n16_SoftKeyStore.register(e, this.element);
 	}
 	onFocus() {
 		return (
@@ -355,7 +355,7 @@ class AppList extends n6_RC {
 									return !!e.tags && e.tags.includes(t.state.viewMode);
 							}
 						});
-					n5.request("showOptionMenu", { options: s });
+					n5_Service.request("showOptionMenu", { options: s });
 				}
 				break;
 			case "SoftLeft":
@@ -367,7 +367,7 @@ class AppList extends n6_RC {
 			case "EndCall":
 			case "BrowserBack":
 			case "Backspace":
-				n ? this.exitReorderMode() : (this.setState({ focus: this.initFocus }), n5.request("closeSheet", "appList"));
+				n ? this.exitReorderMode() : (this.setState({ focus: this.initFocus }), n5_Service.request("closeSheet", "appList"));
 		}
 		i && (e.stopPropagation(), e.preventDefault());
 	}

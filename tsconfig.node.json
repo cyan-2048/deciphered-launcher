@@ -6,7 +6,10 @@
 		"module": "ESNext",
 		"moduleResolution": "bundler",
 		"allowSyntheticDefaultImports": true,
-		"outDir": "./dist"
+		"outDir": "./dist",
+		"types": [
+			"bun-types" // add Bun global
+		]
 	},
-	"include": ["vite.config.ts", "scripts/*"]
+	"include": ["./build.js"]
 }

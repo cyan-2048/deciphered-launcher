@@ -3,7 +3,7 @@ import React from "react";
 // n11
 import ReactDOM from "react-dom";
 // n5
-import n5 from "./m5";
+import n5_Service from "./m5";
 
 function s(e) {
 	if (!e || "string" != typeof e) throw new Error("Event name should be a valid non-empty string!");
@@ -58,7 +58,7 @@ class n6_RC extends React.Component {
 		}
 	}
 	debug() {
-		this.DEBUG ? this.TRACE : window.DUMP && DUMP("[" + this.name + "][" + n5.currentTime() + "] " + Array.prototype.slice.call(arguments).concat());
+		this.DEBUG ? this.TRACE : window.DUMP && DUMP("[" + this.name + "][" + n5_Service.currentTime() + "] " + Array.prototype.slice.call(arguments).concat());
 	}
 	on(e, t) {
 		s(e), u(t), this.listeners || (this.listeners = new Map());

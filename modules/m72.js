@@ -1,6 +1,6 @@
 import React from "react";
 import n6_RC from "./m6";
-import n5 from "./m5";
+import n5_Service from "./m5";
 import n103 from "./m103";
 import n71_OptionMenu_RC from "./m71";
 import n129 from "./m129";
@@ -13,16 +13,16 @@ class n72_RC extends n6_RC {
 		super(props);
 
 		this.state = { shown: !1 };
-		n5.register("chooseSim", this);
+		n5_Service.register("chooseSim", this);
 	}
 
 	componentDidUpdate() {
 		this.refs.menu
 			? (this.refs.menu.show(this.getSimOptions()),
 			  this.refs.menu.on("closed", function () {
-					n5.request("focus");
+					n5_Service.request("focus");
 			  }))
-			: n5.request("focus");
+			: n5_Service.request("focus");
 	}
 	capitalize(e) {
 		return e.charAt(0).toUpperCase() + e.slice(1);

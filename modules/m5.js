@@ -1,4 +1,8 @@
-var n5 = {
+// seems to be taken from here: https://github.com/mozilla-b2g/gaia/blob/975a35c0f5010df341e96d6c5ec60217f5347412/apps/system/js/service.js
+// not sure if it's the same, will test later
+// will name this object "Service"
+
+var n5_Service = {
 	_providers: new Map(),
 	_services: new Map(),
 	_requestsByService: new Map(),
@@ -90,4 +94,4 @@ var n5 = {
 	debug: function () {},
 };
 
-export default n5;
+export default n5_Service;

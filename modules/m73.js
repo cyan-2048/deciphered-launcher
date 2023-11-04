@@ -1,6 +1,6 @@
 import React from "react";
 import n6_RC from "./m6";
-import n16 from "./m16";
+import n16_SoftKeyStore from "./m16";
 
 function SoftKeyButton(props) {
 	var t = props.content ? { "data-icon": props.content.icon, "data-l10n-id": props.content.text } : null;
@@ -18,8 +18,8 @@ class SoftKeyPanel_RC extends n6_RC {
 
 	componentDidMount() {
 		var e = this;
-		n16.on("change", function () {
-			var t = n16.currentKeys;
+		n16_SoftKeyStore.on("change", function () {
+			var t = n16_SoftKeyStore.currentKeys;
 			e.softkeys.forEach(function (n) {
 				t[n] = e.uniformContent(t[n] || "");
 			}),

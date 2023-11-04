@@ -1,6 +1,6 @@
 import React from "react";
 import n6_RC from "./m6";
-import n5 from "./m5";
+import n5_Service from "./m5";
 import n19 from "./m19";
 
 function a(e) {
@@ -80,7 +80,7 @@ class n201_Clock_RC extends n6_RC {
 		n19.addObserver("home.clock.visible", this), n19.addObserver("locale.hour12", this);
 	}
 	componentDidMount() {
-		n5.register("start", this), n5.register("stop", this), n5.register("forcedRefresh", this), window.addEventListener("moztimechange", this);
+		n5_Service.register("start", this), n5_Service.register("stop", this), n5_Service.register("forcedRefresh", this), window.addEventListener("moztimechange", this);
 	}
 	_handle_moztimechange() {
 		this.stop(), this.start();

@@ -1,32 +1,11 @@
 import React from "react";
 import n6_RC from "./m6";
 import n26 from "./m26";
-import n16 from "./m16";
-import n5 from "./m5";
+import n16_SoftKeyStore from "./m16";
+import n5_Service from "./m5";
 import n209_InstantSettingsStore from "./m209";
 import * as n13 from "./m13";
 
-function moduleToESM(e) {
-	if (e && e.__esModule) return e;
-	var t = {};
-	if (null != e) for (var n in e) Object.prototype.hasOwnProperty.call(e, n) && (t[n] = e[n]);
-	return (t.default = e), t;
-}
-function toESM(e) {
-	return e && e.__esModule ? e : { default: e };
-}
-function o(e, t) {
-	if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
-}
-function r(e, t) {
-	if (!e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-	return !t || ("object" != typeof t && "function" != typeof t) ? e : t;
-}
-function s(e, t) {
-	if ("function" != typeof t && null !== t) throw new TypeError("Super expression must either be null or a function, not " + typeof t);
-	(e.prototype = Object.create(t && t.prototype, { constructor: { value: e, enumerable: !1, writable: !0, configurable: !0 } })),
-		t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : (e.__proto__ = t));
-}
 function u(e) {
 	var t = [O, e.isActive ? "is-active" : null, e.isShortcut ? "is-shortcut" : null].filter(Boolean).join(" ");
 	return React.createElement(
@@ -44,20 +23,6 @@ function u(e) {
 		)
 	);
 }
-
-var l = (function () {
-		function e(e, t) {
-			for (var n = 0; n < t.length; n++) {
-				var i = t[n];
-				(i.enumerable = i.enumerable || !1), (i.configurable = !0), "value" in i && (i.writable = !0), Object.defineProperty(e, i.key, i);
-			}
-		}
-		return function (t, n, i) {
-			return n && e(t.prototype, n), i && e(t, i), t;
-		};
-	})(),
-	_ = require(13),
-	S = moduleToESM(_);
 
 var O = "instantSettings__icon";
 
@@ -87,7 +52,7 @@ class InstantSettings extends n6_RC {
 	updateSoftKey() {
 		var e = this.state.focusIndex,
 			t = this.state.settings[e];
-		n16.register({ left: "", center: t.isDisabled ? "" : "select", right: "" }, this.element);
+		n16_SoftKeyStore.register({ left: "", center: t.isDisabled ? "" : "select", right: "" }, this.element);
 	}
 	updateSettings() {
 		this.setState(function (e) {
@@ -170,7 +135,7 @@ class InstantSettings extends n6_RC {
 		return "ArrowDown" === i && h >= r ? -1 : n13.clamp(h, 0, r - 1);
 	}
 	exit() {
-		n209_InstantSettingsStore.removeSimCardObserver(), n5.request("closeSheet", "instantSettings"), window.removeEventListener("visibilitychange", this);
+		n209_InstantSettingsStore.removeSimCardObserver(), n5_Service.request("closeSheet", "instantSettings"), window.removeEventListener("visibilitychange", this);
 	}
 	isHidden() {
 		return !this.element.offsetParent;

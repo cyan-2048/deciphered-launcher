@@ -7,7 +7,7 @@ function SoftKeyButton(props) {
 	return React.createElement("button", Object.assign({ id: "software-keys-" + props.pos, className: "sk-button", "data-position": props.pos }, t), props.content.text);
 }
 
-class SoftKeyPanel_RC extends n6_RC {
+class n73_SoftKeyPanel_RC extends n6_RC {
 	constructor(props) {
 		super(props);
 
@@ -52,4 +52,4 @@ class SoftKeyPanel_RC extends n6_RC {
 	}
 }
 
-export default SoftKeyPanel_RC;
+export default n73_SoftKeyPanel_RC;

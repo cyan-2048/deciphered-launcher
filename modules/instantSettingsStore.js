@@ -277,7 +277,7 @@ class InstantSettingsStore extends StoreBase {
 	}
 }
 
-const n209_InstantSettingsStore = new InstantSettingsStore();
-n209_InstantSettingsStore.start();
+const instantSettingsStore = new InstantSettingsStore();
+instantSettingsStore.start();
 
-export default n209_InstantSettingsStore;
+export default instantSettingsStore;

@@ -3,7 +3,7 @@ import ComponentBase from "./ComponentBase";
 import n26 from "./m26";
 import softkeyStore from "./softkeyStore";
 import Service from "./Service";
-import n209_InstantSettingsStore from "./m209";
+import instantSettingsStore from "./instantSettingsStore";
 import * as n13 from "./m13";
 
 function u(e) {
@@ -37,14 +37,14 @@ class InstantSettings extends ComponentBase {
 
 		__self.name = "InstantSettings";
 		__self.initIndex = 0;
-		__self.state = { settings: n209_InstantSettingsStore.settings, focusIndex: __self.initIndex };
+		__self.state = { settings: instantSettingsStore.settings, focusIndex: __self.initIndex };
 		__self.onKeyDown = __self.onKeyDown.bind(__self);
 		__self.onFocus = __self.onFocus.bind(__self);
 		__self.setRef = __self.setRef.bind(__self);
 	}
 
 	componentDidMount() {
-		(this.icons = this.element.getElementsByClassName(O)), this.updateSettings(), n209_InstantSettingsStore.on("change", this.updateSettings.bind(this));
+		(this.icons = this.element.getElementsByClassName(O)), this.updateSettings(), instantSettingsStore.on("change", this.updateSettings.bind(this));
 	}
 	componentDidUpdate() {
 		this.focusIfPossible(), this.updateSoftKey();
@@ -57,7 +57,7 @@ class InstantSettings extends ComponentBase {
 	updateSettings() {
 		this.setState(function (e) {
 			return (
-				(e.settings = n209_InstantSettingsStore.settings.filter(function (e) {
+				(e.settings = instantSettingsStore.settings.filter(function (e) {
 					return !e.removed;
 				})),
 				e
@@ -68,7 +68,7 @@ class InstantSettings extends ComponentBase {
 		e.preventDefault(), e.stopPropagation();
 		var t = e.key,
 			n = this.state.focusIndex;
-		if (n209_InstantSettingsStore.volumeManagerTimer) return void n209_InstantSettingsStore.click("volume", t);
+		if (instantSettingsStore.volumeManagerTimer) return void instantSettingsStore.click("volume", t);
 		switch (t) {
 			case "ArrowUp":
 			case "ArrowDown":
@@ -86,7 +86,7 @@ class InstantSettings extends ComponentBase {
 	}
 	onFocus(e) {
 		e.target === this.element &&
-			((this.state.focusIndex = this.initIndex), this.focusIfPossible(), n209_InstantSettingsStore.addSimCardObserver(), window.addEventListener("visibilitychange", this));
+			((this.state.focusIndex = this.initIndex), this.focusIfPossible(), instantSettingsStore.addSimCardObserver(), window.addEventListener("visibilitychange", this));
 	}
 	_handle_visibilitychange() {
 		this.exit();
@@ -94,7 +94,7 @@ class InstantSettings extends ComponentBase {
 	onCSK() {
 		var e = this.state.settings[this.state.focusIndex];
 		if (!e.isDisabled) {
-			"launch" === n209_InstantSettingsStore.click(e.name) && this.exit();
+			"launch" === instantSettingsStore.click(e.name) && this.exit();
 		}
 	}
 	handleNavGrid(e, t) {
@@ -135,7 +135,7 @@ class InstantSettings extends ComponentBase {
 		return "ArrowDown" === i && h >= r ? -1 : n13.clamp(h, 0, r - 1);
 	}
 	exit() {
-		n209_InstantSettingsStore.removeSimCardObserver(), Service.request("closeSheet", "instantSettings"), window.removeEventListener("visibilitychange", this);
+		instantSettingsStore.removeSimCardObserver(), Service.request("closeSheet", "instantSettings"), window.removeEventListener("visibilitychange", this);
 	}
 	isHidden() {
 		return !this.element.offsetParent;

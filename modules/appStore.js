@@ -2,7 +2,7 @@ import StoreBase from "./StoreBase";
 import SettingsCore from "./SettingsCore";
 import Service from "./Service";
 import * as n13 from "./m13";
-import n211 from "./m211";
+import ManifestHelper from "./ManifestHelper";
 
 var u =
 		"function" == typeof Symbol && "symbol" == typeof Symbol.iterator
@@ -272,7 +272,7 @@ class AppStore extends StoreBase {
 			for (var a in n) {
 				var o = {},
 					r = n[a];
-				i = new n211(r).name;
+				i = new ManifestHelper(r).name;
 				for (var s in r) "locale" !== s && "name" !== s && (t[s] = r[s]);
 				for (var u in e) o[u] = e[u];
 				(o.type = "mozapp"), (o.manifest = t), (o.displayName = i), (o.entry = a), this.addItem(o, e);
@@ -280,7 +280,7 @@ class AppStore extends StoreBase {
 		} else {
 			var l = {};
 			for (var c in e) l[c] = e[c];
-			l.manifest || (l.manifest = l.updateManifest), (l.type = "mozapp"), (l.displayName = new n211(l.manifest).name), this.addItem(l, e);
+			l.manifest || (l.manifest = l.updateManifest), (l.type = "mozapp"), (l.displayName = new ManifestHelper(l.manifest).name), this.addItem(l, e);
 		}
 	}
 	removeMozAppItem(e) {

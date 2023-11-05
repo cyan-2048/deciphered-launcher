@@ -14,7 +14,7 @@ import n210_MainView_RC from "../m210";
 import n200_AppList_RC from "../m200";
 import n208_InstantSettings_RC from "../m208";
 import n203_Dialer_RC from "../m203";
-import n213_QRFace_RC from "../m213";
+import QRFace from "../QRFace";
 import n198_APNSelection_RC from "../m198";
 import n106_DialogRenderer_RC from "../m106";
 import n107_OptionMenuRenderer_RC from "../m107";
@@ -167,7 +167,7 @@ class App extends ComponentBase {
 						e.panels.dialer = t;
 					},
 				}),
-				React.createElement(n213_QRFace_RC, {
+				React.createElement(QRFace, {
 					ref: function (t) {
 						e.panels.qrface = t;
 					},

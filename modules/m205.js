@@ -3,7 +3,7 @@ import ComponentBase from "./ComponentBase";
 import Service from "./Service";
 import softkeyStore from "./softkeyStore";
 import KeypadNavigator from "./KeypadNavigator";
-import n65_SimCardHelper from "./m65";
+import simCardHelper from "./simCardHelper";
 
 class n205_DialerSuggestions_RC extends ComponentBase {
 	static defaultProps = { dial: null, exitSuggestions: null, suggestions: null };
@@ -25,11 +25,11 @@ class n205_DialerSuggestions_RC extends ComponentBase {
 	}
 	updateSoftKeys() {
 		var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : { left: "", center: "call", right: this.isVTSupported ? "options" : "" };
-		if (navigator.mozMobileConnections && navigator.mozMobileConnections.length > 1 && !n65_SimCardHelper.isAlwaysAsk()) {
+		if (navigator.mozMobileConnections && navigator.mozMobileConnections.length > 1 && !simCardHelper.isAlwaysAsk()) {
 			e.center = { text: "call", icon: "" };
 			var t = SIMSlotManager.isMultiSIM() && !SIMSlotManager.hasOnlyOneSIMCardDetected(),
-				n = void 0 !== n65_SimCardHelper.cardIndex;
-			t && n && (e.center.icon = "sim-" + (n65_SimCardHelper.cardIndex + 1));
+				n = void 0 !== simCardHelper.cardIndex;
+			t && n && (e.center.icon = "sim-" + (simCardHelper.cardIndex + 1));
 		}
 		softkeyStore.register(e, this.element);
 	}

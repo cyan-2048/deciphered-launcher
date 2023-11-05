@@ -2,6 +2,7 @@ import ComponentBase from "./ComponentBase";
 import SettingsCore from "./SettingsCore";
 import contactStore from "./contactStore";
 
+// dunno what to call this
 class h_RC extends ComponentBase {
 	constructor() {
 		super(...arguments); // ahhh it's a React Element

@@ -13,7 +13,7 @@ function a(e) {
 	return Array.from(e);
 }
 
-class QRFace extends ComponentBase {
+class _QRFace extends ComponentBase {
 	constructor(props) {
 		super(props);
 
@@ -137,6 +137,6 @@ class QRFace extends ComponentBase {
 	}
 }
 
-const n213_QRFace_RC = n26(QRFace, "immediate", "immediate");
+const QRFace = n26(_QRFace, "immediate", "immediate");
 
-export default n213_QRFace_RC;
+export default QRFace;

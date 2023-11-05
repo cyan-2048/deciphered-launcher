@@ -5,7 +5,7 @@ import softkeyStore from "./softkeyStore";
 import SettingsCore from "./SettingsCore";
 import * as n13 from "./m13";
 import n110 from "./m110";
-import n65_SimCardHelper from "./m65";
+import simCardHelper from "./simCardHelper";
 import launchStore from "./launchStore";
 import n128_fontFit from "./m128";
 
@@ -65,11 +65,11 @@ class n204_DialerInput_RC extends ComponentBase {
 	}
 	updateSoftKeys() {
 		var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : { left: "contacts", center: "call", right: "options" };
-		if (navigator.mozMobileConnections && navigator.mozMobileConnections.length > 1 && !n65_SimCardHelper.isAlwaysAsk()) {
+		if (navigator.mozMobileConnections && navigator.mozMobileConnections.length > 1 && !simCardHelper.isAlwaysAsk()) {
 			e.center = { text: "call", icon: "" };
 			var t = SIMSlotManager.isMultiSIM() && !SIMSlotManager.hasOnlyOneSIMCardDetected(),
-				n = void 0 !== n65_SimCardHelper.cardIndex;
-			t && n && (e.center.icon = "sim-" + (n65_SimCardHelper.cardIndex + 1));
+				n = void 0 !== simCardHelper.cardIndex;
+			t && n && (e.center.icon = "sim-" + (simCardHelper.cardIndex + 1));
 		}
 		softkeyStore.register(e, this.element);
 	}

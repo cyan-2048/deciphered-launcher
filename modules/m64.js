@@ -3,7 +3,7 @@ import Service from "./Service";
 import * as n13 from "./m13";
 import SettingsCore from "./SettingsCore";
 import n104 from "./m104";
-import n65_SimCardHelper from "./m65";
+import simCardHelper from "./simCardHelper";
 
 function o(e) {
 	if (Array.isArray(e)) {
@@ -439,7 +439,7 @@ class k extends EventEmitter {
 										var t = function () {
 											return !n104.isSIMCardAbsent(0) && !n104.isSIMCardAbsent(1);
 										};
-										return e && t() && n65_SimCardHelper.isAlwaysAsk() ? 0 : Service.request("chooseSim", "call");
+										return e && t() && simCardHelper.isAlwaysAsk() ? 0 : Service.request("chooseSim", "call");
 									})
 									.then(function (e) {
 										return a(e);
@@ -622,6 +622,6 @@ class k extends EventEmitter {
 	}
 }
 
-var n64 = new k();
+const n64 = new k();
 
 export default n64;

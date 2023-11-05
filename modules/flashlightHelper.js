@@ -31,6 +31,6 @@ class FlashlightHelper extends StoreBase {
 	}
 }
 
-const n109_FlashlightHelper = new FlashlightHelper();
+const flashlightHelper = new FlashlightHelper();
 
-export default n109_FlashlightHelper;
+export default flashlightHelper;

@@ -21,7 +21,7 @@ function trim(e) {
 var debug = function () {},
 	cache = {};
 
-function n128_fontFit(config) {
+function fontFit(config) {
 	debug("font fit", config);
 	var textWidth,
 		font,
@@ -37,4 +37,4 @@ function n128_fontFit(config) {
 	return { textWidth, fontSize, overflowing: textWidth > space };
 }
 
-export default n128_fontFit;
+export default fontFit;

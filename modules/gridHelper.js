@@ -1,7 +1,7 @@
 import * as n13 from "./m13";
 import EventEmitter from "./EventEmitter";
 
-class d extends EventEmitter {
+class GridHelper extends EventEmitter {
 	constructor(e) {
 		super(e);
 
@@ -12,6 +12,6 @@ class d extends EventEmitter {
 	}
 }
 
-const n207_GridHelper = new d();
+const gridHelper = new GridHelper();
 
-export default n207_GridHelper;
+export default gridHelper;

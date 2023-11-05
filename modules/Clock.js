@@ -37,7 +37,7 @@ var u = (function () {
 	};
 })();
 
-class n201_Clock_RC extends ComponentBase {
+class Clock extends ComponentBase {
 	constructor(props) {
 		super(props);
 
@@ -180,4 +180,4 @@ class n201_Clock_RC extends ComponentBase {
 	}
 }
 
-export default n201_Clock_RC;
+export default Clock;

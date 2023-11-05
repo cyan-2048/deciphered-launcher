@@ -1,9 +1,9 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
-import n71_OptionMenu_RC from "./m71";
+import OptionMenu from "./OptionMenu";
 import Service from "./Service";
 
-class n107_OptionMenuRenderer_RC extends ComponentBase {
+class OptionMenuRenderer extends ComponentBase {
 	constructor(prop) {
 		super(prop);
 
@@ -36,7 +36,7 @@ class n107_OptionMenuRenderer_RC extends ComponentBase {
 			"div",
 			{ id: "menu-root" },
 			this.state.menu
-				? React.createElement(n71_OptionMenu_RC, {
+				? React.createElement(OptionMenu, {
 						ref: function (t) {
 							e.menu = t;
 						},
@@ -46,4 +46,4 @@ class n107_OptionMenuRenderer_RC extends ComponentBase {
 	}
 }
 
-export default n107_OptionMenuRenderer_RC;
+export default OptionMenuRenderer;

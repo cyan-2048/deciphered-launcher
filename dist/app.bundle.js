@@ -1,1 +1,1 @@
-"use strict";(()=>{__vendor("app");})();
+__vendor("app")

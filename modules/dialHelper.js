@@ -2,7 +2,7 @@ import EventEmitter from "./EventEmitter";
 import Service from "./Service";
 import * as n13 from "./m13";
 import SettingsCore from "./SettingsCore";
-import n104 from "./m104";
+import simSlotManagerStore from "./simSlotManagerStore";
 import simCardHelper from "./simCardHelper";
 
 function o(e) {
@@ -14,34 +14,39 @@ function o(e) {
 }
 
 var u = (function () {
-		function e(e, t) {
-			var n = [],
-				r = true,
-				o = false,
-				i = void 0;
+	function e(e, t) {
+		var n = [],
+			r = true,
+			o = false,
+			i = void 0;
+		try {
+			for (var a, s = e[Symbol.iterator](); !(r = (a = s.next()).done) && (n.push(a.value), !t || n.length !== t); r = true);
+		} catch (u) {
+			(o = true), (i = u);
+		} finally {
 			try {
-				for (var a, s = e[Symbol.iterator](); !(r = (a = s.next()).done) && (n.push(a.value), !t || n.length !== t); r = true);
-			} catch (u) {
-				(o = true), (i = u);
+				!r && s.return && s.return();
 			} finally {
-				try {
-					!r && s.return && s.return();
-				} finally {
-					if (o) throw i;
-				}
+				if (o) throw i;
 			}
-			return n;
 		}
-		return function (t, n) {
-			if (Array.isArray(t)) return t;
-			if (Symbol.iterator in Object(t)) return e(t, n);
-			throw new TypeError("Invalid attempt to destructure non-iterable instance");
-		};
-	})(),
-	C = "*#33#",
-	E = "*#43#";
+		return n;
+	}
+	return function (t, n) {
+		if (Array.isArray(t)) return t;
+		if (Symbol.iterator in Object(t)) return e(t, n);
+		throw new TypeError("Invalid attempt to destructure non-iterable instance");
+	};
+})();
 
-class k extends EventEmitter {
+// As defined in 3GPP TS 22.030 version 10.0.0 Release 10 standard
+// USSD code used to query call barring supplementary service status
+const CALL_BARRING_STATUS_MMI_CODE = "*#33#";
+// USSD code used to query call waiting supplementary service status
+const CALL_WAITING_STATUS_MMI_CODE = "*#43#";
+
+// name is taken from one of the dump calls
+class DialHelper extends EventEmitter {
 	constructor(e) {
 		super(e);
 
@@ -334,7 +339,7 @@ class k extends EventEmitter {
 						break;
 					case "scCallBarring":
 					case "scCallWaiting":
-						if (t === C || t === E) {
+						if (t === CALL_BARRING_STATUS_MMI_CODE || t === CALL_WAITING_STATUS_MMI_CODE) {
 							var a = [],
 								s = { smServiceEnabled: "ServiceIsEnabled", smServiceDisabled: "ServiceIsDisabled", smServiceEnabledFor: "ServiceIsEnabledFor" };
 							i && "smServiceEnabledFor" === o && Array.isArray(i) && (a = i.map(n13.toL10n)), a.unshift(n13.toL10n(s[o]) || o), (o = a.join("\n"));
@@ -437,7 +442,7 @@ class k extends EventEmitter {
 									})
 									.then(function (e) {
 										var t = function () {
-											return !n104.isSIMCardAbsent(0) && !n104.isSIMCardAbsent(1);
+											return !simSlotManagerStore.isSIMCardAbsent(0) && !simSlotManagerStore.isSIMCardAbsent(1);
 										};
 										return e && t() && simCardHelper.isAlwaysAsk() ? 0 : Service.request("chooseSim", "call");
 									})
@@ -450,8 +455,8 @@ class k extends EventEmitter {
 							navigator.mozTelephony.getEccList().then(function (t) {
 								var n = false;
 								return (
-									n104.isMultiSIM()
-										? n104.getSlots().forEach(function (e, t) {
+									simSlotManagerStore.isMultiSIM()
+										? simSlotManagerStore.getSlots().forEach(function (e, t) {
 												if (e) {
 													(!e.isAbsent() && !e.isLocked()) || (n = true);
 												}
@@ -622,6 +627,6 @@ class k extends EventEmitter {
 	}
 }
 
-const n64 = new k();
+const dialHelper = new DialHelper();
 
-export default n64;
+export default dialHelper;

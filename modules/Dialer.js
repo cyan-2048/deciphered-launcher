@@ -3,12 +3,12 @@ import Service from "./Service";
 import ComponentBase from "./ComponentBase";
 import n26 from "./m26";
 import * as n13 from "./m13";
-import n64 from "./m64";
+import dialHelper from "./dialHelper";
 import contactStore from "./contactStore";
 import n204_DialerInput_RC from "./m204";
 import n205_DialerSuggestions_RC from "./m205";
 
-class Dialer extends ComponentBase {
+class _Dialer extends ComponentBase {
 	constructor(e) {
 		super(e);
 
@@ -22,9 +22,9 @@ class Dialer extends ComponentBase {
 		};
 		__self.initState = { dialerState: null, matchedContact: null, telNum: "", suggestions: [] };
 		__self.state = Object.assign({}, __self.initState);
-		n64.on("mmiloading", __self.showLoading.bind(__self));
-		n64.on("mmiloaded", __self.showAlert.bind(__self));
-		n64.on("ussd-received", __self.onUssdReceived.bind(__self));
+		dialHelper.on("mmiloading", __self.showLoading.bind(__self));
+		dialHelper.on("mmiloaded", __self.showAlert.bind(__self));
+		dialHelper.on("ussd-received", __self.onUssdReceived.bind(__self));
 		__self.children = {};
 		["onKeyDown", "call", "hide", "updateTelNum", "focusInput"].forEach(function (e) {
 			__self[e] = __self[e].bind(__self);
@@ -52,7 +52,7 @@ class Dialer extends ComponentBase {
 			(this.ready = true);
 	}
 	onUssdReceived(e) {
-		if ((n64.mmiloading && Service.request("hideDialog"), !e.message))
+		if ((dialHelper.mmiloading && Service.request("hideDialog"), !e.message))
 			return void Service.request("showDialog", { type: "alert", header: "Error USSD case!", content: JSON.stringify(e), translated: true, noClose: false });
 		var t = navigator.mozMobileConnections[e.serviceId || 0].voice.network,
 			n = t ? t.shortName || t.longName : "";
@@ -91,7 +91,7 @@ class Dialer extends ComponentBase {
 			n = { telNum: e };
 		e.length < 2 && ((n.matchedContact = this.initState.matchedContact), (n.suggestions = this.initState.suggestions)),
 			this.setState(n, function () {
-				0 === e.length ? t.hide() : n64.instantDialIfNecessary(e) && (t.children.dialerInput.exitDialer(), n64.dial(e)),
+				0 === e.length ? t.hide() : dialHelper.instantDialIfNecessary(e) && (t.children.dialerInput.exitDialer(), dialHelper.dial(e)),
 					e.length >= 4 &&
 						(clearTimeout(t.timer),
 						(t.timer = setTimeout(function () {
@@ -141,7 +141,7 @@ class Dialer extends ComponentBase {
 			  })
 			: ((this.isCalling = true),
 			  this.stopRenderSteply(),
-			  void n64
+			  void dialHelper
 					.dial(i, o)
 					.then(function () {
 						(e.isCalling = false), Service.request("Dialer:hide"), Service.request("hideDialog");
@@ -151,7 +151,7 @@ class Dialer extends ComponentBase {
 					}));
 	}
 	getSuggestions(e) {
-		n64.isValid(e) && n13.contactNumFilter({ telNum: e }).then(this.filterSuggestions.bind(this, e));
+		dialHelper.isValid(e) && n13.contactNumFilter({ telNum: e }).then(this.filterSuggestions.bind(this, e));
 	}
 	filterSuggestions(e, t) {
 		var n = this,
@@ -261,6 +261,6 @@ class Dialer extends ComponentBase {
 	}
 }
 
-const n203_Dialer_RC = n26(Dialer, "immediate", "immediate");
+const Dialer = n26(_Dialer, "immediate", "immediate");
 
-export default n203_Dialer_RC;
+export default Dialer;

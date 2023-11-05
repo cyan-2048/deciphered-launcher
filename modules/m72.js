@@ -2,12 +2,13 @@ import React from "react";
 import ComponentBase from "./ComponentBase";
 import Service from "./Service";
 import SimSettingsHelper from "./SimSettingsHelper";
-import n71_OptionMenu_RC from "./m71";
-import n129 from "./m129";
+import OptionMenu from "./OptionMenu";
+import MobileOperator from "./mobile_operator";
 
 // useless side effects, all return a string
 // require(234), require(235), require(236);
 
+// have no idea what to call this, might be able to figure out once i read where it's used
 class n72_RC extends ComponentBase {
 	constructor(props) {
 		super(props);
@@ -48,7 +49,7 @@ class n72_RC extends ComponentBase {
 		var t = this,
 			n = navigator.mozMobileConnections[e];
 		if (n) {
-			var r = n129.userFacingInfo(n).operator,
+			var r = MobileOperator.userFacingInfo(n).operator,
 				o = e + 1;
 			return {
 				id: r ? "sim-with-index-and-carrier" : "sim-without-carrier",
@@ -91,7 +92,7 @@ class n72_RC extends ComponentBase {
 		return !e || !e.iccIds || 0 === e.iccIds.length;
 	}
 	render() {
-		return React.createElement("div", null, this.state.shown ? React.createElement(n71_OptionMenu_RC, { ref: "menu" }) : null);
+		return React.createElement("div", null, this.state.shown ? React.createElement(OptionMenu, { ref: "menu" }) : null);
 	}
 }
 

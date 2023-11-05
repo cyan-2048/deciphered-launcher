@@ -7,7 +7,7 @@ import * as n13 from "./m13";
 import n110 from "./m110";
 import simCardHelper from "./simCardHelper";
 import launchStore from "./launchStore";
-import n128_fontFit from "./m128";
+import fontFit from "./font-fit";
 
 class n204_DialerInput_RC extends ComponentBase {
 	static defaultProps = { dial: null, exitDialer: null, updateTelNum: null };
@@ -222,7 +222,7 @@ class n204_DialerInput_RC extends ComponentBase {
 	updateFontSize(e) {
 		this.offsetWidth || (this.offsetWidth = this.element.offsetWidth);
 		var t = this.element.style.fontSize,
-			n = n128_fontFit({ text: e, font: this.fontStyles, space: this.offsetWidth, min: 22, max: 30 }).fontSize + "px";
+			n = fontFit({ text: e, font: this.fontStyles, space: this.offsetWidth, min: 22, max: 30 }).fontSize + "px";
 		t !== n && (this.element.style.fontSize = n);
 	}
 	getVTSupportability() {

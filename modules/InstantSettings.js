@@ -26,7 +26,7 @@ function u(e) {
 
 var O = "instantSettings__icon";
 
-class InstantSettings extends ComponentBase {
+class _InstantSettings extends ComponentBase {
 	static defaultProps = { col: 3, row: 3 };
 	static propTypes = { col: React.PropTypes.number, row: React.PropTypes.number };
 
@@ -175,6 +175,6 @@ class InstantSettings extends ComponentBase {
 	}
 }
 
-const n208_InstantSettings_RC = n26(InstantSettings, "immediate", "immediate");
+const InstantSettings = n26(_InstantSettings, "immediate", "immediate");
 
-export default n208_InstantSettings_RC;
+export default InstantSettings;

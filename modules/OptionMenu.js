@@ -4,7 +4,7 @@ import ComponentBase from "./ComponentBase";
 import softkeyStore from "./softkeyStore";
 import KeypadNavigator from "./KeypadNavigator";
 
-class n71_OptionMenu_RC extends ComponentBase {
+class OptionMenu extends ComponentBase {
 	constructor(e) {
 		super(e);
 
@@ -102,4 +102,4 @@ class n71_OptionMenu_RC extends ComponentBase {
 		);
 	}
 }
-export default n71_OptionMenu_RC;
+export default OptionMenu;

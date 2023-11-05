@@ -8,6 +8,7 @@
   "module": "build.js",
   "type": "module",
   "devDependencies": {
+    "@types/react": "^18.2.34",
     "bun-types": "latest"
   },
   "peerDependencies": {

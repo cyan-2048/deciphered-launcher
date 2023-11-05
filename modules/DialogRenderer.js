@@ -5,7 +5,7 @@ import Dialog from "./Dialog";
 
 var s = Object.assign;
 
-class n106_DialogRenderer_RC extends ComponentBase {
+class DialogRenderer extends ComponentBase {
 	constructor(props) {
 		super(props);
 
@@ -62,4 +62,4 @@ class n106_DialogRenderer_RC extends ComponentBase {
 	}
 }
 
-export default n106_DialogRenderer_RC;
+export default DialogRenderer;

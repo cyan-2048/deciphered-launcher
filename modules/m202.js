@@ -1,16 +1,28 @@
-function getThumbnail(e) {
-	return o(e, "begin");
+function getThumbnail(config) {
+	return o(config, "begin");
 }
-function getFullResolution(e) {
-	return o(e, "end");
+
+function getFullResolution(config) {
+	return o(config, "end");
 }
-function o(e, t) {
-	if (!e || !e.photo || !e.photo.length) return null;
-	if (1 === e.photo.length) return e.photo[0];
-	var n = e.photo,
-		r = e.category;
-	return Array.isArray(r) && r.indexOf("fb_linked") !== -1 ? (n.length >= 4 ? n["begin" === t ? 1 : 0] : n[0]) : ((n = i(e)), n["begin" === t ? 0 : n.length - 1]);
+
+function o(config, position) {
+	if (!config || !config.photo || !config.photo.length) return null;
+	if (1 === config.photo.length) return config.photo[0];
+	var photo = config.photo,
+		category = config.category;
+
+	if (Array.isArray(category) && category.indexOf("fb_linked") !== -1) {
+		if (photo.length >= 4) {
+			return photo["begin" === position ? 1 : 0];
+		}
+		return photo[0];
+	} else {
+		photo = i(config);
+		return photo["begin" === position ? 0 : photo.length - 1];
+	}
 }
+
 function i(e) {
 	var t = e.photo.slice(0);
 	return (
@@ -20,33 +32,48 @@ function i(e) {
 		t
 	);
 }
+
 function a(e) {
 	return "string" == typeof e ? e.length : e.size;
 }
-function getPhotoHeader(e, t) {
-	if (e && e.photo && e.photo.length) {
-		return c(getThumbnail(e));
+
+function getPhotoHeader(config, t) {
+	if (config && config.photo && config.photo.length) {
+		return c(getThumbnail(config));
 	}
-	return l(e, t);
+	return l(config, t);
 }
+
+// wtf???
 function u() {
 	return "";
 }
-function l(e, t) {
-	var n = document.createElement("span");
-	n.classList.add("defaultPicture"), n.classList.add("contactHeaderImage"), n.setAttribute("style", "");
+
+function l(config, t) {
+	var spanEl = document.createElement("span");
+	spanEl.classList.add("defaultPicture");
+	spanEl.classList.add("contactHeaderImage");
+	spanEl.setAttribute("style", "");
+
 	var r = ["top", "center", "bottom"],
 		o = ["left", "center", "right"],
 		i = o[Math.floor(Math.random() * o.length)],
 		a = r[Math.floor(Math.random() * r.length)],
 		s = i + " " + a;
-	return (n.dataset.group = u(e, t)), (n.style.backgroundPosition = s), n;
+
+	spanEl.dataset.group = u(config, t);
+	spanEl.style.backgroundPosition = s;
+
+	return spanEl;
 }
+
 function c(e) {
-	var t = document.createElement("span");
-	t.classList.add("contactHeaderImage");
+	var spanEl = document.createElement("span");
+	spanEl.classList.add("contactHeaderImage");
 	try {
-		return (t.dataset.src = window.URL.createObjectURL(e)), t.setAttribute("style", "background-image:url(" + t.dataset.src + ")"), t;
+		spanEl.dataset.src = window.URL.createObjectURL(e);
+		spanEl.setAttribute("style", "background-image:url(" + spanEl.dataset.src + ")");
+		return spanEl;
 	} catch (n) {}
 }
 

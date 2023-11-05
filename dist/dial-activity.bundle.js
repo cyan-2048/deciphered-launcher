@@ -1,1 +1,1 @@
-"use strict";(()=>{__vendor("dial-activity");})();
+__vendor("dial-activity")

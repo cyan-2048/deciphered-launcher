@@ -4,12 +4,12 @@ import softkeyStore from "./softkeyStore";
 import Service from "./Service";
 import speedDialHelper from "./speedDialHelper";
 import appStore from "./appStore";
-import n201_Clock_RC from "./m201";
+import Clock from "./Clock";
 import SimcardInfo from "./SimcardInfo";
-import n109_FlashlightHelper from "./m109";
+import flashlightHelper from "./flashlightHelper";
 import launchStore from "./launchStore";
 
-class n210_MainView_RC extends ComponentBase {
+class MainView extends ComponentBase {
 	static defaultProps = { open: null, close: null };
 	static propTypes = { open: React.PropTypes.func, close: React.PropTypes.func };
 
@@ -40,7 +40,7 @@ class n210_MainView_RC extends ComponentBase {
 					_self._longPressTimer = setTimeout(function () {
 						switch ((_self.clearLongPressTimer(), (_self._longPressActionTriggered = true), t)) {
 							case "ArrowUp":
-								n109_FlashlightHelper.toggle();
+								flashlightHelper.toggle();
 								break;
 							case "Enter":
 								_self.simmcc
@@ -115,9 +115,9 @@ class n210_MainView_RC extends ComponentBase {
 				},
 			},
 			React.createElement(SimcardInfo, null),
-			React.createElement(n201_Clock_RC, null)
+			React.createElement(Clock, null)
 		);
 	}
 }
 
-export default n210_MainView_RC;
+export default MainView;

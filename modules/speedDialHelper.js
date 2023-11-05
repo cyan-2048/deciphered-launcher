@@ -2,7 +2,7 @@ import Service from "./Service";
 import StoreBase from "./StoreBase";
 import * as n13 from "./m13";
 import n215 from "./m215";
-import n64 from "./m64";
+import dialHelper from "./dialHelper";
 import appStore from "./appStore";
 import n110 from "./m110";
 
@@ -36,7 +36,7 @@ class SpeedDialHelper extends StoreBase {
 	}
 	dialOrAssignSpeedDial(e) {
 		var t = n215.contacts[e - 1].tel;
-		t ? n64.dial(t) : this.assignSpeedDial(e);
+		t ? dialHelper.dial(t) : this.assignSpeedDial(e);
 	}
 	dialVoicemail() {
 		var e = this;
@@ -44,7 +44,7 @@ class SpeedDialHelper extends StoreBase {
 			var t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 0,
 				n = n215["ril.iccInfo.mbdn"],
 				i = (Array.isArray(n) ? n[t] : n) || (navigator.mozVoicemail && navigator.mozVoicemail.getNumber(t));
-			i ? n64.dial(i, false, t) : e.assignSpeedDial(1);
+			i ? dialHelper.dial(i, false, t) : e.assignSpeedDial(1);
 		});
 	}
 	assignSpeedDial(e) {

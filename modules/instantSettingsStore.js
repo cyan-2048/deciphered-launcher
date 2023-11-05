@@ -1,5 +1,5 @@
-import n104 from "./m104";
-import n109_FlashlightHelper from "./m109";
+import simSlotManagerStore from "./simSlotManagerStore";
+import flashlightHelper from "./flashlightHelper";
 import StoreBase from "./StoreBase";
 import SettingsCore from "./SettingsCore";
 import launchStore from "./launchStore";
@@ -42,7 +42,7 @@ class InstantSettingsStore extends StoreBase {
 				removed: true,
 				order: { portrait: 4, landscape: 3 },
 				cskType: "toggle",
-				click: n109_FlashlightHelper.toggle.bind(n109_FlashlightHelper),
+				click: flashlightHelper.toggle.bind(flashlightHelper),
 			},
 			{
 				name: "camera",
@@ -128,8 +128,8 @@ class InstantSettingsStore extends StoreBase {
 				navigator.hasFeature("device.capability.torch").then(function (t) {
 					if (t) {
 						(e.getSetting("flashlight").removed = false),
-							n109_FlashlightHelper.on("ready", e.updateFlashlightState.bind(e)),
-							n109_FlashlightHelper.on("change", e.updateFlashlightState.bind(e));
+							flashlightHelper.on("ready", e.updateFlashlightState.bind(e)),
+							flashlightHelper.on("change", e.updateFlashlightState.bind(e));
 					}
 				}),
 			navigator.hasFeature &&
@@ -174,14 +174,14 @@ class InstantSettingsStore extends StoreBase {
 	updateFlashlightState() {
 		dump("cck updateFlashlightState entry");
 		var e = this.getSetting("flashlight"),
-			t = n109_FlashlightHelper.flashlightManager.flashlightEnabled;
+			t = flashlightHelper.flashlightManager.flashlightEnabled;
 		dump("cck updateFlashlightState _flashlightEnabled=" + t), (e.isActive = t), (e.subtitle = t ? "on" : "off"), this.emit("change");
 	}
 	checkSimCardState() {
-		var e = n104.noSIMCardOnDevice() || n104.noSIMCardConnectedToNetwork(),
+		var e = simSlotManagerStore.noSIMCardOnDevice() || simSlotManagerStore.noSIMCardConnectedToNetwork(),
 			t =
 				-1 !==
-				n104
+				simSlotManagerStore
 					.getSlots()
 					.map(function (e) {
 						return e.conn.voice.state;

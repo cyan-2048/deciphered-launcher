@@ -9,17 +9,17 @@ import Service from "./Service";
 import SoftKeyPanel from "./SoftKeyPanel";
 
 import "./speedDialHelper";
-import n72_RC from "./m72";
+import SelectSimMenu from "./SelectSimMenu";
 import MainView from "./MainView";
-import n200_AppList_RC from "./m200";
+import AppList from "./AppList";
 import InstantSettings from "./InstantSettings";
 import Dialer from "./Dialer";
 import QRFace from "./QRFace";
-import n198_APNSelection_RC from "./m198";
+import APNSelection from "./APNSelection";
 import DialogRenderer from "./DialogRenderer";
 import OptionMenuRenderer from "./OptionMenuRenderer";
 import gridHelper from "./gridHelper";
-import n108 from "./m108";
+import apnSelectionStore from "./apnSelectionStore";
 
 function s() {
 	var e,
@@ -48,7 +48,7 @@ function s() {
 			(a && JSON.stringify(a[e]) === JSON.stringify(n[e])) ||
 				(e > 0 && n[e - 1] && "23415" === n[e - 1].mccmnc && (!a || (JSON.stringify(n[e - 1]) !== JSON.stringify(a[e - 1]) && JSON.stringify(n[e]) !== JSON.stringify(a[e])))
 					? (dump("apn_selection waiting for open the 2nd dialog"),
-					  n108.on("user-has-selected", function () {
+					  apnSelectionStore.on("user-has-selected", function () {
 							dump("launcher app recv user-has-selected message..."),
 								n[e] &&
 									"23415" === n[e].mccmnc &&
@@ -131,7 +131,7 @@ class App extends ComponentBase {
 				: (this.panels.appList.focus(), (this.lastSheet = "AppList")));
 	}
 	render() {
-		var e = this;
+		var self = this;
 		return React.createElement(
 			"div",
 			{ className: "app-workspace" },
@@ -140,15 +140,15 @@ class App extends ComponentBase {
 				{ className: "app-content" },
 				React.createElement(MainView, {
 					ref: function (t) {
-						e.panels.mainView = t;
+						self.panels.mainView = t;
 					},
 				}),
 				React.createElement(
-					n200_AppList_RC,
+					AppList,
 					u(
 						{
 							ref: function (t) {
-								e.panels.appList = t;
+								self.panels.appList = t;
 							},
 						},
 						this.state.grid
@@ -158,32 +158,32 @@ class App extends ComponentBase {
 					InstantSettings,
 					u({}, this.state.grid, {
 						ref: function (t) {
-							e.panels.instantSettings = t;
+							self.panels.instantSettings = t;
 						},
 					})
 				),
 				React.createElement(Dialer, {
 					ref: function (t) {
-						e.panels.dialer = t;
+						self.panels.dialer = t;
 					},
 				}),
 				React.createElement(QRFace, {
 					ref: function (t) {
-						e.panels.qrface = t;
+						self.panels.qrface = t;
 					},
 				}),
-				React.createElement(n198_APNSelection_RC, {
+				React.createElement(APNSelection, {
 					ref: function (t) {
-						e.panels.apnselection = t;
+						self.panels.apnselection = t;
 					},
 				})
 			),
 			React.createElement(OptionMenuRenderer, null),
-			React.createElement(n72_RC, null),
+			React.createElement(SelectSimMenu, null),
 			React.createElement(DialogRenderer, null),
 			React.createElement(SoftKeyPanel, {
 				ref: function (t) {
-					e.panels.softKey = t;
+					self.panels.softKey = t;
 				},
 			})
 		);

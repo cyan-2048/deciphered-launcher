@@ -1,7 +1,7 @@
 import Service from "./Service";
 import StoreBase from "./StoreBase";
 import * as n13 from "./m13";
-import n215 from "./m215";
+import speedDialSettings from "./speedDialSettings";
 import dialHelper from "./dialHelper";
 import appStore from "./appStore";
 import n110 from "./m110";
@@ -35,14 +35,14 @@ class SpeedDialHelper extends StoreBase {
 				  });
 	}
 	dialOrAssignSpeedDial(e) {
-		var t = n215.contacts[e - 1].tel;
+		var t = speedDialSettings.contacts[e - 1].tel;
 		t ? dialHelper.dial(t) : this.assignSpeedDial(e);
 	}
 	dialVoicemail() {
 		var e = this;
 		Service.request("chooseSim", "call").then(function () {
 			var t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 0,
-				n = n215["ril.iccInfo.mbdn"],
+				n = speedDialSettings["ril.iccInfo.mbdn"],
 				i = (Array.isArray(n) ? n[t] : n) || (navigator.mozVoicemail && navigator.mozVoicemail.getNumber(t));
 			i ? dialHelper.dial(i, false, t) : e.assignSpeedDial(1);
 		});
@@ -62,7 +62,10 @@ class SpeedDialHelper extends StoreBase {
 								n13.pickContact(function (t) {
 									var n = t.target.result,
 										i = n.id;
-									if (n && i) return n.tel || n.tel[0] || n.tel[0].value ? void n215.set(e, n.tel[0].value, i) : void window.alert(n13.toL10n("alert-for-contacts-without-number"));
+									if (n && i)
+										return n.tel || n.tel[0] || n.tel[0].value
+											? void speedDialSettings.set(e, n.tel[0].value, i)
+											: void window.alert(n13.toL10n("alert-for-contacts-without-number"));
 								});
 							},
 					  }));
@@ -81,7 +84,7 @@ class SpeedDialHelper extends StoreBase {
 			content: n13.toL10n("remove-speed-dial", { name: n }),
 			translated: true,
 			onOk: function () {
-				n215.remove(t);
+				speedDialSettings.remove(t);
 			},
 			onCancel: a,
 			onBack: a,
@@ -91,7 +94,7 @@ class SpeedDialHelper extends StoreBase {
 		var t = e.number,
 			n = e.name,
 			i = e.contactId,
-			a = n215.contacts[t - 1].tel;
+			a = speedDialSettings.contacts[t - 1].tel;
 		n13.pickContact(function (e) {
 			var o = e.target.result,
 				r = o.id;
@@ -99,7 +102,7 @@ class SpeedDialHelper extends StoreBase {
 				var s = o.tel[0].value,
 					u = o.name[0] || s;
 				i + "-" + n + "-" + a == r + "-" + u + "-" + s
-					? n215.set(t, s, r)
+					? speedDialSettings.set(t, s, r)
 					: Service.request("showDialog", {
 							ok: "replace",
 							type: "confirm",
@@ -107,7 +110,7 @@ class SpeedDialHelper extends StoreBase {
 							content: n13.toL10n("replace-speed-dial", { name: n, subName: u }),
 							translated: true,
 							onOk: function () {
-								n215.set(t, s, r);
+								speedDialSettings.set(t, s, r);
 							},
 					  });
 			}

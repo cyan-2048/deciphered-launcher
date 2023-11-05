@@ -1,6 +1,6 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
-import n26 from "./m26";
+import animateComponent from "./animate-component";
 import softkeyStore from "./softkeyStore";
 import Service from "./Service";
 import instantSettingsStore from "./instantSettingsStore";
@@ -175,6 +175,6 @@ class _InstantSettings extends ComponentBase {
 	}
 }
 
-const InstantSettings = n26(_InstantSettings, "immediate", "immediate");
+const InstantSettings = animateComponent(_InstantSettings, "immediate", "immediate");
 
 export default InstantSettings;

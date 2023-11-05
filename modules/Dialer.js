@@ -1,12 +1,12 @@
 import React from "react";
 import Service from "./Service";
 import ComponentBase from "./ComponentBase";
-import n26 from "./m26";
+import animateComponent from "./animate-component";
 import * as n13 from "./m13";
 import dialHelper from "./dialHelper";
 import contactStore from "./contactStore";
-import n204_DialerInput_RC from "./m204";
-import n205_DialerSuggestions_RC from "./m205";
+import DialerInput from "./DialerInput";
+import DialerSuggestions from "./DialerSuggestions";
 
 class _Dialer extends ComponentBase {
 	constructor(e) {
@@ -239,7 +239,7 @@ class _Dialer extends ComponentBase {
 				"div",
 				{ className: "dialer-header" },
 				React.createElement("div", { className: "dialer-state text-thi" }, this.state.dialerState),
-				React.createElement(n204_DialerInput_RC, {
+				React.createElement(DialerInput, {
 					ref: function (t) {
 						e.children.dialerInput = t;
 					},
@@ -249,7 +249,7 @@ class _Dialer extends ComponentBase {
 				}),
 				React.createElement("div", { className: "dialer-info text-thi" }, this.getMatchedContactInfo())
 			),
-			React.createElement(n205_DialerSuggestions_RC, {
+			React.createElement(DialerSuggestions, {
 				ref: function (t) {
 					e.children.dialerSuggestions = t;
 				},
@@ -261,6 +261,6 @@ class _Dialer extends ComponentBase {
 	}
 }
 
-const Dialer = n26(_Dialer, "immediate", "immediate");
+const Dialer = animateComponent(_Dialer, "immediate", "immediate");
 
 export default Dialer;

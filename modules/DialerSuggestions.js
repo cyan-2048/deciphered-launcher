@@ -5,7 +5,7 @@ import softkeyStore from "./softkeyStore";
 import KeypadNavigator from "./KeypadNavigator";
 import simCardHelper from "./simCardHelper";
 
-class n205_DialerSuggestions_RC extends ComponentBase {
+class DialerSuggestions extends ComponentBase {
 	static defaultProps = { dial: null, exitSuggestions: null, suggestions: null };
 	static propTypes = { dial: React.PropTypes.func, exitSuggestions: React.PropTypes.func, suggestions: React.PropTypes.arrayOf(React.PropTypes.object) };
 
@@ -130,4 +130,4 @@ class n205_DialerSuggestions_RC extends ComponentBase {
 	}
 }
 
-export default n205_DialerSuggestions_RC;
+export default DialerSuggestions;

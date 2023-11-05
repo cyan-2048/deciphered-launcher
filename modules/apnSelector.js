@@ -1,4 +1,4 @@
-class a {
+class ApnSelector {
 	_getDefaultApns(e) {
 		return new Promise(function (t, n) {
 			var i = navigator.mozSettings.createLock(),
@@ -78,5 +78,5 @@ class a {
 	}
 }
 
-const n199 = new a();
-export default n199;
+const apnSelector = new ApnSelector();
+export default apnSelector;

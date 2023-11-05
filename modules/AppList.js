@@ -7,7 +7,7 @@ import speedDialHelper from "./speedDialHelper";
 import * as n13 from "./m13";
 import launchStore from "./launchStore";
 import SettingsCore from "./SettingsCore";
-import n26 from "./m26";
+import animateComponent from "./animate-component";
 import * as n216 from "./m216";
 import * as n206 from "./m206";
 
@@ -39,7 +39,7 @@ function l(e) {
 var N = ["Siberian Strike", "Danger Dash", "Castle Of Magic", "Nitro Street Run 2"],
 	D = ["Assistant", "Maps", "Google Search", "YouTube", "Twitter"];
 
-class AppList extends ComponentBase {
+class _AppList extends ComponentBase {
 	static defaultProps = { viewMode: "grid", col: 3, row: 3 };
 	static propTypes = { viewMode: React.PropTypes.string, col: React.PropTypes.number, row: React.PropTypes.number };
 
@@ -438,5 +438,5 @@ class AppList extends ComponentBase {
 	}
 }
 
-const n200_AppList_RC = n26(AppList, "immediate", "immediate");
-export default n200_AppList_RC;
+const AppList = animateComponent(_AppList, "immediate", "immediate");
+export default AppList;

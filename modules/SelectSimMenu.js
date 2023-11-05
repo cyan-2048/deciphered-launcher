@@ -8,8 +8,9 @@ import MobileOperator from "./mobile_operator";
 // useless side effects, all return a string
 // require(234), require(235), require(236);
 
-// have no idea what to call this, might be able to figure out once i read where it's used
-class n72_RC extends ComponentBase {
+// it just shows a select menu that lets you choose a sim
+// let's call it SelectSimMenu
+class SelectSimMenu extends ComponentBase {
 	constructor(props) {
 		super(props);
 
@@ -29,34 +30,34 @@ class n72_RC extends ComponentBase {
 		return e.charAt(0).toUpperCase() + e.slice(1);
 	}
 	chooseSim() {
-		var e = this,
+		var self = this,
 			t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "call";
-		return (
-			(this.lastActive = document.activeElement),
-			new Promise(function (n, r) {
-				(e.resolve = n),
-					(e.reject = r),
-					SimSettingsHelper.getCardIndexFrom("outgoing" + e.capitalize(t), function (t) {
-						if (e.hasOnlyOneSIMCardDetected()) {
-							var n = e.isSIMCardAbsent(0) ? 1 : 0;
-							e.resolve(n);
-						} else e.noSIMCardOnDevice() ? e.resolve(0) : t === SimSettingsHelper.ALWAYS_ASK_OPTION_VALUE ? e.setState({ shown: true }) : e.resolve(t);
-					});
-			})
-		);
+
+		this.lastActive = document.activeElement;
+
+		return new Promise(function (n, r) {
+			self.resolve = n;
+			self.reject = r;
+			SimSettingsHelper.getCardIndexFrom("outgoing" + self.capitalize(t), function (t) {
+				if (self.hasOnlyOneSIMCardDetected()) {
+					var n = self.isSIMCardAbsent(0) ? 1 : 0;
+					self.resolve(n);
+				} else self.noSIMCardOnDevice() ? self.resolve(0) : t === SimSettingsHelper.ALWAYS_ASK_OPTION_VALUE ? self.setState({ shown: true }) : self.resolve(t);
+			});
+		});
 	}
-	getSimCardByIndex(e) {
-		var t = this,
-			n = navigator.mozMobileConnections[e];
-		if (n) {
-			var r = MobileOperator.userFacingInfo(n).operator,
-				o = e + 1;
+	getSimCardByIndex(index) {
+		var self = this,
+			mobileConnection = navigator.mozMobileConnections[index];
+		if (mobileConnection) {
+			var operator = MobileOperator.userFacingInfo(mobileConnection).operator,
+				o = index + 1;
 			return {
-				id: r ? "sim-with-index-and-carrier" : "sim-without-carrier",
-				l10nArgs: JSON.stringify({ carrier: r ? r : null, index: o }),
+				id: operator ? "sim-with-index-and-carrier" : "sim-without-carrier",
+				l10nArgs: JSON.stringify({ carrier: operator ? operator : null, index: o }),
 				label: "SIM " + o,
 				callback: function () {
-					t.resolve(e), t.onCancel(), (t.resolve = null), (t.reject = null);
+					self.resolve(index), self.onCancel(), (self.resolve = null), (self.reject = null);
 				},
 			};
 		}
@@ -67,7 +68,10 @@ class n72_RC extends ComponentBase {
 			header: "select",
 			options: [this.getSimCardByIndex(0), this.getSimCardByIndex(1)],
 			onCancel: function () {
-				e.reject(), e.onCancel(), (e.resolve = null), (e.reject = null);
+				e.reject();
+				e.onCancel();
+				e.resolve = null;
+				e.reject = null;
 			},
 		};
 	}
@@ -85,6 +89,7 @@ class n72_RC extends ComponentBase {
 		return !r || (r && r.iccInfo && null === r.iccInfo.iccid);
 	}
 	hasOnlyOneSIMCardDetected() {
+		// cool math
 		return this.isSIMCardAbsent(0) ^ this.isSIMCardAbsent(1);
 	}
 	noSIMCardOnDevice() {
@@ -96,4 +101,4 @@ class n72_RC extends ComponentBase {
 	}
 }
 
-export default n72_RC;
+export default SelectSimMenu;

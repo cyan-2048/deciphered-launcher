@@ -1,6 +1,6 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
-import n26 from "./m26";
+import animateComponent from "./animate-component";
 import softkeyStore from "./softkeyStore";
 import Service from "./Service";
 import n212 from "./m212";
@@ -137,6 +137,6 @@ class _QRFace extends ComponentBase {
 	}
 }
 
-const QRFace = n26(_QRFace, "immediate", "immediate");
+const QRFace = animateComponent(_QRFace, "immediate", "immediate");
 
 export default QRFace;

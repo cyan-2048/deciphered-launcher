@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import SoftKeyPanel from "./SoftKeyPanel";
 import Service from "./Service";
-import n72_RC from "./m72";
+import SelectSimMenu from "./SelectSimMenu";
 import DialogRenderer from "./DialogRenderer";
 import OptionMenuRenderer from "./OptionMenuRenderer";
 import dialHelper from "./dialHelper";
@@ -18,21 +18,21 @@ class DialActivity extends React.Component {
 	}
 
 	activityHandler(e) {
-		var t = e.source;
+		var source = e.source;
 		navigator.mozL10n.ready(function () {
-			var e = t.data && t.data.number;
-			return e
+			var phoneNumber = source.data && source.data.number;
+			return phoneNumber
 				? void Service.request("showDialog", {
 						ok: "call",
 						cancel: "cancel",
 						type: "confirm",
 						header: null,
-						content: e,
+						content: phoneNumber,
 						translated: true,
 						onOk: function () {
 							Service.request("chooseSim", "call")
 								.then(function (t) {
-									dialHelper.dialForcely(e, t), window.close();
+									dialHelper.dialForcely(phoneNumber, t), window.close();
 								})
 								.catch(function () {
 									window.close();
@@ -48,12 +48,13 @@ class DialActivity extends React.Component {
 				: (window.alert(toL10n("invalidNumberToDialMessage")), void window.close());
 		});
 	}
+
 	render() {
 		return React.createElement(
 			"div",
 			{ className: "app-workspace" },
 			React.createElement(OptionMenuRenderer, null),
-			React.createElement(n72_RC, null),
+			React.createElement(SelectSimMenu, null),
 			React.createElement(DialogRenderer, null),
 			React.createElement(SoftKeyPanel, null)
 		);

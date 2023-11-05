@@ -2,10 +2,15 @@ import ComponentBase from "./ComponentBase";
 import SettingsCore from "./SettingsCore";
 import contactStore from "./contactStore";
 
-// dunno what to call this
-class h_RC extends ComponentBase {
+// dunno what to call this, it's not exactly a store but it does act like it....
+// I get it now, it's like a store, but for settings
+// StoreBase doesn't have a working SettingsCore observer
+// therefore a good name for this would probably be "SpeedDialSettings"
+// because it's not a Store nor is it a React.Component
+
+class SpeedDialSettings extends ComponentBase {
 	constructor() {
-		super(...arguments); // ahhh it's a React Element
+		super(...arguments);
 
 		this.SIZE = 9;
 		this.contacts = [];
@@ -89,7 +94,7 @@ class h_RC extends ComponentBase {
 	}
 }
 
-var n215 = new h_RC();
-n215.start();
+var speedDialSettings = new SpeedDialSettings();
+speedDialSettings.start();
 
-export default n215;
+export default speedDialSettings;

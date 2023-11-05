@@ -1,11 +1,11 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
-import n26 from "./m26";
+import animateComponent from "./animate-component";
 import softkeyStore from "./softkeyStore";
 import KeypadNavigator from "./KeypadNavigator";
 import Service from "./Service";
-import n108 from "./m108";
-import n199 from "./m199";
+import apnSelectionStore from "./apnSelectionStore";
+import apnSelector from "./apnSelector";
 
 var O = ["Contract WAP", "PAYG WAP"],
 	E = [
@@ -13,7 +13,7 @@ var O = ["Contract WAP", "PAYG WAP"],
 		{ l10nId: "apnConfigPrepay", value: O[1] },
 	];
 
-class APNSelection extends ComponentBase {
+class _APNSelection extends ComponentBase {
 	constructor(props) {
 		super(props);
 
@@ -38,14 +38,14 @@ class APNSelection extends ComponentBase {
 				var n = navigator.mozSettings.createLock(),
 					i = {};
 				t === O[0]
-					? ((i["apn_default_show_" + this.id] = "wap.vodafone.co.uk"), n199.apnSelect(this.id, "wap.vodafone.co.uk"))
+					? ((i["apn_default_show_" + this.id] = "wap.vodafone.co.uk"), apnSelector.apnSelect(this.id, "wap.vodafone.co.uk"))
 					: t === O[1]
-					? ((i["apn_default_show_" + this.id] = "pp.vodafone.co.uk"), n199.apnSelect(this.id, "pp.vodafone.co.uk"))
+					? ((i["apn_default_show_" + this.id] = "pp.vodafone.co.uk"), apnSelector.apnSelect(this.id, "pp.vodafone.co.uk"))
 					: (i["apn_default_show_" + this.id] = ""),
 					n.set(i),
 					n.set({ apn_auto_disable: true }),
 					this.hide(),
-					0 == this.id && n108.start();
+					0 == this.id && apnSelectionStore.start();
 				break;
 			case "Backspace":
 				e.preventDefault(), Service.request("back");
@@ -97,6 +97,6 @@ class APNSelection extends ComponentBase {
 	}
 }
 
-const n198_APNSelection_RC = n26(APNSelection, "immediate", "immediate");
+const APNSelection = animateComponent(_APNSelection, "immediate", "immediate");
 
-export default n198_APNSelection_RC;
+export default APNSelection;

@@ -1,5 +1,5 @@
 const EVENT_TYPES = { APP_POSITION: "app_position" },
-	o = "eventlogger_event";
+	STORE_NAME = "eventlogger_event";
 
 class EventLogger {
 	dataStore = null;
@@ -23,16 +23,24 @@ class EventLogger {
 		});
 	}
 	getStore() {
-		var e = this;
-		return this.dataStore
-			? Promise.resolve(this.dataStore)
-			: new Promise(function (t, n) {
-					return navigator.getDataStores
-						? void navigator.getDataStores(o).then(function (i) {
-								return i.length < 1 ? void n("EventLogger: Cannot get access to the DataStore:", o) : ((e.dataStore = i[0]), void t(e.dataStore));
-						  }, n)
-						: void n("EventLogger: DataStore API is not available.");
-			  });
+		var self = this;
+
+		if (this.dataStore) return Promise.resolve(this.dataStore);
+
+		return new Promise(function (resolve, reject) {
+			if (navigator.getDataStores) {
+				navigator.getDataStores(STORE_NAME).then(function (dataStores) {
+					if (dataStores.length < 1) {
+						reject("EventLogger: Cannot get access to the DataStore:", STORE_NAME);
+					} else {
+						self.dataStore = dataStores[0];
+						resolve(self.dataStore);
+					}
+				}, reject);
+			} else {
+				reject("EventLogger: DataStore API is not available.");
+			}
+		});
 	}
 }
 

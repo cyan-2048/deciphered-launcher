@@ -9,7 +9,7 @@ import simCardHelper from "./simCardHelper";
 import launchStore from "./launchStore";
 import fontFit from "./font-fit";
 
-class n204_DialerInput_RC extends ComponentBase {
+class DialerInput extends ComponentBase {
 	static defaultProps = { dial: null, exitDialer: null, updateTelNum: null };
 	static propTypes = { dial: React.PropTypes.func, exitDialer: React.PropTypes.func, updateTelNum: React.PropTypes.func };
 
@@ -252,4 +252,4 @@ class n204_DialerInput_RC extends ComponentBase {
 	}
 }
 
-export default n204_DialerInput_RC;
+export default DialerInput;

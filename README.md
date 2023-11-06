@@ -24,4 +24,4 @@
 
 ## LICENSE
 
-it's decompiled code ;\_;
+it's decompiled _proprietary_ code ;\_;

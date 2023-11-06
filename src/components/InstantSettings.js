@@ -1,10 +1,10 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
 import animateComponent from "./animate-component";
-import softkeyStore from "./softkeyStore";
-import Service from "./Service";
-import instantSettingsStore from "./instantSettingsStore";
-import * as n13 from "./m13";
+import softkeyStore from "../softkeyStore";
+import Service from "../Service";
+import instantSettingsStore from "../instantSettingsStore";
+import * as n13 from "../m13";
 
 function u(e) {
 	var t = [O, e.isActive ? "is-active" : null, e.isShortcut ? "is-shortcut" : null].filter(Boolean).join(" ");

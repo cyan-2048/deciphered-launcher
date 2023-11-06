@@ -1,6 +1,6 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
-import Service from "./Service";
+import Service from "../Service";
 import Dialog from "./Dialog";
 
 var s = Object.assign;

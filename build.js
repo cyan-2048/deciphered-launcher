@@ -6,7 +6,7 @@ function createBundle(name) {
 }
 
 await esbuild.build({
-	entryPoints: ["modules/vendors.js"],
+	entryPoints: ["src/vendors.js"],
 	bundle: true,
 	minify: true,
 	target: "es6",

@@ -21,3 +21,7 @@
 
 - Original File Size: 354.9kB
 - Deciphered Version: 292.1kB
+
+## LICENSE
+
+it's decompiled code ;\_;

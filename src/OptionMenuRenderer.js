@@ -1,7 +1,7 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
 import OptionMenu from "./OptionMenu";
-import Service from "../Service";
+import Service from "./Service";
 
 class OptionMenuRenderer extends ComponentBase {
 	constructor(prop) {

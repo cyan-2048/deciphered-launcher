@@ -1,9 +1,9 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
-import Service from "../Service";
-import SimSettingsHelper from "../SimSettingsHelper";
+import Service from "./Service";
+import SimSettingsHelper from "./SimSettingsHelper";
 import OptionMenu from "./OptionMenu";
-import MobileOperator from "../mobile_operator";
+import MobileOperator from "./mobile_operator";
 
 // useless side effects, all return a string
 // require(234), require(235), require(236);

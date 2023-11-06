@@ -1,6 +1,6 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
-import SettingsCore from "../SettingsCore";
+import SettingsCore from "./SettingsCore";
 
 class SimcardInfo extends ComponentBase {
 	constructor(props) {

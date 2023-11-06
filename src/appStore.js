@@ -12,7 +12,7 @@ var u =
 			: function (e) {
 					return e && "function" == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype ? "symbol" : typeof e;
 			  },
-	defaultAppOrder = [
+	w = [
 		"Communications",
 		"Contact",
 		"KaiOS Plus",
@@ -155,14 +155,14 @@ class AppStore extends StoreBase {
 		);
 	}
 	updateAppIcon(e) {
-		var self = this;
+		var t = this;
 		return new Promise(function (n, i) {
-			var a = self.apps.findIndex(function (t) {
+			var a = t.apps.findIndex(function (t) {
 				return t.manifestURL === e.manifestURL;
 			});
 			a < 0 && n();
-			var o = self.apps[a],
-				r = self.pickUpAppIconInProperSize(o.manifest.icons);
+			var o = t.apps[a],
+				r = t.pickUpAppIconInProperSize(o.manifest.icons);
 			navigator.mozApps.mgmt
 				.getIcon(e, r)
 				.then(function (e) {
@@ -186,11 +186,10 @@ class AppStore extends StoreBase {
 		return e.entry && (t = t + "+" + e.entry), t;
 	}
 	getAppsOrder() {
-		var self = this;
-		return new Promise(function (resolve) {
+		var e = this;
+		return new Promise(function (t) {
 			n13.asyncLocalStorage.getItem("app-order").then(function (n) {
-				self.appsOrder = JSON.parse(n) || defaultAppOrder;
-				resolve();
+				(e.appsOrder = JSON.parse(n) || w), t();
 			});
 		});
 	}
@@ -207,16 +206,16 @@ class AppStore extends StoreBase {
 		});
 	}
 	updateAllItems() {
-		var self = this;
+		var e = this;
 		this.getAppsOrder()
 			.then(function () {
-				return self.updateMozAppItems();
+				return e.updateMozAppItems();
 			})
 			.then(function () {
-				return self.updateBookmarkItems();
+				return e.updateBookmarkItems();
 			})
 			.then(function () {
-				self.emit("change");
+				e.emit("change");
 			});
 	}
 	addItem(e, t) {
@@ -296,12 +295,12 @@ class AppStore extends StoreBase {
 		-1 !== t && (this.appsOrder.splice(t, 1), this.setAppsOrder(this.appsOrder));
 	}
 	updateMozAppItems() {
-		var self = this;
+		var e = this;
 		return new Promise(function (t, n) {
 			var i = navigator.mozApps.mgmt.getAll();
 			(i.onsuccess = function (n) {
 				n.target.result.forEach(function (t) {
-					return self.addMozAppItem(t);
+					return e.addMozAppItem(t);
 				}),
 					t();
 			}),
@@ -335,7 +334,7 @@ class AppStore extends StoreBase {
 		return t >= 0 ? this.apps.splice(t, 1).shift() : null;
 	}
 	updateBookmarkItems() {
-		var self = this;
+		var e = this;
 		return new Promise(function (t) {
 			BookmarksDatabase.getAll().then(function (n) {
 				Object.keys(n)
@@ -343,7 +342,7 @@ class AppStore extends StoreBase {
 						return n[e];
 					})
 					.forEach(function (t) {
-						return self.addBookmarkItem(t);
+						return e.addBookmarkItem(t);
 					}),
 					t();
 			});

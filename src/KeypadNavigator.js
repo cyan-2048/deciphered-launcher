@@ -111,16 +111,16 @@ class KeypadNavigator {
 		);
 	}
 	findPrev(e) {
-		var self = this;
+		var t = this;
 		e = e || document.activeElement;
-		var candidates = this._candidates;
-		if (!candidates.length) return null;
+		var n = this._candidates;
+		if (!n.length) return null;
 		var r = null;
 		return (
-			candidates.some(function (o, i) {
-				return o === e && ((r = (candidates.length + i - 1) % candidates.length), self.loopable || 0 !== i || (r = null), true);
+			n.some(function (o, i) {
+				return o === e && ((r = (n.length + i - 1) % n.length), t.loopable || 0 !== i || (r = null), true);
 			}),
-			candidates[r] || this.loopable ? candidates[r] || candidates[this.initialFocusIndex] : null
+			n[r] || this.loopable ? n[r] || n[this.initialFocusIndex] : null
 		);
 	}
 }

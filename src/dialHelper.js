@@ -320,11 +320,11 @@ class DialHelper extends EventEmitter {
 		}
 	}
 	mmiHandler(e, t) {
-		var self = this;
+		var n = this;
 		(this.mmiloading = true),
 			this.emit("mmiloading"),
 			e.then(function (e) {
-				if (!e) return void self.emit("mmiloaded", "!", "GenericFailure");
+				if (!e) return void n.emit("mmiloaded", "!", "GenericFailure");
 				var r = n13.toL10n(e.serviceCode),
 					o = e.statusMessage,
 					i = e.additionalInformation;
@@ -335,7 +335,7 @@ class DialHelper extends EventEmitter {
 						if (!o) return;
 						break;
 					case "scCallForwarding":
-						o ? i && (o = self.processCf(i)) : (o = "GenericFailure");
+						o ? i && (o = n.processCf(i)) : (o = "GenericFailure");
 						break;
 					case "scCallBarring":
 					case "scCallWaiting":
@@ -345,7 +345,7 @@ class DialHelper extends EventEmitter {
 							i && "smServiceEnabledFor" === o && Array.isArray(i) && (a = i.map(n13.toL10n)), a.unshift(n13.toL10n(s[o]) || o), (o = a.join("\n"));
 						}
 				}
-				(self.mmiloading = false), self.emit("mmiloaded", r, o);
+				(n.mmiloading = false), n.emit("mmiloaded", r, o);
 			});
 	}
 	processCf(e) {
@@ -397,7 +397,7 @@ class DialHelper extends EventEmitter {
 		navigator.mozTelephony.dial(e, t);
 	}
 	dial(e, t, n) {
-		var self = this;
+		var r = this;
 		return (
 			(e = String(e).replace(this.extraCharExp, "")),
 			this.checkSpecialNumber(e)
@@ -406,10 +406,10 @@ class DialHelper extends EventEmitter {
 				? new Promise(function (o, i) {
 						var a = function (n) {
 							var a = navigator.mozMobileConnections && navigator.mozMobileConnections[n],
-								s = self,
+								s = r,
 								u = void 0,
 								l = e;
-							if (((e = self.getNumberAsDtmfToneGroups(l)[0]), (self._conn = a), !a || !a.voice)) return i(), void self.errorHandler({ errorName: "NoNetwork" });
+							if (((e = r.getNumberAsDtmfToneGroups(l)[0]), (r._conn = a), !a || !a.voice)) return i(), void r.errorHandler({ errorName: "NoNetwork" });
 							var c = navigator.mozTelephony;
 							if (!c) return void i();
 							Service.request("Dialer:toggleStayEffect", true);
@@ -422,12 +422,12 @@ class DialHelper extends EventEmitter {
 											c.addEventListener("callschanged", function e() {
 												c.removeEventListener("callschanged", e), Service.request("Dialer:toggleStayEffect");
 											});
-											var i = self.getNumberAsDtmfToneGroups(l);
+											var i = r.getNumberAsDtmfToneGroups(l);
 											i.length > 1 &&
 												t.addEventListener("connected", function e() {
 													t.removeEventListener("connected", e), s.playDtmfToneGroups(i, n);
 												});
-										} else Service.request("Dialer:toggleStayEffect"), self.mmiHandler(t.result, e);
+										} else Service.request("Dialer:toggleStayEffect"), r.mmiHandler(t.result, e);
 									})
 									.catch(function (t) {
 										Service.request("Dialer:toggleStayEffect"), i(), s.errorHandler({ errorName: t, number: e, isEmergencyOnly: d });
@@ -593,13 +593,13 @@ class DialHelper extends EventEmitter {
 			});
 	}
 	playDtmfToneGroups(e, t) {
-		var self = this;
+		var n = this;
 		e = e.slice(1);
 		for (var r = e.length, o = r - 1; "" === e[o]; ) o--;
 		(e = e.slice(0, ++o)), (r = e.length);
 		for (var i = Promise.resolve(), a = 0, s = void 0; a < r; ) {
 			for (s = 1; "" === e[a]; ) s++, a++;
-			i = i.then(self.playDtmfToneGroup.bind(null, e[a++], s, t));
+			i = i.then(n.playDtmfToneGroup.bind(null, e[a++], s, t));
 		}
 		return i;
 	}

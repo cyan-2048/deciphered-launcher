@@ -1,7 +1,7 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
-import Service from "../Service";
-import SettingsCore from "../SettingsCore";
+import Service from "./Service";
+import SettingsCore from "./SettingsCore";
 
 function a(e) {
 	if (Array.isArray(e)) {

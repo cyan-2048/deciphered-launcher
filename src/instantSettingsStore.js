@@ -110,77 +110,61 @@ class InstantSettingsStore extends StoreBase {
 	}
 
 	start() {
-		var self = this,
-			orderType = this.orderType;
-		this.settings = this.oriSettings
+		var e = this,
+			t = this.orderType;
+		(this.settings = this.oriSettings
 			.filter(function (e) {
-				return -1 !== e.order[orderType];
+				return -1 !== e.order[t];
 			})
 			.sort(function (e, n) {
-				return e.order[orderType] - n.order[orderType];
-			});
-		this.settings.forEach(function (t) {
-			t.observerSetting && !t.removed && self.initSettingObserver(t);
-		});
-		this.initSettingObserverForBrightness();
-		SettingsCore.addObserver("airplaneMode.status", this);
-
-		if (navigator.hasFeature) {
-			navigator.hasFeature("device.capability.torch").then(function (t) {
-				if (t) {
-					self.getSetting("flashlight").removed = false;
-					flashlightHelper.on("ready", self.updateFlashlightState.bind(self));
-					flashlightHelper.on("change", self.updateFlashlightState.bind(self));
-				}
-			});
-
-			navigator.hasFeature("device.capability.bt").then(function (t) {
-				if (t) {
-					navigator.mozBluetooth.defaultAdapter ||
-						(navigator.mozBluetooth.onattributechanged = function (e) {
-							// what is this for?
-							if (e.attrs.includes("defaultAdapter")) {
-								navigator.mozBluetooth.onattributechanged = null;
-							}
-						});
-					var n = self.getSetting("bluetooth");
-					n.removed = false;
-					self.initSettingObserver(n);
-				}
-			});
-
-			navigator.hasFeature("device.capability.wifi").then(function (t) {
-				if (t) {
-					var n = self.getSetting("wifi");
-					n.removed = false;
-					self.initSettingObserver(n);
-				}
-			});
-		}
-
-		this.emit("change");
+				return e.order[t] - n.order[t];
+			})),
+			this.settings.forEach(function (t) {
+				t.observerSetting && !t.removed && e.initSettingObserver(t);
+			}),
+			this.initSettingObserverForBrightness(),
+			SettingsCore.addObserver("airplaneMode.status", this),
+			navigator.hasFeature &&
+				navigator.hasFeature("device.capability.torch").then(function (t) {
+					if (t) {
+						(e.getSetting("flashlight").removed = false),
+							flashlightHelper.on("ready", e.updateFlashlightState.bind(e)),
+							flashlightHelper.on("change", e.updateFlashlightState.bind(e));
+					}
+				}),
+			navigator.hasFeature &&
+				navigator.hasFeature("device.capability.bt").then(function (t) {
+					if (t) {
+						navigator.mozBluetooth.defaultAdapter ||
+							(navigator.mozBluetooth.onattributechanged = function (e) {
+								e.attrs.includes("defaultAdapter") && (navigator.mozBluetooth.onattributechanged = null);
+							});
+						var n = e.getSetting("bluetooth");
+						(n.removed = false), e.initSettingObserver(n);
+					}
+				}),
+			navigator.hasFeature &&
+				navigator.hasFeature("device.capability.wifi").then(function (t) {
+					if (t) {
+						var n = e.getSetting("wifi");
+						(n.removed = false), e.initSettingObserver(n);
+					}
+				}),
+			this.emit("change");
 	}
 	initSettingObserver(e) {
-		var self = this;
+		var t = this;
 		SettingsCore.addObserver(e.observerSetting, this),
 			(this["_observe_" + e.observerSetting] = function (n) {
-				var i = self.getSetting(e.name);
-				i.isActive = n;
-				if (n === true) {
-					i.subtitle = "on";
-				} else if (n === false) {
-					i.subtitle = "off";
-				} else {
-					i.subtitle = n.toString();
-				}
-				self.emit("change");
+				var i = t.getSetting(e.name);
+				(i.isActive = n), true === n ? (i.subtitle = "on") : false === n ? (i.subtitle = "off") : (i.subtitle = n.toString()), t.emit("change");
 			});
 	}
 	initSettingObserverForBrightness() {
-		var self = this;
+		var e = this;
 		SettingsCore.addObserver("screen.brightness", this),
 			(this["_observe_screen.brightness"] = function (t) {
-				(self.getSetting("brightness").subtitleArgs = { number: 100 * t }), self.emit("change");
+				(e.getSetting("brightness").subtitleArgs = { number: 100 * t }), e.emit("change");
 			});
 	}
 	"_observe_airplaneMode.status"(e) {
@@ -208,97 +192,88 @@ class InstantSettingsStore extends StoreBase {
 		(n.isDisabled = i.isActive || e), !t && e && n.isActive && this.toggleSetting(n), this.emit("change");
 	}
 	addSimCardObserver() {
-		var self = this;
+		var e = this;
 		if (!this.isSimCardObserverAdded) {
 			(this.isSimCardObserverAdded = true), this.checkSimCardState();
 			var t = window.navigator.mozMobileConnections;
 			t &&
 				Array.from(t).forEach(function (t) {
-					t.addEventListener("voicechange", self);
+					t.addEventListener("voicechange", e);
 				}, this);
 		}
 	}
 	removeSimCardObserver() {
-		var self = this;
+		var e = this;
 		this.isSimCardObserverAdded = false;
-		var mobileConnections = window.navigator.mozMobileConnections;
-		mobileConnections &&
-			Array.from(mobileConnections).forEach(function (mobileConnection) {
-				mobileConnection.removeEventListener("voicechange", self);
+		var t = window.navigator.mozMobileConnections;
+		t &&
+			Array.from(t).forEach(function (t) {
+				t.removeEventListener("voicechange", e);
 			}, this);
 	}
 	_handle_voicechange() {
 		this.checkSimCardState();
 	}
-	getIndex(settingName) {
-		var index = this.settings.findIndex(function (setting) {
-			return setting.name === settingName;
+	getIndex(e) {
+		var t = this.settings.findIndex(function (t) {
+			return t.name === e;
 		});
-		return index;
+		return t;
 	}
-	getSetting(settingName) {
-		var setting = this.settings.find(function (setting) {
-			return setting.name === settingName;
+	getSetting(e) {
+		var t = this.settings.find(function (t) {
+			return t.name === e;
 		});
-		return setting;
+		return t;
 	}
-	toggleSetting(setting) {
-		var self = this;
-		setting.isDisabled = true;
-		this.emit("change");
-
-		var disableSetting = function () {
-			setting.isDisabled = false;
-			self.emit("change");
+	toggleSetting(e) {
+		var t = this;
+		(e.isDisabled = true), this.emit("change");
+		var n = function () {
+			(e.isDisabled = false), t.emit("change");
 		};
-
-		SettingsCore.get(setting.observerSetting).then(function (boolean) {
-			var settings = {};
-			settings[setting.observerSetting] = !boolean;
-			SettingsCore.set(settings).then(function () {
-				switch (setting.name) {
-					case "airplane-mode":
-						break;
-					case "bluetooth":
-						n13.toggleBletooth(boolean ? "disable" : "enable").then(
-							function () {
-								return disableSetting();
-							},
-							function (e) {
-								disableSetting();
-							}
-						);
-						break;
-					default:
-						disableSetting();
-				}
-			});
+		SettingsCore.get(e.observerSetting).then(function (t) {
+			var i = {};
+			(i[e.observerSetting] = !t),
+				SettingsCore.set(i).then(function () {
+					switch (e.name) {
+						case "airplane-mode":
+							break;
+						case "bluetooth":
+							n13.toggleBletooth(t ? "disable" : "enable").then(
+								function () {
+									return n();
+								},
+								function (e) {
+									n();
+								}
+							);
+							break;
+						default:
+							n();
+					}
+				});
 		});
 	}
 	toggleBrightness() {
-		var currentBrightness = this.getSetting("brightness").subtitleArgs.number;
-		SettingsCore.set({ "screen.brightness": this.brightnessMap[currentBrightness] || 0.1 });
+		var e = this.getSetting("brightness").subtitleArgs.number;
+		SettingsCore.set({ "screen.brightness": this.brightnessMap[e] || 0.1 });
 	}
 	enterVolumeManagerMode() {
-		var self = this;
-		this.volumeManagerTimer && this.exitVolumeManagerMode();
-		this.volumeManagerTimer = setTimeout(function () {
-			self.exitVolumeManagerMode();
-		}, 2e3);
+		var e = this;
+		this.volumeManagerTimer && this.exitVolumeManagerMode(),
+			(this.volumeManagerTimer = setTimeout(function () {
+				e.exitVolumeManagerMode();
+			}, 2e3));
 	}
 	exitVolumeManagerMode() {
-		window.clearTimeout(this.volumeManagerTimer);
-		this.volumeManagerTimer = null;
+		window.clearTimeout(this.volumeManagerTimer), (this.volumeManagerTimer = null);
 	}
-	click(settingName, clickArg) {
-		var setting = this.getSetting(settingName);
-		if (setting && !setting.isDisabled)
-			if ("toggle" === setting.cskType && setting.observerSetting) {
-				this.toggleSetting(setting);
-			} else if (setting.click) {
-				setting.click(clickArg);
-				return setting.cskType;
-			}
+	click(e, t) {
+		var n = this.getSetting(e);
+		if (n && !n.isDisabled)
+			if ("toggle" === n.cskType && n.observerSetting) this.toggleSetting(n);
+			else if (n.click) return n.click(t), n.cskType;
 	}
 }
 

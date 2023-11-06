@@ -1,13 +1,13 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
-import softkeyStore from "../softkeyStore";
-import Service from "../Service";
-import speedDialHelper from "../speedDialHelper";
-import appStore from "../appStore";
+import softkeyStore from "./softkeyStore";
+import Service from "./Service";
+import speedDialHelper from "./speedDialHelper";
+import appStore from "./appStore";
 import Clock from "./Clock";
 import SimcardInfo from "./SimcardInfo";
-import flashlightHelper from "../flashlightHelper";
-import launchStore from "../launchStore";
+import flashlightHelper from "./flashlightHelper";
+import launchStore from "./launchStore";
 
 class MainView extends ComponentBase {
 	static defaultProps = { open: null, close: null };

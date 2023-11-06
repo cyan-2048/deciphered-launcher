@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import SoftKeyPanel from "./components/SoftKeyPanel";
+import SoftKeyPanel from "./SoftKeyPanel";
 import Service from "./Service";
 import SelectSimMenu from "./SelectSimMenu";
 import DialogRenderer from "./DialogRenderer";

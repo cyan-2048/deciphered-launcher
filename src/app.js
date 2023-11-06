@@ -3,19 +3,19 @@ import ReactDOM from "react-dom";
 // n3
 import React from "react";
 // n6
-import ComponentBase from "./components/ComponentBase";
+import ComponentBase from "./ComponentBase";
 // n5
 import Service from "./Service";
-import SoftKeyPanel from "./components/SoftKeyPanel";
+import SoftKeyPanel from "./SoftKeyPanel";
 
 import "./speedDialHelper";
 import SelectSimMenu from "./SelectSimMenu";
 import MainView from "./MainView";
-import AppList from "./components/AppList";
+import AppList from "./AppList";
 import InstantSettings from "./InstantSettings";
-import Dialer from "./components/Dialer";
-import QRFace from "./components/QRFace";
-import APNSelection from "./components/APNSelection";
+import Dialer from "./Dialer";
+import QRFace from "./QRFace";
+import APNSelection from "./APNSelection";
 import DialogRenderer from "./DialogRenderer";
 import OptionMenuRenderer from "./OptionMenuRenderer";
 import gridHelper from "./gridHelper";
@@ -108,10 +108,10 @@ class App extends ComponentBase {
 		document.body.classList.toggle("large-text", navigator.largeTextEnabled);
 	}
 	focusWhenReady() {
-		var self = this;
+		var e = this;
 		if (!this.focusMainView()) {
 			var t = function t() {
-				self.focusMainView(), document.removeEventListener("visibilitychange", t);
+				e.focusMainView(), document.removeEventListener("visibilitychange", t);
 			};
 			document.addEventListener("visibilitychange", t);
 		}

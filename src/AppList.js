@@ -1,15 +1,15 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
-import appStore from "../appStore";
-import softkeyStore from "../softkeyStore";
-import Service from "../Service";
-import speedDialHelper from "../speedDialHelper";
-import * as n13 from "../m13";
-import launchStore from "../launchStore";
-import SettingsCore from "../SettingsCore";
+import appStore from "./appStore";
+import softkeyStore from "./softkeyStore";
+import Service from "./Service";
+import speedDialHelper from "./speedDialHelper";
+import * as n13 from "./m13";
+import launchStore from "./launchStore";
+import SettingsCore from "./SettingsCore";
 import animateComponent from "./animate-component";
-import * as n216 from "../m216";
-import * as n206 from "../m206";
+import * as n216 from "./m216";
+import * as n206 from "./m206";
 
 function o(e) {
 	if (Array.isArray(e)) {

@@ -14,12 +14,12 @@ class ApnSelector {
 		return t;
 	}
 	_separateApnsByType(e) {
-		var self = this;
+		var t = this;
 		return e
 			? e.reduce(function (e, n) {
 					return (
 						n.types.forEach(function (i) {
-							var a = self._cloneApn(n);
+							var a = t._cloneApn(n);
 							(a.types = [i]), e.push(a);
 						}),
 						e
@@ -43,7 +43,7 @@ class ApnSelector {
 		t.set(n);
 	}
 	_updateApnSettings(e, t) {
-		var self = this;
+		var n = this;
 		this._getApnSettings().then(function (i) {
 			if ((dump("ApnSelector in launcher _updateApnSettings apnSettings:" + JSON.stringify(i)), i && i[e])) {
 				var a = i[e],
@@ -56,15 +56,15 @@ class ApnSelector {
 					});
 					t === -1 ? (a.push(e), (o = true)) : JSON.stringify(a[t]) != JSON.stringify(e) && ((a[t] = e), (o = true));
 				}),
-					o && (dump("_updateApnSettings to set new apns:" + JSON.stringify(i)), self._setApnSettings(i));
+					o && (dump("_updateApnSettings to set new apns:" + JSON.stringify(i)), n._setApnSettings(i));
 			}
 		});
 	}
 	apnSelect(e, t) {
-		var self = this;
+		var n = this;
 		this._getDefaultApns(e).then(function (i) {
 			if (null != i) {
-				var a = self._separateApnsByType(i);
+				var a = n._separateApnsByType(i);
 				dump("apnSelector  in launcher apnSelect for " + e);
 				var o = [],
 					r = new Set();
@@ -72,7 +72,7 @@ class ApnSelector {
 					var n = e.types[0];
 					dump("autoSelect check apn: + " + JSON.stringify(e) + " apnType:" + n), e.apn == t && (r.has(n) || (o.push(e), r.add(n)));
 				}),
-					o.length > 0 && (dump("apnSelector in launcher _updateApnSettings newApns:" + JSON.stringify(o)), self._updateApnSettings(e, o));
+					o.length > 0 && (dump("apnSelector in launcher _updateApnSettings newApns:" + JSON.stringify(o)), n._updateApnSettings(e, o));
 			}
 		});
 	}

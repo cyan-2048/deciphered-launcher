@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import ComponentBase from "./ComponentBase";
-import softkeyStore from "../softkeyStore";
-import KeypadNavigator from "../KeypadNavigator";
+import softkeyStore from "./softkeyStore";
+import KeypadNavigator from "./KeypadNavigator";
 
 class OptionMenu extends ComponentBase {
 	constructor(e) {

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import ComponentBase from "./ComponentBase";
-import Service from "../Service";
+import Service from "./Service";
 
 class n131_RC extends React.Component {
 	// odd?

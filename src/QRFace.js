@@ -1,9 +1,9 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
 import animateComponent from "./animate-component";
-import softkeyStore from "../softkeyStore";
-import Service from "../Service";
-import n212 from "../m212";
+import softkeyStore from "./softkeyStore";
+import Service from "./Service";
+import n212 from "./m212";
 
 function a(e) {
 	if (Array.isArray(e)) {

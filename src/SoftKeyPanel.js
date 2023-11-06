@@ -1,6 +1,6 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
-import softkeyStore from "../softkeyStore";
+import softkeyStore from "./softkeyStore";
 
 function SoftKeyButton(props) {
 	var t = props.content ? { "data-icon": props.content.icon, "data-l10n-id": props.content.text } : null;

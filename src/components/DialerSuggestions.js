@@ -1,9 +1,9 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
-import Service from "./Service";
-import softkeyStore from "./softkeyStore";
-import KeypadNavigator from "./KeypadNavigator";
-import simCardHelper from "./simCardHelper";
+import Service from "../Service";
+import softkeyStore from "../softkeyStore";
+import KeypadNavigator from "../KeypadNavigator";
+import simCardHelper from "../simCardHelper";
 
 class DialerSuggestions extends ComponentBase {
 	static defaultProps = { dial: null, exitSuggestions: null, suggestions: null };

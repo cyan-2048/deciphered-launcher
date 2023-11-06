@@ -1,11 +1,11 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
 import animateComponent from "./animate-component";
-import softkeyStore from "./softkeyStore";
-import KeypadNavigator from "./KeypadNavigator";
-import Service from "./Service";
-import apnSelectionStore from "./apnSelectionStore";
-import apnSelector from "./apnSelector";
+import softkeyStore from "../softkeyStore";
+import KeypadNavigator from "../KeypadNavigator";
+import Service from "../Service";
+import apnSelectionStore from "../apnSelectionStore";
+import apnSelector from "../apnSelector";
 
 var O = ["Contract WAP", "PAYG WAP"],
 	E = [

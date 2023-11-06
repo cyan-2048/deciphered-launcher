@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import ComponentBase from "./ComponentBase";
-import softkeyStore from "./softkeyStore";
-import Service from "./Service";
+import softkeyStore from "../softkeyStore";
+import Service from "../Service";
 
 var b = 0;
 

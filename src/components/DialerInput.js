@@ -1,13 +1,13 @@
 import React from "react";
 import ComponentBase from "./ComponentBase";
-import Service from "./Service";
-import softkeyStore from "./softkeyStore";
-import SettingsCore from "./SettingsCore";
-import * as n13 from "./m13";
-import n110 from "./m110";
-import simCardHelper from "./simCardHelper";
-import launchStore from "./launchStore";
-import fontFit from "./font-fit";
+import Service from "../Service";
+import softkeyStore from "../softkeyStore";
+import SettingsCore from "../SettingsCore";
+import * as n13 from "../m13";
+import n110 from "../m110";
+import simCardHelper from "../simCardHelper";
+import launchStore from "../launchStore";
+import fontFit from "../font-fit";
 
 class DialerInput extends ComponentBase {
 	static defaultProps = { dial: null, exitDialer: null, updateTelNum: null };

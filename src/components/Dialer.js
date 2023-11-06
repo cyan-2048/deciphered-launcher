@@ -1,10 +1,10 @@
 import React from "react";
-import Service from "./Service";
+import Service from "../Service";
 import ComponentBase from "./ComponentBase";
 import animateComponent from "./animate-component";
-import * as n13 from "./m13";
-import dialHelper from "./dialHelper";
-import contactStore from "./contactStore";
+import * as n13 from "../m13";
+import dialHelper from "../dialHelper";
+import contactStore from "../contactStore";
 import DialerInput from "./DialerInput";
 import DialerSuggestions from "./DialerSuggestions";
 

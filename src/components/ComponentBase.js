@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Service from "./Service";
+import Service from "../Service";
 
 function ensureValidEventName(eventName) {
 	if (!eventName || typeof eventName !== "string") {

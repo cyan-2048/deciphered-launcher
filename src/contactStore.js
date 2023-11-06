@@ -81,7 +81,7 @@ class ContactStore extends StoreBase {
 			i,
 			a = [],
 			o = (e.filterValue || "").trim(),
-			r = this;
+			self = this;
 		return navigator.mozContacts && o.length
 			? ((n = o.split(m)),
 			  (e.filterValue =
@@ -93,7 +93,7 @@ class ContactStore extends StoreBase {
 			  e.filterValue.length < 3 && (e.filterLimit = 10),
 			  a.splice(a.indexOf(e.filterValue.toLowerCase()), 1),
 			  a.push.apply(a, n),
-			  (i = r.API.find(e)),
+			  (i = self.API.find(e)),
 			  (i.onsuccess = function () {
 					var e,
 						i = this.result.slice(),

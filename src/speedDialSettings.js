@@ -1,4 +1,4 @@
-import ComponentBase from "./ComponentBase";
+import ComponentBase from "./components/ComponentBase";
 import SettingsCore from "./SettingsCore";
 import contactStore from "./contactStore";
 
